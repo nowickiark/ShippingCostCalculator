@@ -25,10 +25,10 @@ public class Expedition {
     private LocalDate startDay;
     private LocalDate endDay;
 
-    private BigDecimal CashBeginingZl;
-    private BigDecimal CashEndZl;
-    private BigDecimal CashBeginingEur;
-    private BigDecimal CashEndEur;
+    private BigDecimal cashBeginingZl;
+    private BigDecimal cashEndZl;
+    private BigDecimal cashBeginingEur;
+    private BigDecimal cashEndEur;
 
     public Expedition(){};
 
@@ -39,17 +39,17 @@ public class Expedition {
         this.startDay = startDay;
     }
 
-    public Expedition(Truck truck, String startingPlace, long startOdometerReading, long endOdometerReading, LocalDate startDay, LocalDate endDay, BigDecimal cashBeginingZl, BigDecimal cashEndZl, BigDecimal cashBeginingEur, BigDecimal cashEndEur) {
+    public Expedition(Truck truck, String startingPlace, Long startOdometerReading, Long endOdometerReading, LocalDate startDay, LocalDate endDay, BigDecimal cashBeginingZl, BigDecimal cashEndZl, BigDecimal cashBeginingEur, BigDecimal cashEndEur) {
         this.truck = truck;
         this.startingPlace = startingPlace;
         this.startOdometerReading = startOdometerReading;
         this.endOdometerReading = endOdometerReading;
         this.startDay = startDay;
         this.endDay = endDay;
-        CashBeginingZl = cashBeginingZl;
-        CashEndZl = cashEndZl;
-        CashBeginingEur = cashBeginingEur;
-        CashEndEur = cashEndEur;
+        this.cashBeginingZl = cashBeginingZl;
+        this.cashEndZl = cashEndZl;
+        this.cashBeginingEur = cashBeginingEur;
+        this.cashEndEur = cashEndEur;
     }
 
     public Long getId() {
@@ -109,35 +109,35 @@ public class Expedition {
     }
 
     public BigDecimal getCashBeginingZl() {
-        return CashBeginingZl;
+        return cashBeginingZl;
     }
 
     public void setCashBeginingZl(BigDecimal cashBeginingZl) {
-        CashBeginingZl = cashBeginingZl;
+        this.cashBeginingZl = cashBeginingZl;
     }
 
     public BigDecimal getCashEndZl() {
-        return CashEndZl;
+        return cashEndZl;
     }
 
     public void setCashEndZl(BigDecimal cashEndZl) {
-        CashEndZl = cashEndZl;
+        this.cashEndZl = cashEndZl;
     }
 
     public BigDecimal getCashBeginingEur() {
-        return CashBeginingEur;
+        return cashBeginingEur;
     }
 
     public void setCashBeginingEur(BigDecimal cashBeginingEur) {
-        CashBeginingEur = cashBeginingEur;
+        this.cashBeginingEur = cashBeginingEur;
     }
 
     public BigDecimal getCashEndEur() {
-        return CashEndEur;
+        return cashEndEur;
     }
 
     public void setCashEndEur(BigDecimal cashEndEur) {
-        CashEndEur = cashEndEur;
+        this.cashEndEur = cashEndEur;
     }
 
     @Override
@@ -152,14 +152,14 @@ public class Expedition {
                 Objects.equals(endOdometerReading, that.endOdometerReading) &&
                 Objects.equals(startDay, that.startDay) &&
                 Objects.equals(endDay, that.endDay) &&
-                Objects.equals(CashBeginingZl, that.CashBeginingZl) &&
-                Objects.equals(CashEndZl, that.CashEndZl) &&
-                Objects.equals(CashBeginingEur, that.CashBeginingEur) &&
-                Objects.equals(CashEndEur, that.CashEndEur);
+                Objects.equals(cashBeginingZl, that.cashBeginingZl) &&
+                Objects.equals(cashEndZl, that.cashEndZl) &&
+                Objects.equals(cashBeginingEur, that.cashBeginingEur) &&
+                Objects.equals(cashEndEur, that.cashEndEur);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, truck, startingPlace, startOdometerReading, endOdometerReading, startDay, endDay, CashBeginingZl, CashEndZl, CashBeginingEur, CashEndEur);
+        return Objects.hash(id, truck, startingPlace, startOdometerReading, endOdometerReading, startDay, endDay, cashBeginingZl, cashEndZl, cashBeginingEur, cashEndEur);
     }
 }

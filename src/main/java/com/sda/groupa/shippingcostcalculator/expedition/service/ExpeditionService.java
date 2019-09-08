@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public class ExpeditionService {
 
-   private ExpeditionRepository expeditionRepository;
+   private final ExpeditionRepository expeditionRepository;
 
    @Autowired
     public ExpeditionService(ExpeditionRepository expeditionRepository){

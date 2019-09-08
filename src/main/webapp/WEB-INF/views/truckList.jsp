@@ -23,13 +23,13 @@
                 <td>${truck.brand}</td>
                 <td>${truck.model}</td>
                 <td>${truck.horsePower}</td>
-                <td><a href="/truck/Add/${truck.id}">Truck Details</a></td>
+                <td><a href="/truck/add/${truck.id}">Truck Details</a></td>
             </tr>
         </c:forEach>
 
     </table>
 
-        <a href="/truck">Add Truck</a>
+        <a href="/truck/add">Add Truck</a>
 
 </div>
 

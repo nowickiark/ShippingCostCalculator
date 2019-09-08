@@ -29,7 +29,7 @@
 
     </table>
 
-    <a href="/expedition/Add">Add expedition</a>
+    <a href="/expedition/add">Add expedition</a>
 
 </div>
 

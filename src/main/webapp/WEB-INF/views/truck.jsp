@@ -5,7 +5,7 @@
 <html>
 <body>
 
-<form:form method="POST" action="/truck/Add" modelAttribute="truck">
+<form:form method="POST" action="/truck/add" modelAttribute="truck">
     <table>
         <tr>
             <td><form:label path="id">Id</form:label></td>

@@ -6,7 +6,7 @@
 <html>
 <body>
 
-<form:form method="POST" action="/expedition/Add" modelAttribute="expedition">
+<form:form method="POST" action="/expedition/add" modelAttribute="expedition">
     <table>
         <tr>
             <td><form:label path="id">Id</form:label></td>
@@ -34,12 +34,12 @@
             <td><form:input path="startDay"/></td>
         </tr>
         <tr>
-            <td><form:label path="CashBeginingZl">Amount of cash in zloty</form:label></td>
-            <td><form:input path="CashBeginingZl"/></td>
+            <td><form:label path="cashBeginingZl">Amount of cash in zloty</form:label></td>
+            <td><form:input path="cashBeginingZl"/></td>
         </tr>
         <tr>
-            <td><form:label path="CashBeginingEur">Amount of cash in euro</form:label></td>
-            <td><form:input path="CashBeginingEur"/></td>
+            <td><form:label path="cashBeginingEur">Amount of cash in euro</form:label></td>
+            <td><form:input path="cashBeginingEur"/></td>
         </tr>
         <tr>
             <td><input type="submit" value="Add"/></td>

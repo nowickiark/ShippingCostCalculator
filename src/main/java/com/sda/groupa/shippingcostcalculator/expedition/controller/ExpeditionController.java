@@ -16,15 +16,15 @@ import java.util.List;
 @Controller
 public class ExpeditionController {
 
-    private ExpeditionService expeditionService;
-    private TruckService truckService;
+    private final ExpeditionService expeditionService;
+    private final TruckService truckService;
 
     public ExpeditionController(ExpeditionService expeditionService, TruckService truckService) {
         this.expeditionService = expeditionService;
         this.truckService = truckService;
     }
 
-    @GetMapping("/expedition/Add")
+    @GetMapping("/expedition/add")
     public ModelAndView getExpeditionform(){
         ModelAndView modelAndView = new ModelAndView("expedition");
 
@@ -38,11 +38,11 @@ public class ExpeditionController {
         return modelAndView;
     }
 
-    @GetMapping("/expedition/Add/{id}")
+    @GetMapping("/expedition/add/{id}")
     public ModelAndView getExpeditionform(@PathVariable Long id){
         ModelAndView modelAndView = new ModelAndView("expedition");
 
-        Expedition expedition = expeditionService.getExpeditionById(id).get();
+        Expedition expedition = expeditionService.getExpeditionById(id).orElseThrow(() -> new RuntimeException("Unavailable"));
 
         List<Truck> trucks = truckService.getTrucks();
 
@@ -62,18 +62,12 @@ public class ExpeditionController {
             return modelAndView;
     }
 
-    @PostMapping("/expedition/Add")
+    @PostMapping("/expedition/add")
     public ModelAndView addExpedition(@ModelAttribute Expedition expedition){
 
         expeditionService.addExpedition(expedition);
 
-        Expedition expedition1 = expeditionService.getExpeditionById(expedition.getId()).get();
-
-        System.out.println(expedition.getId());
-
         return new ModelAndView("redirect:/expeditions");
-
     }
-
 
 }

@@ -15,7 +15,7 @@ import java.util.Optional;
 @Controller
 public class TruckController {
 
-    private TruckService truckService;
+    private final TruckService truckService;
 
     public TruckController(TruckService truckService) {
         this.truckService = truckService;
@@ -32,7 +32,7 @@ public class TruckController {
         return modelAndView;
     }
 
-    @GetMapping("/truck/Add")
+    @GetMapping("/truck/add")
         public ModelAndView addTruck(){
         ModelAndView modelAndView = new ModelAndView("truck");
 
@@ -44,18 +44,18 @@ public class TruckController {
     }
 
 
-    @GetMapping("/truck/Add/{id}")
+    @GetMapping("/truck/add/{id}")
     public ModelAndView addTruck(@PathVariable Long id){
         ModelAndView modelAndView = new ModelAndView("truck");
 
-        Optional<Truck> truck = truckService.getTruckById(id);
+        Truck truck = truckService.getTruckById(id).orElseThrow(() -> new RuntimeException("Unavailable"));
 
         modelAndView.addObject("truck",truck);
 
         return modelAndView;
     }
 
-    @PostMapping("/truck/Add")
+    @PostMapping("/truck/add")
     public String addTruck(@ModelAttribute Truck truck){
 
         truckService.saveTruck(truck);
