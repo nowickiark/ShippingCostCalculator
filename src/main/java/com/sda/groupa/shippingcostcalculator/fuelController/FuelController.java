@@ -50,7 +50,7 @@ public class FuelController {
     @PostMapping(value = "/updatefuel")
     public String updateFueling(@ModelAttribute Fuel fuel){
         fuelService.updateFueling(fuel);
-        return "redirect:/fuelings/" + fuel.getId();
+        return "redirect:/fuelings";
 
     }
     @GetMapping(value = "/updatefuel/{id}")

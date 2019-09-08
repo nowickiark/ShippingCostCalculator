@@ -31,7 +31,6 @@ public class FuelService {
     }
 
     public void updateFueling(Fuel fuel){
-        fuelRepository.findById(fuel.getId()).ifPresent(f->fuelRepository.delete(f));
         fuelRepository.save(fuel);
     }
 

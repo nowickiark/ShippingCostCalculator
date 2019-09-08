@@ -14,6 +14,14 @@
 
 <form:form method="POST" action="${update? updateFuelingUrl : addFuelingUrl}" modelAttribute="fuel">
     <table>
+<%--        add Expedition--%>
+
+        <tr ${update ? "" : "hidden"}>
+            <td><form:label path="id" >Id</form:label></td>
+            <td><form:input path="id" readonly="${update}"/></td>
+        </tr>
+
+
         <tr>
             <td><form:label path="liters" >Liters</form:label></td>
             <td><form:input type="number" path="liters"/></td>
@@ -41,9 +49,7 @@
         <tr>
             <td><form:label path="refuelingToFull" >Full</form:label></td>
             <td><form:checkbox path="refuelingToFull"/></td>
-<%--        </tr>--%>
-<%--        <form:hidden path="fuel.id"></form:hidden>--%>
-<%--        <tr>--%>
+
             <td><input type="submit" value="Add"/></td>
         </tr>
 
