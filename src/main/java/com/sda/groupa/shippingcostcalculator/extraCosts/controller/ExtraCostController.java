@@ -20,7 +20,7 @@ public class ExtraCostController {
         this.extraCostService = extraCostService;
     }
 
-    @GetMapping("/extracost/Add")
+    @GetMapping("/extracost/add")
     public ModelAndView getFormPage() {
 
         ExtraCost extraCost = new ExtraCost();
@@ -29,7 +29,7 @@ public class ExtraCostController {
         return modelAndView;
     }
 
-    @GetMapping("/extracosts/List")
+    @GetMapping("/extracosts/list")
     public ModelAndView getExtraCosts(){
 
         ModelAndView modelAndView = new ModelAndView("extracostslist");
@@ -39,7 +39,7 @@ public class ExtraCostController {
 
     }
 
-    @GetMapping("/extracost/{id}")
+    @GetMapping("/extracosts/{id}")
     public ModelAndView getExtraCostsForm(@PathVariable Long id) {
 
         Optional<ExtraCost> extraCost = extraCostService.getById(id);
@@ -48,11 +48,11 @@ public class ExtraCostController {
         return modelAndView;
     }
 
-    @PostMapping("/extracost/Add")
+    @PostMapping("/extracost/add")
     public String extraCosts (@ModelAttribute ExtraCost extracost) {
 
         extraCostService.addExtraCost(extracost);
-        return "redirect:/extracosts/List";
+        return "redirect:/extracosts/list";
     }
 
 }
