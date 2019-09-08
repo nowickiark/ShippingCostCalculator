@@ -1,6 +1,7 @@
 package com.sda.groupa.shippingcostcalculator.expedition.model;
 
 import com.sda.groupa.shippingcostcalculator.truck.model.Truck;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -22,7 +23,9 @@ public class Expedition {
     private Long startOdometerReading;
     private Long endOdometerReading;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDay;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDay;
 
     private BigDecimal cashBeginingZl;
