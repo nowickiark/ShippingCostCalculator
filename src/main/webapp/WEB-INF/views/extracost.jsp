@@ -5,7 +5,7 @@
 <html>
 <body>
 
-<form:form method="POST" action="/extracost/Add" modelAttribute="extracost">
+<form:form method="POST" action="/extracost/add" modelAttribute="extracost">
             <table>
                 <tr>
                     <td><form:label path="id">Id</form:label></td>

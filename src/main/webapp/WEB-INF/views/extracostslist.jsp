@@ -21,14 +21,14 @@
                 <td>${extracost.description}</td>
                 <td>${extracost.cost}</td>
                 <td>${extracost.currency}</td>
-                <td>${extracost.dateOfPurchase}</td>
-                <td><a href="/extracost/${extracost.id}">Extracost/Details</a></td>
+                <td>${extracost.dateOfPurchase}</td\
+                <td><a href="/extracost/add/${extracost.id}">Extracost/Details</a></td>
             </tr>
         </c:forEach>
 
     </table>
 
-    <a href="/extracost/Add">Add Extra cost</a>
+    <a href="/extracost/add">Add Extra cost</a>
 
 </div>
 </body>
