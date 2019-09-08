@@ -1,8 +1,8 @@
-package com.sda.groupa.shippingcostcalculator.controller;
+package com.sda.groupa.shippingcostcalculator.border.controller;
 
-import com.sda.groupa.shippingcostcalculator.model.BorderCross;
-import com.sda.groupa.shippingcostcalculator.model.Borders;
-import com.sda.groupa.shippingcostcalculator.service.BorderCrossService;
+import com.sda.groupa.shippingcostcalculator.border.model.BorderCross;
+import com.sda.groupa.shippingcostcalculator.border.model.Borders;
+import com.sda.groupa.shippingcostcalculator.border.service.BorderCrossService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;

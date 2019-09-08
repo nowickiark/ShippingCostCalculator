@@ -1,10 +1,10 @@
-package com.sda.groupa.shippingcostcalculator.service;
+package com.sda.groupa.shippingcostcalculator.border.service;
 
 
-import com.sda.groupa.shippingcostcalculator.model.BorderCross;
-import com.sda.groupa.shippingcostcalculator.model.Borders;
-import com.sda.groupa.shippingcostcalculator.repository.BorderCrossRepository;
-import com.sda.groupa.shippingcostcalculator.repository.BordersRepository;
+import com.sda.groupa.shippingcostcalculator.border.model.BorderCross;
+import com.sda.groupa.shippingcostcalculator.border.model.Borders;
+import com.sda.groupa.shippingcostcalculator.border.repository.BorderCrossRepository;
+import com.sda.groupa.shippingcostcalculator.border.repository.BordersRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;

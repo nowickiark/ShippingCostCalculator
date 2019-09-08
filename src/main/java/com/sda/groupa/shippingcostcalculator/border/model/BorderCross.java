@@ -1,4 +1,4 @@
-package com.sda.groupa.shippingcostcalculator.model;
+package com.sda.groupa.shippingcostcalculator.border.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
