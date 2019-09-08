@@ -8,9 +8,9 @@
 <body>
 <h2>Add Driver</h2>
 
-<spring:url value="/adddriver" var="addDriverUrl"/>
+<spring:url value="/driver/add" var="addDriverUrl"/>
 
-<spring:url value="/updatedriver" var="updateDriverUrl"/>
+<spring:url value="/driver/update" var="updateDriverUrl"/>
 
 <form:form method="POST" action="${update? updateDriverUrl : addDriverUrl}" modelAttribute="driver">
     <table>
@@ -45,7 +45,7 @@
 
 <br>
 
-<a href="/driver"/>Go back to driver</a>
+<a href="/drivers"/>Go back to drivers</a>
 
 </body>
 </html>

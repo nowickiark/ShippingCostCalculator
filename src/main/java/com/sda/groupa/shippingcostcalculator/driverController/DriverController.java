@@ -20,38 +20,44 @@ public class DriverController {
         this.driverService = driverService;
     }
 
-    @GetMapping(value = "/driver")
-    public ModelAndView getDrivers(){
+    @GetMapping(value = "/drivers")
+    public ModelAndView getDrivers() {
         List<Driver> listOfDrivers = driverService.findAll();
         ModelAndView modelAndView = new ModelAndView("driver");
         modelAndView.addObject("listOfDrivers", listOfDrivers);
         return modelAndView;
     }
 
-    @PostMapping(value = "/adddriver")
-    public String addDriver(@ModelAttribute Driver driver){
-       driverService.addDriver(driver);
-        return "redirect:/driver";
+    @PostMapping(value = "/driver/add")
+    public String addDriver(@ModelAttribute Driver driver) {
+        driverService.addDriver(driver);
+        return "redirect:/drivers";
     }
 
-    @GetMapping(value = "/adddriver")
-    public ModelAndView addDriverPage(){
+    @GetMapping(value = "/driver/add")
+    public ModelAndView addDriverPage() {
         ModelAndView modelAndView = new ModelAndView("addDriver");
         modelAndView.addObject("driver", new Driver());
         return modelAndView;
     }
 
-    @PostMapping(value = "/updatedriver")
-    public String updateDriver(@ModelAttribute Driver driver){
-       driverService.updateDriver(driver);
-        return "redirect:/driver";
+    @PostMapping(value = "/driver/update")
+    public String updateDriver(@ModelAttribute Driver driver) {
+        driverService.updateDriver(driver);
+        return "redirect:/drivers";
     }
 
-    @GetMapping(value = "/updatedriver/{id}")
-    public ModelAndView updateDriverPage(@PathVariable Long id){
+    @GetMapping(value = "/driver/update/{id}")
+    public ModelAndView updateDriverPage(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("addDriver");
         modelAndView.addObject("driver", driverService.findById(id));
         modelAndView.addObject("update", true);
+        return modelAndView;
+    }
+
+    @GetMapping(value = "/driverMainMenu")
+    public ModelAndView getDriversMainMenuPage() {
+        ModelAndView modelAndView = new ModelAndView("driversMainMenu");
         return modelAndView;
     }
 }

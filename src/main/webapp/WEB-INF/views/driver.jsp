@@ -8,7 +8,7 @@
 
         <td>Driver id: ${onedriver.id}</td>
         <br>
-        <td>First name: ${onedrivers.firstName}</td>
+        <td>First name: ${onedriver.firstName}</td>
         <br>
         <td>Surname: ${onedriver.surname}</td>
         <br>
@@ -17,12 +17,13 @@
         <td>Personal ID number: ${onedriver.personalIdNumber}</td>
         <br>
         <br>
-        <td><a href="/updatedriver/${onedriver.id}">Edit driver</a></td>
+        <td><a href="/driver/update/${onedriver.id}">Edit driver</a></td>
         <br>
 
     </tr>
     <br>
 </c:forEach>
-<a href="/adddriver">Add driver</a>
+<a href="/driver/add">Add driver</a>
+
 </body>
 </html>
