@@ -6,6 +6,7 @@ import com.sda.groupa.shippingcostcalculator.fuelRepository.FuelRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FuelService {
@@ -25,13 +26,17 @@ public class FuelService {
     }
 
 
-    public List<Fuel> getListOfFuellings(){
+    public List<Fuel> findAll(){
         return fuelRepository.findAll();
     }
 
     public void updateFueling(Fuel fuel){
         fuelRepository.findById(fuel.getId()).ifPresent(f->fuelRepository.delete(f));
         fuelRepository.save(fuel);
+    }
+
+    public Optional<Fuel> findById(Long id){
+        return fuelRepository.findById(id);
     }
 
 }

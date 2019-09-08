@@ -7,7 +7,12 @@
 <html>
 <body>
 <h2>Add refueling</h2>
-<form:form method="POST" action="/addfuel" modelAttribute="fuel">
+
+<spring:url value="/addfuel" var="addFuelingUrl" />
+
+<spring:url value="/updatefuel" var="updateFuelingUrl" />
+
+<form:form method="POST" action="${update? updateFuelingUrl : addFuelingUrl}" modelAttribute="fuel">
     <table>
         <tr>
             <td><form:label path="liters" >Liters</form:label></td>
@@ -44,5 +49,6 @@
 
     </table>
 </form:form>
+<a href="/fuelings"/>Go back to fuelings</a>
 </body>
 </html>

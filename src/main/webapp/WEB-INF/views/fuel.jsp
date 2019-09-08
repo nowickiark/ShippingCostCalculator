@@ -3,17 +3,17 @@
 <html>
 <body>
 <h2>Fuelings</h2>
-<c:forEach var="listOfFuelings" items="${listOfFuelings}">
+<c:forEach var="singlefueling" items="${listOfFuelings}">
     <tr>
 
-        <td>Fueling id: ${listOfFuelings.id}</td> <br>
-        <td>Place of refueling: ${listOfFuelings.placeOfRefueling}</td><br>
-        <td>Liters: ${listOfFuelings.liters}</td><br>
-        <td>Cost: ${listOfFuelings.cost}</td><br>
-        <td>Currency: ${listOfFuelings.currency}</td><br>
-        <td>Kilometers: ${listOfFuelings.kilometers}</td><br>
-        <td>Full: ${listOfFuelings.refuelingToFull}</td><br>
-        <td><a href="/updatefuel">Edit refueling</a></td>   //tu mi jeszcze nie działa updatefuel
+        <td>Fueling id: ${singlefueling.id}</td> <br>
+        <td>Place of refueling: ${singlefueling.placeOfRefueling}</td><br>
+        <td>Liters: ${singlefueling.liters}</td><br>
+        <td>Cost: ${singlefueling.cost}</td><br>
+        <td>Currency: ${singlefueling.currency}</td><br>
+        <td>Kilometers: ${singlefueling.kilometers}</td><br>
+        <td>Full: ${singlefueling.refuelingToFull}</td><br>
+        <td><a href="/updatefuel/${singlefueling.id}">Edit refueling</a></td> 
 
     </tr>
     <br>

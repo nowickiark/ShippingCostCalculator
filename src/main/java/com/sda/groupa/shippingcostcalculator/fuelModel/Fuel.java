@@ -3,6 +3,7 @@ package com.sda.groupa.shippingcostcalculator.fuelModel;
 
 import javax.persistence.*;
 
+import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.Objects;
 
@@ -17,9 +18,9 @@ public class Fuel {
 //    private Driver driver;
 //    @ManyToOne
 //    private Expedition expedition;
-    private double liters;
+    private BigDecimal liters;
     private String placeOfRefueling;
-    private double cost;
+    private BigDecimal cost;
     private Currency currency;
     private Long kilometers;
     private String paymentMethod;
@@ -29,7 +30,7 @@ public class Fuel {
 
     };
 
-//    public Fuel(Driver driver, Expedition expedition, double liters, String placeOfRefueling, double cost, Currency currency, Long kilometers, String paymentMethod, boolean refuelingToFull) {
+//    public Fuel(Driver driver, Expedition expedition, BigDecimal liters, String placeOfRefueling, BigDecimal cost, Currency currency, Long kilometers, String paymentMethod, boolean refuelingToFull) {
 //        this.driver = driver;
 //        this.expedition = expedition;
 //        this.liters = liters;
@@ -47,11 +48,11 @@ public class Fuel {
     }
 
 
-    public double getLiters() {
+    public BigDecimal getLiters() {
         return liters;
     }
 
-    public void setLiters(double liters) {
+    public void setLiters(BigDecimal liters) {
         this.liters = liters;
     }
 
@@ -63,11 +64,11 @@ public class Fuel {
         this.placeOfRefueling = placeOfRefueling;
     }
 
-    public double getCost() {
+    public BigDecimal getCost() {
         return cost;
     }
 
-    public void setCost(double cost) {
+    public void setCost(BigDecimal cost) {
         this.cost = cost;
     }
 

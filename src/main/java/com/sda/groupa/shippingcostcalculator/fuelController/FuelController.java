@@ -22,9 +22,9 @@ public class FuelController {
 
 
 //    public ModelAndView getFuelPageWithListOfFuelings(@PathVariable Long id){
-    @GetMapping(value = "/fuel")
+    @GetMapping(value = "/fuelings")
     public ModelAndView getFuelPageWithListOfFuelings(){
-        List<Fuel> listOfFuelings = fuelService.getListOfFuellings();
+        List<Fuel> listOfFuelings = fuelService.findAll();
 //        Expedition expedition = new Expedition();
 //        Fuel fuel = new Fuel();
 //        expedition.setId(id);
@@ -37,7 +37,7 @@ public class FuelController {
     @PostMapping(value = "/addfuel")    //fuel
     public String addFueling(@ModelAttribute Fuel fuel){
         fuelService.addFueling(fuel);
-        return "redirect:/fuel";
+        return "redirect:/fuelings";
     }
 
     @GetMapping(value = "/addfuel")   //fuel/add
@@ -50,8 +50,15 @@ public class FuelController {
     @PostMapping(value = "/updatefuel")
     public String updateFueling(@ModelAttribute Fuel fuel){
         fuelService.updateFueling(fuel);
-        return "redirect:/fuel";
+        return "redirect:/fuelings/" + fuel.getId();
 
+    }
+    @GetMapping(value = "/updatefuel/{id}")
+    public ModelAndView updateFuelingPage (@PathVariable Long id){
+        ModelAndView modelAndView = new ModelAndView("addFuel");
+        modelAndView.addObject("fuel", fuelService.findById(id));
+        modelAndView.addObject("update", true);
+        return modelAndView;
     }
 
 }
