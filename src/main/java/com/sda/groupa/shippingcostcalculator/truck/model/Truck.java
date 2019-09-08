@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import java.util.Objects;
 
 
 @Entity
@@ -69,13 +70,19 @@ public class Truck {
     }
 
     @Override
-    public String toString() {
-        return "Truck{" +
-                "id=" + id +
-                ", plateNumber='" + plateNumber + '\'' +
-                ", brand='" + brand + '\'' +
-                ", model='" + model + '\'' +
-                ", horsePower=" + horsePower +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Truck truck = (Truck) o;
+        return horsePower == truck.horsePower &&
+                Objects.equals(id, truck.id) &&
+                Objects.equals(plateNumber, truck.plateNumber) &&
+                Objects.equals(brand, truck.brand) &&
+                Objects.equals(model, truck.model);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, plateNumber, brand, model, horsePower);
     }
 }

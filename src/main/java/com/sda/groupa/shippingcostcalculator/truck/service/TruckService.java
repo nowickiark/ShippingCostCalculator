@@ -30,4 +30,12 @@ public class TruckService {
         return trucks;
     }
 
+    public Optional<Truck> getTruckById(Long id){
+
+        Optional<Truck> truckOptional = truckRepository.findById(id);
+
+        return truckOptional;
+
+    }
+
 }

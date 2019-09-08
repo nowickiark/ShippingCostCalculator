@@ -9,6 +9,10 @@
 <form:form method="POST" action="/expedition/Add" modelAttribute="expedition">
     <table>
         <tr>
+            <td><form:label path="id">Id</form:label></td>
+            <td><form:input path="id" readonly="true" /></td>
+        </tr>
+        <tr>
             <td><form:label path="startingPlace">Starting Place</form:label></td>
             <td><form:input path="startingPlace"/></td>
         </tr>

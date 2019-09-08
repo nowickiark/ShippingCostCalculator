@@ -22,13 +22,14 @@
                 <td>${expedition.startingPlace}</td>
                 <td>${expedition.startOdometerReading}</td>
                 <td>${expedition.startDay}</td>
+                <td><a href="/expedition/Add/${expedition.id}">Edit</a></td>
                 <%--<td><a href="/whipround/${whipround.whipRound.id}">Donate/Details</a></td>--%>
             </tr>
         </c:forEach>
 
     </table>
 
-
+    <a href="/expedition/Add">Add expedition</a>
 
 </div>
 

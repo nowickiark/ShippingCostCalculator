@@ -3,7 +3,9 @@ package com.sda.groupa.shippingcostcalculator.expedition.model;
 import com.sda.groupa.shippingcostcalculator.truck.model.Truck;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 public class Expedition {
@@ -17,20 +19,27 @@ public class Expedition {
     private Truck truck;
 
     private String startingPlace;
-    private long startOdometerReading;
-    private long endOdometerReading;
+    private Long startOdometerReading;
+    private Long endOdometerReading;
 
     private LocalDate startDay;
     private LocalDate endDay;
 
-    private double CashBeginingZl;
-    private double CashEndZl;
-    private double CashBeginingEur;
-    private double CashEndEur;
+    private BigDecimal CashBeginingZl;
+    private BigDecimal CashEndZl;
+    private BigDecimal CashBeginingEur;
+    private BigDecimal CashEndEur;
 
     public Expedition(){};
 
-    public Expedition(Truck truck, String startingPlace, long startOdometerReading, long endOdometerReading, LocalDate startDay, LocalDate endDay, double cashBeginingZl, double cashEndZl, double cashBeginingEur, double cashEndEur) {
+    public Expedition(Truck truck,String startingPlace, long startOdometerReading, LocalDate startDay){
+        this.truck = truck;
+        this.startingPlace = startingPlace;
+        this.startOdometerReading = startOdometerReading;
+        this.startDay = startDay;
+    }
+
+    public Expedition(Truck truck, String startingPlace, long startOdometerReading, long endOdometerReading, LocalDate startDay, LocalDate endDay, BigDecimal cashBeginingZl, BigDecimal cashEndZl, BigDecimal cashBeginingEur, BigDecimal cashEndEur) {
         this.truck = truck;
         this.startingPlace = startingPlace;
         this.startOdometerReading = startOdometerReading;
@@ -67,19 +76,19 @@ public class Expedition {
         this.startingPlace = startingPlace;
     }
 
-    public long getStartOdometerReading() {
+    public Long getStartOdometerReading() {
         return startOdometerReading;
     }
 
-    public void setStartOdometerReading(long startOdometerReading) {
+    public void setStartOdometerReading(Long startOdometerReading) {
         this.startOdometerReading = startOdometerReading;
     }
 
-    public long getEndOdometerReading() {
+    public Long getEndOdometerReading() {
         return endOdometerReading;
     }
 
-    public void setEndOdometerReading(long endOdometerReading) {
+    public void setEndOdometerReading(Long endOdometerReading) {
         this.endOdometerReading = endOdometerReading;
     }
 
@@ -99,52 +108,58 @@ public class Expedition {
         this.endDay = endDay;
     }
 
-    public double getCashBeginingZl() {
+    public BigDecimal getCashBeginingZl() {
         return CashBeginingZl;
     }
 
-    public void setCashBeginingZl(double cashBeginingZl) {
+    public void setCashBeginingZl(BigDecimal cashBeginingZl) {
         CashBeginingZl = cashBeginingZl;
     }
 
-    public double getCashEndZl() {
+    public BigDecimal getCashEndZl() {
         return CashEndZl;
     }
 
-    public void setCashEndZl(double cashEndZl) {
+    public void setCashEndZl(BigDecimal cashEndZl) {
         CashEndZl = cashEndZl;
     }
 
-    public double getCashBeginingEur() {
+    public BigDecimal getCashBeginingEur() {
         return CashBeginingEur;
     }
 
-    public void setCashBeginingEur(double cashBeginingEur) {
+    public void setCashBeginingEur(BigDecimal cashBeginingEur) {
         CashBeginingEur = cashBeginingEur;
     }
 
-    public double getCashEndEur() {
+    public BigDecimal getCashEndEur() {
         return CashEndEur;
     }
 
-    public void setCashEndEur(double cashEndEur) {
+    public void setCashEndEur(BigDecimal cashEndEur) {
         CashEndEur = cashEndEur;
     }
 
     @Override
-    public String toString() {
-        return "Expedition{" +
-                "id=" + id +
-                ", truck=" + truck +
-                ", startingPlace='" + startingPlace + '\'' +
-                ", startOdometerReading=" + startOdometerReading +
-                ", endOdometerReading=" + endOdometerReading +
-                ", startDay=" + startDay +
-                ", endDay=" + endDay +
-                ", CashBeginingZl=" + CashBeginingZl +
-                ", CashEndZl=" + CashEndZl +
-                ", CashBeginingEur=" + CashBeginingEur +
-                ", CashEndEur=" + CashEndEur +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Expedition that = (Expedition) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(truck, that.truck) &&
+                Objects.equals(startingPlace, that.startingPlace) &&
+                Objects.equals(startOdometerReading, that.startOdometerReading) &&
+                Objects.equals(endOdometerReading, that.endOdometerReading) &&
+                Objects.equals(startDay, that.startDay) &&
+                Objects.equals(endDay, that.endDay) &&
+                Objects.equals(CashBeginingZl, that.CashBeginingZl) &&
+                Objects.equals(CashEndZl, that.CashEndZl) &&
+                Objects.equals(CashBeginingEur, that.CashBeginingEur) &&
+                Objects.equals(CashEndEur, that.CashEndEur);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, truck, startingPlace, startOdometerReading, endOdometerReading, startDay, endDay, CashBeginingZl, CashEndZl, CashBeginingEur, CashEndEur);
     }
 }

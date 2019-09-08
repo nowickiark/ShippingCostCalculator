@@ -7,6 +7,7 @@ import com.sda.groupa.shippingcostcalculator.truck.service.TruckService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -37,6 +38,20 @@ public class ExpeditionController {
         return modelAndView;
     }
 
+    @GetMapping("/expedition/Add/{id}")
+    public ModelAndView getExpeditionform(@PathVariable Long id){
+        ModelAndView modelAndView = new ModelAndView("expedition");
+
+        Expedition expedition = expeditionService.getExpeditionById(id).get();
+
+        List<Truck> trucks = truckService.getTrucks();
+
+        modelAndView.addObject("expedition",expedition);
+        modelAndView.addObject("trucks",trucks);
+
+        return modelAndView;
+    }
+
     @GetMapping("/expeditions")
     public ModelAndView getExpeditions(){
             ModelAndView modelAndView = new ModelAndView("expeditions");
@@ -57,8 +72,6 @@ public class ExpeditionController {
         System.out.println(expedition.getId());
 
         return new ModelAndView("redirect:/expeditions");
-
-        /*return "redirect:/expeditions";*/
 
     }
 

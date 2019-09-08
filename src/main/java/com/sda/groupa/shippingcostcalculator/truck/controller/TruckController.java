@@ -5,10 +5,12 @@ import com.sda.groupa.shippingcostcalculator.truck.service.TruckService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class TruckController {
@@ -19,9 +21,9 @@ public class TruckController {
         this.truckService = truckService;
     }
 
-    @GetMapping("/trucks")
+    @GetMapping("/truckList")
     public ModelAndView getTrucks(){
-        ModelAndView modelAndView = new ModelAndView("trucks");
+        ModelAndView modelAndView = new ModelAndView("truckList");
 
         List<Truck> trucks = truckService.getTrucks();
 
@@ -30,11 +32,23 @@ public class TruckController {
         return modelAndView;
     }
 
-    @GetMapping("/truck")
-    public ModelAndView addTruck(){
+    @GetMapping("/truck/Add")
+        public ModelAndView addTruck(){
         ModelAndView modelAndView = new ModelAndView("truck");
 
         Truck truck = new Truck();
+
+        modelAndView.addObject(truck);
+
+        return modelAndView;
+    }
+
+
+    @GetMapping("/truck/Add/{id}")
+    public ModelAndView addTruck(@PathVariable Long id){
+        ModelAndView modelAndView = new ModelAndView("truck");
+
+        Optional<Truck> truck = truckService.getTruckById(id);
 
         modelAndView.addObject("truck",truck);
 
@@ -43,8 +57,10 @@ public class TruckController {
 
     @PostMapping("/truck/Add")
     public String addTruck(@ModelAttribute Truck truck){
+
         truckService.saveTruck(truck);
-        return "redirect:/trucks";
+
+        return "redirect:/truckList";
     }
 
 

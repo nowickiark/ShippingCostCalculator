@@ -8,6 +8,10 @@
 <form:form method="POST" action="/truck/Add" modelAttribute="truck">
     <table>
         <tr>
+            <td><form:label path="id">Id</form:label></td>
+            <td><form:input path="id" readonly="true" /></td>
+        </tr>
+        <tr>
             <td><form:label path="plateNumber">Truck Plate Number</form:label></td>
             <td><form:input path="plateNumber"/></td>
         </tr>
@@ -29,6 +33,8 @@
         </tr>
     </table>
 </form:form>
+
+
 
 </body>
 </html>
