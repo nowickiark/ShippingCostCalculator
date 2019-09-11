@@ -1,4 +1,4 @@
-package com.sda.groupa.shippingcostcalculator.driverModel;
+package com.sda.groupa.shippingcostcalculator.driver.driverModel;
 
 public class Role {
 }

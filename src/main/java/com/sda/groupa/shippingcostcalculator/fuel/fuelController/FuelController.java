@@ -1,7 +1,8 @@
-package com.sda.groupa.shippingcostcalculator.fuelController;
+package com.sda.groupa.shippingcostcalculator.fuel.fuelController;
 
-import com.sda.groupa.shippingcostcalculator.fuelModel.Fuel;
-import com.sda.groupa.shippingcostcalculator.fuelService.FuelService;
+
+import com.sda.groupa.shippingcostcalculator.fuel.fuelModel.Fuel;
+import com.sda.groupa.shippingcostcalculator.fuel.fuelService.FuelService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;

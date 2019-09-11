@@ -1,4 +1,4 @@
-package com.sda.groupa.shippingcostcalculator.fuelModel;
+package com.sda.groupa.shippingcostcalculator.fuel.fuelModel;
 
 
 import javax.persistence.*;

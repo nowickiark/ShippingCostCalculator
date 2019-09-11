@@ -1,7 +1,7 @@
-package com.sda.groupa.shippingcostcalculator.driverController;
+package com.sda.groupa.shippingcostcalculator.driver.driverController;
 
-import com.sda.groupa.shippingcostcalculator.driverModel.Driver;
-import com.sda.groupa.shippingcostcalculator.driverService.DriverService;
+import com.sda.groupa.shippingcostcalculator.driver.driverModel.Driver;
+import com.sda.groupa.shippingcostcalculator.driver.driverService.DriverService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;

@@ -1,8 +1,9 @@
-package com.sda.groupa.shippingcostcalculator.fuelService;
+package com.sda.groupa.shippingcostcalculator.fuel.fuelService;
 
 
-import com.sda.groupa.shippingcostcalculator.fuelModel.Fuel;
-import com.sda.groupa.shippingcostcalculator.fuelRepository.FuelRepository;
+
+import com.sda.groupa.shippingcostcalculator.fuel.fuelModel.Fuel;
+import com.sda.groupa.shippingcostcalculator.fuel.fuelRepository.FuelRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

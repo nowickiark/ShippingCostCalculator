@@ -13,7 +13,7 @@ import java.util.Optional;
 public class BorderCrossService {
 
 private final BorderCrossRepository borderCrossRepository;
-private BordersRepository bordersRepository;
+private final BordersRepository bordersRepository;
 
     public BorderCrossService(BordersRepository bordersRepository, BorderCrossRepository borderCrossRepository) {
         this.borderCrossRepository = borderCrossRepository;

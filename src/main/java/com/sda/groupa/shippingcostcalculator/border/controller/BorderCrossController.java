@@ -1,8 +1,11 @@
 package com.sda.groupa.shippingcostcalculator.border.controller;
 
+//import com.sda.groupa.shippingcostcalculator.border.exception.BorderCrossNotFoundException;
+import com.sda.groupa.shippingcostcalculator.border.exception.BorderCrossNotFoundException;
 import com.sda.groupa.shippingcostcalculator.border.model.BorderCross;
 import com.sda.groupa.shippingcostcalculator.border.model.Borders;
 import com.sda.groupa.shippingcostcalculator.border.service.BorderCrossService;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,7 +17,7 @@ import java.util.List;
 
 @Controller
 public class BorderCrossController {
-    private BorderCrossService borderCrossService;
+    private final BorderCrossService borderCrossService;
 
     public BorderCrossController(BorderCrossService borderCrossService) {
         this.borderCrossService = borderCrossService;
@@ -41,29 +44,25 @@ public class BorderCrossController {
         modelAndView.addObject("borders", borders);
         return modelAndView;
     }
-@GetMapping("/borderCross/add/{id}")
-public ModelAndView editBorderCross(@PathVariable Long id){
+
+    @GetMapping("/borderCross/add/{id}")
+    public ModelAndView editBorderCross(@PathVariable Long id) {
 
         ModelAndView modelAndView = new ModelAndView("borderCross");
 
-    BorderCross borderCross = borderCrossService.findBorderCrossById(id).orElseThrow(() -> new RuntimeException("Unavailable"));
+        BorderCross borderCross = borderCrossService.findBorderCrossById(id).orElseThrow(() -> new BorderCrossNotFoundException("Unavailable"));
 
-    modelAndView.addObject(borderCross);
+        modelAndView.addObject(borderCross);
 
-    return modelAndView;
+        return modelAndView;
 
 
-}
+    }
 
     @GetMapping("/borders/add/{id}")
     public ModelAndView editBorder(@PathVariable Long id) {
 
         ModelAndView modelAndView = new ModelAndView("borders");
-
-//        List<Borders> listOfBorders = borderCrossService.getListOfBorders();
-
-        //Borders borders = borderCrossService.findBorderById(id).orElseThrow(() -> new RuntimeException("Unavailable"));
-
         modelAndView.addObject("borders", borderCrossService.findBorderById(id));
 
 
@@ -72,22 +71,22 @@ public ModelAndView editBorderCross(@PathVariable Long id){
     }
 
     @GetMapping("/listOfBorderCrosses")
-    public ModelAndView getListOfBorderCrosses(){
+    public ModelAndView getListOfBorderCrosses() {
         ModelAndView modelAndView = new ModelAndView("listOfBorderCrosses");
 
         List<BorderCross> listOfBorderCrosses = borderCrossService.getListOfBorderCrosses();
 
-        modelAndView.addObject("listOfBorderCrosses",listOfBorderCrosses);
+        modelAndView.addObject("listOfBorderCrosses", listOfBorderCrosses);
         return modelAndView;
     }
 
     @GetMapping("/listOfBorders")
-    public ModelAndView getListOfBorders(){
+    public ModelAndView getListOfBorders() {
         ModelAndView modelAndView = new ModelAndView("listOfBorders");
 
         List<Borders> listOfBorders = borderCrossService.getListOfBorders();
 
-        modelAndView.addObject("listOfBorders",listOfBorders);
+        modelAndView.addObject("listOfBorders", listOfBorders);
         return modelAndView;
     }
 

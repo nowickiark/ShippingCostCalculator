@@ -1,7 +1,8 @@
-package com.sda.groupa.shippingcostcalculator.driverService;
+package com.sda.groupa.shippingcostcalculator.driver.driverService;
 
-import com.sda.groupa.shippingcostcalculator.driverModel.Driver;
-import com.sda.groupa.shippingcostcalculator.driverRepository.DriverRepository;
+
+import com.sda.groupa.shippingcostcalculator.driver.driverModel.Driver;
+import com.sda.groupa.shippingcostcalculator.driver.driverRepository.DriverRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
