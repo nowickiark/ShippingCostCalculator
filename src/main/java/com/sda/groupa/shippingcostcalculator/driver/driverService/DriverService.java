@@ -32,6 +32,11 @@ public class DriverService {
     public Optional<Driver> findById(Long id){
         return driverRepository.findById(id);
     }
+
+    public Optional<Driver> findDriverByUser(String user){
+        return driverRepository.findDriverByUser(user);
+    }
+
 }
 
 
