@@ -25,14 +25,22 @@ public class Driver {
     private Expedition expedition;
 
     public Driver() {
-
     }
 
-    public Driver(String firstName, String surname, String phoneNumber, String personalIdNumber) {
+/*    public Driver(String firstName, String surname, String phoneNumber, String personalIdNumber) {
         this.firstName = firstName;
         this.surname = surname;
         this.phoneNumber = phoneNumber;
         this.personalIdNumber = personalIdNumber;
+    }*/
+
+    public Driver(String firstName, String surname, String phoneNumber, String personalIdNumber, User user, Expedition expedition) {
+        this.firstName = firstName;
+        this.surname = surname;
+        this.phoneNumber = phoneNumber;
+        this.personalIdNumber = personalIdNumber;
+        this.user = user;
+        this.expedition = expedition;
     }
 
     public Long getId() {

@@ -5,6 +5,7 @@ import com.sda.groupa.shippingcostcalculator.border.model.BorderCross;
 import com.sda.groupa.shippingcostcalculator.border.model.Borders;
 import com.sda.groupa.shippingcostcalculator.border.repository.BorderCrossRepository;
 import com.sda.groupa.shippingcostcalculator.border.repository.BordersRepository;
+import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -39,6 +40,11 @@ private final BordersRepository bordersRepository;
 
     }
 
+    public List<BorderCross> findListOfBorderCrossesByExpedition(Expedition expedition){
+        return borderCrossRepository.findBorderCrossesByExpedition(expedition);
+    }
+
+
     public List<Borders> getListOfBorders() {
         return bordersRepository.findAll();
     }
@@ -46,6 +52,7 @@ private final BordersRepository bordersRepository;
     public Optional<Borders> findBorderById(Long id) {
         return bordersRepository.findById(id);
     }
+
 
 
 

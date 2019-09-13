@@ -1,5 +1,6 @@
 package com.sda.groupa.shippingcostcalculator.expedition.model;
 
+import com.sda.groupa.shippingcostcalculator.driver.driverModel.Driver;
 import com.sda.groupa.shippingcostcalculator.truck.model.Truck;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -19,6 +20,9 @@ public class Expedition {
     @ManyToOne(targetEntity = Truck.class)
     private Truck truck;
 
+    @OneToOne(targetEntity = Driver.class)
+    private Driver driver;
+
     private String startingPlace;
     private Long startOdometerReading;
     private Long endOdometerReading;
@@ -35,15 +39,17 @@ public class Expedition {
 
     public Expedition(){};
 
-    public Expedition(Truck truck,String startingPlace, long startOdometerReading, LocalDate startDay){
+    public Expedition(Truck truck,Driver driver, String startingPlace, long startOdometerReading, LocalDate startDay){
         this.truck = truck;
+        this.driver = driver;
         this.startingPlace = startingPlace;
         this.startOdometerReading = startOdometerReading;
         this.startDay = startDay;
     }
 
-    public Expedition(Truck truck, String startingPlace, Long startOdometerReading, Long endOdometerReading, LocalDate startDay, LocalDate endDay, BigDecimal cashBeginingZl, BigDecimal cashEndZl, BigDecimal cashBeginingEur, BigDecimal cashEndEur) {
+    public Expedition(Truck truck, Driver driver, String startingPlace, Long startOdometerReading, Long endOdometerReading, LocalDate startDay, LocalDate endDay, BigDecimal cashBeginingZl, BigDecimal cashEndZl, BigDecimal cashBeginingEur, BigDecimal cashEndEur) {
         this.truck = truck;
+        this.driver = driver;
         this.startingPlace = startingPlace;
         this.startOdometerReading = startOdometerReading;
         this.endOdometerReading = endOdometerReading;
@@ -69,6 +75,14 @@ public class Expedition {
 
     public void setTruck(Truck truck) {
         this.truck = truck;
+    }
+
+    public Driver getDriver() {
+        return driver;
+    }
+
+    public void setDriver(Driver driver) {
+        this.driver = driver;
     }
 
     public String getStartingPlace() {
@@ -150,6 +164,7 @@ public class Expedition {
         Expedition that = (Expedition) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(truck, that.truck) &&
+                Objects.equals(driver, that.driver) &&
                 Objects.equals(startingPlace, that.startingPlace) &&
                 Objects.equals(startOdometerReading, that.startOdometerReading) &&
                 Objects.equals(endOdometerReading, that.endOdometerReading) &&
@@ -163,6 +178,6 @@ public class Expedition {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, truck, startingPlace, startOdometerReading, endOdometerReading, startDay, endDay, cashBeginingZl, cashEndZl, cashBeginingEur, cashEndEur);
+        return Objects.hash(id, truck, driver, startingPlace, startOdometerReading, endOdometerReading, startDay, endDay, cashBeginingZl, cashEndZl, cashBeginingEur, cashEndEur);
     }
 }

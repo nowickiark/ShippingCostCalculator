@@ -1,4 +1,4 @@
-<%@ page session="false"%>
+<%@ page session="true"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
@@ -33,6 +33,14 @@
         </table>
 
 </form:form>
+
+<br>
+
+<a href="/extracost/add">Add Extra cost</a>
+
+<br>
+
+<a href="/">Back to home</a>
 
 </body>
 </html>

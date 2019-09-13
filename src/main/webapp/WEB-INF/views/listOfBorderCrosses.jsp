@@ -9,6 +9,7 @@
 
         <tr>
             <th>Id: </th>
+            <th>Expedition Id</th>
             <th>Date of departure: </th>
             <th>Border details: </th>
 
@@ -17,6 +18,7 @@
         <c:forEach var="borderCross" items="${listOfBorderCrosses}">
             <tr>
                 <td>${borderCross.id}</td>
+                <td>${borderCross.expedition.id}</td>
                 <td>${borderCross.dateOfBorderCrossing}</td>
                 <td>${borderCross.borders.countryFrom}</td>
                 <td>${borderCross.borders.cityFrom}</td>
@@ -30,6 +32,10 @@
     </table>
 
     <a href="/borderCross/add">Add border crossing</a>
+
+    <br>
+
+    <a href="/">Go Back Home</a>
 
 </div>
 

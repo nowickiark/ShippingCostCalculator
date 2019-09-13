@@ -55,6 +55,11 @@
 
     </table>
 </form:form>
-<a href="/fuelings"/>Go back to fuelings</a>
+<a href="/expedition/listOfFuels"/>Go back to fuelings</a>
+
+<br>
+
+<a href="/">Go Back Home</a>
+
 </body>
 </html>

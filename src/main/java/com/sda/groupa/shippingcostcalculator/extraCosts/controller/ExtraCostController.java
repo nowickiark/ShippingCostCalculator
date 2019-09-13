@@ -1,5 +1,7 @@
 package com.sda.groupa.shippingcostcalculator.extraCosts.controller;
 
+import com.sda.groupa.shippingcostcalculator.driver.driverModel.Driver;
+import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
 import com.sda.groupa.shippingcostcalculator.extraCosts.model.ExtraCost;
 import com.sda.groupa.shippingcostcalculator.extraCosts.service.ExtraCostService;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +25,9 @@ public class ExtraCostController {
 
     @GetMapping("/extracost/add")
     public ModelAndView getFormPage() {
+
         ExtraCost extraCost = new ExtraCost();
+
         ModelAndView modelAndView = new ModelAndView("extracost");
         modelAndView.addObject("extracost", extraCost);
         return modelAndView;
@@ -38,6 +43,18 @@ public class ExtraCostController {
 
     }
 
+    @GetMapping("/expedition/listOfExtraCosts")
+    public ModelAndView getExtraCostsByExpedition(HttpServletRequest request){
+
+        Driver driver = (Driver)request.getSession().getAttribute("driver");
+
+        ModelAndView modelAndView = new ModelAndView("extracostslist");
+        List<ExtraCost> extraCosts = extraCostService.getExtraCostsByExpetionId(driver.getExpedition());
+        modelAndView.addObject("extracosts",extraCosts);
+        return modelAndView;
+
+    }
+
     @GetMapping("/extracost/add/{id}")
     public ModelAndView getExtraCostsForm(@PathVariable Long id) {
 
@@ -48,9 +65,14 @@ public class ExtraCostController {
     }
 
     @PostMapping("/extracost/add")
-    public String extraCosts (@ModelAttribute ExtraCost extracost) {
+    public String extraCosts (@ModelAttribute ExtraCost extracost, HttpServletRequest request ) {
+
+        Driver driver = (Driver)request.getSession().getAttribute("driver");
+
+        extracost.setExpedition(driver.getExpedition());
+
         extraCostService.addExtraCost(extracost);
-        return "redirect:/extracosts/list";
+        return "redirect:/expedition/listOfExtraCosts";
     }
 
 }

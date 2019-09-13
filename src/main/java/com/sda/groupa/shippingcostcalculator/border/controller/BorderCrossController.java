@@ -6,6 +6,7 @@ import com.sda.groupa.shippingcostcalculator.border.model.BorderCross;
 import com.sda.groupa.shippingcostcalculator.border.model.Borders;
 import com.sda.groupa.shippingcostcalculator.border.service.BorderCrossService;
 
+import com.sda.groupa.shippingcostcalculator.driver.driverModel.Driver;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -80,6 +82,19 @@ public class BorderCrossController {
         return modelAndView;
     }
 
+    @GetMapping("/expedition/listOfBorderCrosses")
+    public ModelAndView getListOfBorderCrossesByExpedition(HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView("listOfBorderCrosses");
+
+        Driver driver = (Driver)request.getSession().getAttribute("driver");
+
+
+        List<BorderCross> listOfBorderCrosses = borderCrossService.findListOfBorderCrossesByExpedition(driver.getExpedition());
+
+        modelAndView.addObject("listOfBorderCrosses", listOfBorderCrosses);
+        return modelAndView;
+    }
+
     @GetMapping("/listOfBorders")
     public ModelAndView getListOfBorders() {
         ModelAndView modelAndView = new ModelAndView("listOfBorders");
@@ -91,13 +106,20 @@ public class BorderCrossController {
     }
 
     @PostMapping("/borderCross/add")
-    public String addBorderCrossing(@ModelAttribute BorderCross borderCross) {
+    public String addBorderCrossing(@ModelAttribute BorderCross borderCross, HttpServletRequest request) {
+
+        Driver driver = (Driver)request.getSession().getAttribute("driver");
+
+        borderCross.setExpedition(driver.getExpedition());
+
         borderCrossService.addBorderCrossing(borderCross);
         return "redirect:/listOfBorderCrosses";
     }
 
     @PostMapping("/borders/add")
     public String addBorder(@ModelAttribute Borders borders) {
+
+
         borderCrossService.addBorder(borders);
         return "redirect:/listOfBorders";
     }

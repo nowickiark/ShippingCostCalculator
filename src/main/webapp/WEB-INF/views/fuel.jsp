@@ -19,6 +19,7 @@
     <tr>
         <th>Fueling id</th>
 <%--        <th>Expedition</th>--%>
+        <th>Expedition id</th>
         <th>Place of refueling</th>
         <th>Liters</th>
         <th>Cost</th>
@@ -34,6 +35,7 @@
 
             <td>${singlefueling.id}</td> <br>
                 <%--        add Expedition--%>
+            <td>${singlefueling.expedition.id}</td>
             <td>${singlefueling.placeOfRefueling}</td>
             <td>${singlefueling.liters}</td>
             <td>${singlefueling.cost}</td>
@@ -48,5 +50,10 @@
 </c:forEach>
 </table>
 <a href="/addfuel">Add refueling</a>
+
+<br>
+
+<a href="/">Go Back Home</a>
+
 </body>
 </html>
