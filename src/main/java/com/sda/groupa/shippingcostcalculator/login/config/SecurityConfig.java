@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().loginPage("/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .successHandler(successHandler())
+                .successHandler(myAuthenticationSuccessHandler())
                 .and()
                 .exceptionHandling()
                 .accessDeniedPage("/accessDenied")
@@ -49,9 +49,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
-    @Bean
+/*    @Bean
     AuthenticationSuccessHandler successHandler() {
         return new SavedRequestAwareAuthenticationSuccessHandler();
+    }*/
+
+    @Bean
+    public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
+        return new MySimpleUrlAuthenticationSuccessHandler();
     }
 
     @Bean

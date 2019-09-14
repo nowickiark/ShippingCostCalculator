@@ -1,9 +1,11 @@
 package com.sda.groupa.shippingcostcalculator.extraCosts.controller;
 
 import com.sda.groupa.shippingcostcalculator.driver.driverModel.Driver;
+import com.sda.groupa.shippingcostcalculator.driver.driverService.DriverService;
 import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
 import com.sda.groupa.shippingcostcalculator.extraCosts.model.ExtraCost;
 import com.sda.groupa.shippingcostcalculator.extraCosts.service.ExtraCostService;
+import com.sda.groupa.shippingcostcalculator.login.workerStrategy.WorkerStrategy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,9 +20,13 @@ import java.util.Optional;
 @Controller
 public class ExtraCostController {
     private final ExtraCostService extraCostService;
+    private final WorkerStrategy workerStrategy;
+    private final DriverService driverService;
 
-    public ExtraCostController(ExtraCostService extraCostService) {
+    public ExtraCostController(ExtraCostService extraCostService, WorkerStrategy workerStrategy, DriverService driverService) {
         this.extraCostService = extraCostService;
+        this.workerStrategy = workerStrategy;
+        this.driverService = driverService;
     }
 
     @GetMapping("/extracost/add")
@@ -44,15 +50,14 @@ public class ExtraCostController {
     }
 
     @GetMapping("/expedition/listOfExtraCosts")
-    public ModelAndView getExtraCostsByExpedition(HttpServletRequest request){
+    public ModelAndView getExtraCostsByExpedition(){
 
-        Driver driver = (Driver)request.getSession().getAttribute("driver");
+        Expedition expedition = driverService.findDriverByUsername(workerStrategy.getUser().getUsername()).get().getExpedition();
 
         ModelAndView modelAndView = new ModelAndView("extracostslist");
-        List<ExtraCost> extraCosts = extraCostService.getExtraCostsByExpetionId(driver.getExpedition());
+        List<ExtraCost> extraCosts = extraCostService.getExtraCostsByExpetionId(expedition);
         modelAndView.addObject("extracosts",extraCosts);
         return modelAndView;
-
     }
 
     @GetMapping("/extracost/add/{id}")
@@ -65,11 +70,11 @@ public class ExtraCostController {
     }
 
     @PostMapping("/extracost/add")
-    public String extraCosts (@ModelAttribute ExtraCost extracost, HttpServletRequest request ) {
+    public String extraCosts (@ModelAttribute ExtraCost extracost) {
 
-        Driver driver = (Driver)request.getSession().getAttribute("driver");
+        Expedition expedition = driverService.findDriverByUsername(workerStrategy.getUser().getUsername()).get().getExpedition();
 
-        extracost.setExpedition(driver.getExpedition());
+        extracost.setExpedition(expedition);
 
         extraCostService.addExtraCost(extracost);
         return "redirect:/expedition/listOfExtraCosts";
