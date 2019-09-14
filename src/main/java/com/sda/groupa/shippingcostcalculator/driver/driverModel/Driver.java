@@ -27,13 +27,6 @@ public class Driver {
     public Driver() {
     }
 
-/*    public Driver(String firstName, String surname, String phoneNumber, String personalIdNumber) {
-        this.firstName = firstName;
-        this.surname = surname;
-        this.phoneNumber = phoneNumber;
-        this.personalIdNumber = personalIdNumber;
-    }*/
-
     public Driver(String firstName, String surname, String phoneNumber, String personalIdNumber, User user, Expedition expedition) {
         this.firstName = firstName;
         this.surname = surname;

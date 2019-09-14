@@ -119,7 +119,6 @@ public class BorderCrossController {
     @PostMapping("/borders/add")
     public String addBorder(@ModelAttribute Borders borders) {
 
-
         borderCrossService.addBorder(borders);
         return "redirect:/listOfBorders";
     }

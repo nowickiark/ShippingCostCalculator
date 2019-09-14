@@ -19,7 +19,6 @@ import java.security.Principal;
 @Controller
 public class AppController {
 
-
     private UserDetailsService userDetailsService;
     private DriverService driverService;
     private ExpeditionService expeditionService;
@@ -38,7 +37,6 @@ public class AppController {
     @GetMapping("/")
     public ModelAndView getHomePage(Principal principal, HttpServletRequest request) {
 
-
         ModelAndView modelAndView = new ModelAndView("home");
 
         String userName = principal.getName();
@@ -47,7 +45,7 @@ public class AppController {
 
         if (user.getRole().getAuthority().equals("DRIVER")){
 
-            Driver driver  = driverService.findDriverByUser(userName).orElseThrow(() -> new RuntimeException("Unavailable"));
+            Driver driver  = driverService.findDriverByUsername(userName).orElseThrow(() -> new RuntimeException("Unavailable"));
 
             driver.setExpedition(expeditionService.getExpeditionById(1L).get());
 

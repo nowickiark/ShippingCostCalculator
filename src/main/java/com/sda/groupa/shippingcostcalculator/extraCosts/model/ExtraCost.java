@@ -3,6 +3,7 @@ package com.sda.groupa.shippingcostcalculator.extraCosts.model;
 import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -17,7 +18,7 @@ public class ExtraCost {
     @ManyToOne(targetEntity = Expedition.class)
     private Expedition expedition;
     private String description;
-    private Double cost;
+    private BigDecimal cost;
     @Enumerated(EnumType.STRING)
     private Currency currency;
     private LocalDate dateOfPurchase;
@@ -26,7 +27,7 @@ public class ExtraCost {
     public ExtraCost() {
     }
 
-    public ExtraCost(String description, Double cost, Currency currency, LocalDate dateOfPurchase, Expedition expedition) {
+    public ExtraCost(String description, BigDecimal cost, Currency currency, LocalDate dateOfPurchase, Expedition expedition) {
         this.description = description;
         this.cost = cost;
         this.currency = currency;
@@ -50,11 +51,11 @@ public class ExtraCost {
         this.description = description;
     }
 
-    public Double getCost() {
+    public BigDecimal getCost() {
         return cost;
     }
 
-    public void setCost(Double cost) {
+    public void setCost(BigDecimal cost) {
         this.cost = cost;
     }
 

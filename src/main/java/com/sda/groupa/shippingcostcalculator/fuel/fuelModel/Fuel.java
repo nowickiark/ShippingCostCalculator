@@ -16,8 +16,6 @@ public class Fuel {
     @GeneratedValue(generator = "fuelSeq")
     @SequenceGenerator(name = "fuelSeq", sequenceName = "fuel_seq", allocationSize = 1)
     private Long id;
-//    @ManyToOne
-//    private Expedition expedition;
     private BigDecimal liters;
     private String placeOfRefueling;
     private BigDecimal cost;
@@ -29,20 +27,7 @@ public class Fuel {
     private Expedition expedition;
 
     public Fuel(){
-
     };
-//
-//    public Fuel(Expedition expedition, BigDecimal liters, String placeOfRefueling, BigDecimal cost, Currency currency, Long kilometers, String paymentMethod, boolean refuelingToFull) {
-//        this.expedition = expedition;
-//        this.liters = liters;
-//        this.placeOfRefueling = placeOfRefueling;
-//        this.cost = cost;
-//        this.currency = currency;
-//        this.kilometers = kilometers;
-//        this.paymentMethod = paymentMethod;
-//        this.refuelingToFull = refuelingToFull;
-//    }
-
 
     public Long getId() {
         return id;

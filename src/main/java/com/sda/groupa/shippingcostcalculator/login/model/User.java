@@ -2,6 +2,8 @@ package com.sda.groupa.shippingcostcalculator.login.model;
 
 import com.sda.groupa.shippingcostcalculator.driver.driverModel.Driver;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

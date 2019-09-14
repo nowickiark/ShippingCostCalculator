@@ -6,8 +6,7 @@
 
     <h3>Please login</h3>
 
-    <form name='loginForm'
-          action="<c:url value='/login' />" method='POST'>
+    <form name='loginForm' action="/login" method='POST'>
 
         <table>
             <tr>
