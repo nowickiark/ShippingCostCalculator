@@ -1,10 +1,12 @@
 package com.sda.groupa.shippingcostcalculator.fuel.fuelModel;
 
 
+import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
+import com.sda.groupa.shippingcostcalculator.extraCosts.model.Currency;
+
 import javax.persistence.*;
 
 import java.math.BigDecimal;
-import java.util.Currency;
 import java.util.Objects;
 
 @Entity
@@ -14,8 +16,6 @@ public class Fuel {
     @GeneratedValue(generator = "fuelSeq")
     @SequenceGenerator(name = "fuelSeq", sequenceName = "fuel_seq", allocationSize = 1)
     private Long id;
-//    @ManyToOne
-//    private Expedition expedition;
     private BigDecimal liters;
     private String placeOfRefueling;
     private BigDecimal cost;
@@ -23,22 +23,11 @@ public class Fuel {
     private Long kilometers;
     private String paymentMethod;
     private boolean refuelingToFull;
+    @ManyToOne(targetEntity = Expedition.class)
+    private Expedition expedition;
 
     public Fuel(){
-
     };
-//
-//    public Fuel(Expedition expedition, BigDecimal liters, String placeOfRefueling, BigDecimal cost, Currency currency, Long kilometers, String paymentMethod, boolean refuelingToFull) {
-//        this.expedition = expedition;
-//        this.liters = liters;
-//        this.placeOfRefueling = placeOfRefueling;
-//        this.cost = cost;
-//        this.currency = currency;
-//        this.kilometers = kilometers;
-//        this.paymentMethod = paymentMethod;
-//        this.refuelingToFull = refuelingToFull;
-//    }
-
 
     public Long getId() {
         return id;
@@ -102,16 +91,32 @@ public class Fuel {
         this.refuelingToFull = refuelingToFull;
     }
 
+    public Expedition getExpedition() {
+        return expedition;
+    }
+
+    public void setExpedition(Expedition expedition) {
+        this.expedition = expedition;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Fuel fuel = (Fuel) o;
-        return getId().equals(fuel.getId());
+        return refuelingToFull == fuel.refuelingToFull &&
+                Objects.equals(id, fuel.id) &&
+                Objects.equals(liters, fuel.liters) &&
+                Objects.equals(placeOfRefueling, fuel.placeOfRefueling) &&
+                Objects.equals(cost, fuel.cost) &&
+                Objects.equals(currency, fuel.currency) &&
+                Objects.equals(kilometers, fuel.kilometers) &&
+                Objects.equals(paymentMethod, fuel.paymentMethod) &&
+                Objects.equals(expedition, fuel.expedition);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId());
+        return Objects.hash(id, liters, placeOfRefueling, cost, currency, kilometers, paymentMethod, refuelingToFull, expedition);
     }
 }

@@ -1,5 +1,6 @@
 package com.sda.groupa.shippingcostcalculator.border.model;
 
+import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -14,6 +15,8 @@ public class BorderCross {
     @SequenceGenerator(name = "crossSeq", sequenceName = "cross_seq", allocationSize = 1)
     private Long id;
 
+    @ManyToOne(targetEntity = Expedition.class)
+    private Expedition expedition;
 
     @ManyToOne(targetEntity = Borders.class)
     private Borders borders;
@@ -21,11 +24,11 @@ public class BorderCross {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBorderCrossing;
 
-    public BorderCross(Borders borders, LocalDate dateOfBorderCrossing) {
+    public BorderCross(Expedition expedition, Borders borders, LocalDate dateOfBorderCrossing) {
+        this.expedition = expedition;
         this.borders = borders;
         this.dateOfBorderCrossing = dateOfBorderCrossing;
     }
-
 
     public BorderCross() {
     }
@@ -54,6 +57,14 @@ public class BorderCross {
         this.borders = borders;
     }
 
+    public Expedition getExpedition() {
+        return expedition;
+    }
+
+    public void setExpedition(Expedition expedition) {
+        this.expedition = expedition;
+    }
+
     @Override
     public String toString() {
         return "BorderCross{" +
@@ -63,18 +74,20 @@ public class BorderCross {
                 '}';
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BorderCross that = (BorderCross) o;
-        return Objects.equals(getId(), that.getId()) &&
+        return Objects.equals(id, that.id) &&
+                Objects.equals(expedition, that.expedition) &&
                 Objects.equals(borders, that.borders) &&
-                Objects.equals(getDateOfBorderCrossing(), that.getDateOfBorderCrossing());
+                Objects.equals(dateOfBorderCrossing, that.dateOfBorderCrossing);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), borders, getDateOfBorderCrossing());
+        return Objects.hash(id, expedition, borders, dateOfBorderCrossing);
     }
 }

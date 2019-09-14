@@ -9,6 +9,7 @@
 
         <tr>
             <th>Id</th>
+            <th>Expedition Id</th>
             <th>Description</th>
             <th>Cost</th>
             <th>Currency</th>
@@ -18,6 +19,7 @@
         <c:forEach var="extracost" items="${extracosts}">
             <tr>
                 <td>${extracost.id}</td>
+                <td>${extracost.expedition.id}</td>
                 <td>${extracost.description}</td>
                 <td>${extracost.cost}</td>
                 <td>${extracost.currency}</td>
@@ -29,6 +31,10 @@
     </table>
 
     <a href="/extracost/add">Add Extra cost</a>
+
+    <br>
+
+    <a href="/">Back to home</a>
 
 </div>
 </body>

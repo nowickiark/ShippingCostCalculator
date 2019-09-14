@@ -1,5 +1,6 @@
 package com.sda.groupa.shippingcostcalculator.expedition.controller;
 
+import com.sda.groupa.shippingcostcalculator.driver.driverModel.Driver;
 import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
 import com.sda.groupa.shippingcostcalculator.expedition.service.ExpeditionService;
 import com.sda.groupa.shippingcostcalculator.truck.model.Truck;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -38,6 +40,7 @@ public class ExpeditionController {
         return modelAndView;
     }
 
+
     @GetMapping("/expedition/add/{id}")
     public ModelAndView getExpeditionform(@PathVariable Long id){
         ModelAndView modelAndView = new ModelAndView("expedition");
@@ -53,10 +56,12 @@ public class ExpeditionController {
     }
 
     @GetMapping("/expeditions")
-    public ModelAndView getExpeditions(){
+    public ModelAndView getExpeditions(HttpServletRequest request){
             ModelAndView modelAndView = new ModelAndView("expeditions");
 
-            List<Expedition> expeditions = expeditionService.getExpeditions();
+        Driver driver = (Driver)request.getSession().getAttribute("driver");
+
+        List<Expedition> expeditions = expeditionService.findExpeditionsByDriver(driver);
 
             modelAndView.addObject("expeditions",expeditions);
             return modelAndView;

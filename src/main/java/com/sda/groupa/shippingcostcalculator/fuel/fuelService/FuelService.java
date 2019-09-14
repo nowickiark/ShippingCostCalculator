@@ -2,6 +2,7 @@ package com.sda.groupa.shippingcostcalculator.fuel.fuelService;
 
 
 
+import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
 import com.sda.groupa.shippingcostcalculator.fuel.fuelModel.Fuel;
 import com.sda.groupa.shippingcostcalculator.fuel.fuelRepository.FuelRepository;
 import org.springframework.stereotype.Service;
@@ -38,5 +39,7 @@ public class FuelService {
     public Optional<Fuel> findById(Long id){
         return fuelRepository.findById(id);
     }
+
+    public List<Fuel> findFuelsByExpedition(Expedition expedition){return fuelRepository.findFuelsByExpedition(expedition);}
 
 }

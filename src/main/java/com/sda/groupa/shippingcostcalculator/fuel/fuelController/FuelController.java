@@ -1,6 +1,7 @@
 package com.sda.groupa.shippingcostcalculator.fuel.fuelController;
 
 
+import com.sda.groupa.shippingcostcalculator.driver.driverModel.Driver;
 import com.sda.groupa.shippingcostcalculator.fuel.fuelModel.Fuel;
 import com.sda.groupa.shippingcostcalculator.fuel.fuelService.FuelService;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -35,8 +37,27 @@ public class FuelController {
         return modelAndView;
     }
 
+    @GetMapping(value = "/expedition/listOfFuels")
+    public ModelAndView getFuelsByExpeditions(HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView("fuel");
+
+        Driver driver = (Driver)request.getSession().getAttribute("driver");
+
+        List<Fuel> listOfFuelings = fuelService.findFuelsByExpedition(driver.getExpedition());
+
+        modelAndView.addObject("listOfFuelings", listOfFuelings);
+        return modelAndView;
+
+    }
+
+
     @PostMapping(value = "/addfuel")    //fuel
-    public String addFueling(@ModelAttribute Fuel fuel){
+    public String addFueling(@ModelAttribute Fuel fuel, HttpServletRequest request){
+
+        Driver driver = (Driver)request.getSession().getAttribute("driver");
+
+        fuel.setExpedition(driver.getExpedition());
+
         fuelService.addFueling(fuel);
         return "redirect:/fuelings";
     }

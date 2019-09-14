@@ -1,7 +1,11 @@
 package com.sda.groupa.shippingcostcalculator.extraCosts.model;
 
+import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
+
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 
 
 @Entity
@@ -11,13 +15,24 @@ public class ExtraCost {
     @GeneratedValue(generator = "eCostSeq")
     @SequenceGenerator(name = "eCostSeq", sequenceName = "e_cost_seq", allocationSize = 1)
     private Long id;
+    @ManyToOne(targetEntity = Expedition.class)
+    private Expedition expedition;
     private String description;
-    private Double cost;
+    private BigDecimal cost;
     @Enumerated(EnumType.STRING)
     private Currency currency;
     private LocalDate dateOfPurchase;
 
+
     public ExtraCost() {
+    }
+
+    public ExtraCost(String description, BigDecimal cost, Currency currency, LocalDate dateOfPurchase, Expedition expedition) {
+        this.description = description;
+        this.cost = cost;
+        this.currency = currency;
+        this.dateOfPurchase = dateOfPurchase;
+        this.expedition = expedition;
     }
 
     public Long getId() {
@@ -36,11 +51,11 @@ public class ExtraCost {
         this.description = description;
     }
 
-    public Double getCost() {
+    public BigDecimal getCost() {
         return cost;
     }
 
-    public void setCost(Double cost) {
+    public void setCost(BigDecimal cost) {
         this.cost = cost;
     }
 
@@ -60,10 +75,29 @@ public class ExtraCost {
         this.dateOfPurchase = dateOfPurchase;
     }
 
-    public ExtraCost(String description, Double cost, Currency currency, LocalDate dateOfPurchase) {
-        this.description = description;
-        this.cost = cost;
-        this.currency = currency;
-        this.dateOfPurchase = dateOfPurchase;
+    public Expedition getExpedition() {
+        return expedition;
+    }
+
+    public void setExpedition(Expedition expedition) {
+        this.expedition = expedition;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ExtraCost extraCost = (ExtraCost) o;
+        return Objects.equals(id, extraCost.id) &&
+                Objects.equals(description, extraCost.description) &&
+                Objects.equals(cost, extraCost.cost) &&
+                currency == extraCost.currency &&
+                Objects.equals(dateOfPurchase, extraCost.dateOfPurchase) &&
+                Objects.equals(expedition, extraCost.expedition);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, description, cost, currency, dateOfPurchase, expedition);
     }
 }

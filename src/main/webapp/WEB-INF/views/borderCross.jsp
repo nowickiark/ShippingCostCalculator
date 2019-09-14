@@ -32,5 +32,11 @@
     </table>
 </form:form>
 
+<a href="/borderCross/add">Add border crossing</a>
+
+<br>
+
+<a href="/">Go Back Home</a>
+
 </body>
 </html>

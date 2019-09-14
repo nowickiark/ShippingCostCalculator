@@ -1,5 +1,6 @@
 package com.sda.groupa.shippingcostcalculator.extraCosts.service;
 
+import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
 import com.sda.groupa.shippingcostcalculator.extraCosts.model.ExtraCost;
 import com.sda.groupa.shippingcostcalculator.extraCosts.repository.ExtraCostRepository;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,10 @@ public class ExtraCostService {
         List<ExtraCost> extraCosts = extraCostRepository.findAll();
 
         return extraCosts;
+    }
+
+    public List<ExtraCost> getExtraCostsByExpetionId(Expedition expedition){
+        return extraCostRepository.findExtraCostByExpedition(expedition);
     }
 
 

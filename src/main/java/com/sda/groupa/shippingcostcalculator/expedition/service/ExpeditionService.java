@@ -1,5 +1,6 @@
 package com.sda.groupa.shippingcostcalculator.expedition.service;
 
+import com.sda.groupa.shippingcostcalculator.driver.driverModel.Driver;
 import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
 import com.sda.groupa.shippingcostcalculator.expedition.repository.ExpeditionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,6 @@ public class ExpeditionService {
        return expeditionRepository.findById(id);
    }
 
-
+   public List<Expedition> findExpeditionsByDriver(Driver driver){return expeditionRepository.findExpeditionsByDriver(driver);};
 
 }

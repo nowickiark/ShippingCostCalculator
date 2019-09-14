@@ -1,9 +1,9 @@
 package com.sda.groupa.shippingcostcalculator.driver.driverModel;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
+import com.sda.groupa.shippingcostcalculator.login.model.User;
+
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -18,15 +18,22 @@ public class Driver {
     private String phoneNumber;
     private String personalIdNumber;
 
-    public Driver() {
+    @OneToOne(targetEntity = User.class)
+    private User user;
 
+    @OneToOne(targetEntity = Expedition.class)
+    private Expedition expedition;
+
+    public Driver() {
     }
 
-    public Driver(String firstName, String surname, String phoneNumber, String personalIdNumber) {
+    public Driver(String firstName, String surname, String phoneNumber, String personalIdNumber, User user, Expedition expedition) {
         this.firstName = firstName;
         this.surname = surname;
         this.phoneNumber = phoneNumber;
         this.personalIdNumber = personalIdNumber;
+        this.user = user;
+        this.expedition = expedition;
     }
 
     public Long getId() {
@@ -69,16 +76,37 @@ public class Driver {
         this.personalIdNumber = personalIdNumber;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Expedition getExpedition() {
+        return expedition;
+    }
+
+    public void setExpedition(Expedition expedition) {
+        this.expedition = expedition;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Driver driver = (Driver) o;
-        return Objects.equals(id, driver.id);
+        return Objects.equals(id, driver.id) &&
+                Objects.equals(firstName, driver.firstName) &&
+                Objects.equals(surname, driver.surname) &&
+                Objects.equals(phoneNumber, driver.phoneNumber) &&
+                Objects.equals(personalIdNumber, driver.personalIdNumber) &&
+                Objects.equals(user, driver.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, firstName, surname, phoneNumber, personalIdNumber, user);
     }
 }
