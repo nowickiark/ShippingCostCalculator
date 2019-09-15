@@ -31,10 +31,11 @@
         <tr>
             <td><input type="submit" value="AddTruck"/></td>
         </tr>
+
     </table>
 </form:form>
 
-
+<a href="/expedition/add">Go Back Expedition</a>
 
 </body>
 </html>

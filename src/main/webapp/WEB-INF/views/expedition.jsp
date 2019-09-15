@@ -49,5 +49,7 @@
     </table>
 </form:form>
 
+<a href="/">Go Back Home</a>
+
 </body>
 </html>

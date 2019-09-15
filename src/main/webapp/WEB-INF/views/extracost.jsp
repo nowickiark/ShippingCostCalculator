@@ -34,8 +34,6 @@
 
 </form:form>
 
-<br>
-
 <a href="/extracost/add">Add Extra cost</a>
 
 <br>

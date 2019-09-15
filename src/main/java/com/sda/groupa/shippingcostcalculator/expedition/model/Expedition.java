@@ -27,9 +27,9 @@ public class Expedition {
     private Long startOdometerReading;
     private Long endOdometerReading;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate startDay;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate endDay;
 
     private BigDecimal cashBeginingZl;
