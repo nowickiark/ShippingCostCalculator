@@ -1,7 +1,8 @@
 package com.sda.groupa.shippingcostcalculator.truckParts.model;
 
+import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.CurrencyCode;
 import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
-import com.sda.groupa.shippingcostcalculator.extraCosts.model.Currency;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -19,10 +20,10 @@ public class TruckParts {
     private Expedition expedition;
     private String description;
     private BigDecimal cost;
+    @Enumerated(EnumType.STRING)
     private CurrencyCode currencyCode;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfPurchase;
-
 
     public TruckParts() {
     }

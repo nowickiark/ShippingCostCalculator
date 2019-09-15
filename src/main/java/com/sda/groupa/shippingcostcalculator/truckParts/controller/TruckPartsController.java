@@ -1,6 +1,8 @@
 package com.sda.groupa.shippingcostcalculator.truckParts.controller;
 
 import com.sda.groupa.shippingcostcalculator.driver.driverModel.Driver;
+import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.CurrencyCode;
+import com.sda.groupa.shippingcostcalculator.login.strategy.DriverStrategy;
 import com.sda.groupa.shippingcostcalculator.truckParts.model.TruckParts;
 import com.sda.groupa.shippingcostcalculator.truckParts.service.TruckPartsService;
 import org.springframework.stereotype.Controller;
@@ -16,9 +18,11 @@ import java.util.Optional;
 @Controller
 public class TruckPartsController {
     private final TruckPartsService truckPartsService;
+    private final DriverStrategy driverStrategy;
 
-    public TruckPartsController(TruckPartsService truckPartsService) {
+    public TruckPartsController(TruckPartsService truckPartsService, DriverStrategy driverStrategy) {
         this.truckPartsService = truckPartsService;
+        this.driverStrategy = driverStrategy;
     }
 
     @GetMapping("/truckparts/add")
@@ -43,9 +47,9 @@ public class TruckPartsController {
     }
 
     @GetMapping("/expedition/listOfTruckParts")
-    public ModelAndView getTruckPartsByExpedition(HttpServletRequest request){
+    public ModelAndView getTruckPartsByExpedition(){
 
-        Driver driver = (Driver)request.getSession().getAttribute("driver");
+        Driver driver = driverStrategy.getDriver();
 
         ModelAndView modelAndView = new ModelAndView("truckpartslist");
         List<TruckParts> truckParts = truckPartsService.getTruckPartsByExpeditionId(driver.getExpedition());
@@ -64,12 +68,9 @@ public class TruckPartsController {
     }
 
     @PostMapping("/truckparts/add")
-    public String truckParts (@ModelAttribute TruckParts truckParts, HttpServletRequest request ) {
-
-        Driver driver = (Driver)request.getSession().getAttribute("driver");
-
+    public String truckParts (@ModelAttribute TruckParts truckParts) {
+        Driver driver = driverStrategy.getDriver();
         truckParts.setExpedition(driver.getExpedition());
-
         truckPartsService.addTruckParts(truckParts);
         return "redirect:/expedition/listOfTruckParts";
     }

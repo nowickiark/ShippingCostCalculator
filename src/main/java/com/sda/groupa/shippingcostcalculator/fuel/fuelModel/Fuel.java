@@ -1,12 +1,16 @@
 package com.sda.groupa.shippingcostcalculator.fuel.fuelModel;
 
 
+
+import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.CurrencyCode;
 import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
-import com.sda.groupa.shippingcostcalculator.extraCosts.model.Currency;
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 import javax.persistence.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -19,15 +23,29 @@ public class Fuel {
     private BigDecimal liters;
     private String placeOfRefueling;
     private BigDecimal cost;
-    private Currency currency;
+    private CurrencyCode currencyCode;
     private Long kilometers;
     private String paymentMethod;
     private boolean refuelingToFull;
     @ManyToOne(targetEntity = Expedition.class)
     private Expedition expedition;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dateOfFueling;
 
     public Fuel(){
     };
+
+    public Fuel(BigDecimal liters, String placeOfRefueling, BigDecimal cost, CurrencyCode currencyCode, Long kilometers, String paymentMethod, boolean refuelingToFull, Expedition expedition, LocalDate dateOfFueling) {
+        this.liters = liters;
+        this.placeOfRefueling = placeOfRefueling;
+        this.cost = cost;
+        this.currencyCode = currencyCode;
+        this.kilometers = kilometers;
+        this.paymentMethod = paymentMethod;
+        this.refuelingToFull = refuelingToFull;
+        this.expedition = expedition;
+        this.dateOfFueling = dateOfFueling;
+    }
 
     public Long getId() {
         return id;
@@ -59,12 +77,12 @@ public class Fuel {
         this.cost = cost;
     }
 
-    public Currency getCurrency() {
-        return currency;
+    public CurrencyCode getCurrencyCode() {
+        return currencyCode;
     }
 
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
+    public void setCurrencyCode(CurrencyCode currencyCode) {
+        this.currencyCode = currencyCode;
     }
 
     public Long getKilometers() {
@@ -99,6 +117,14 @@ public class Fuel {
         this.expedition = expedition;
     }
 
+    public LocalDate getDateOfFueling() {
+        return dateOfFueling;
+    }
+
+    public void setDateOfFueling(LocalDate dateOfFueling) {
+        this.dateOfFueling = dateOfFueling;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -109,7 +135,7 @@ public class Fuel {
                 Objects.equals(liters, fuel.liters) &&
                 Objects.equals(placeOfRefueling, fuel.placeOfRefueling) &&
                 Objects.equals(cost, fuel.cost) &&
-                Objects.equals(currency, fuel.currency) &&
+                Objects.equals(currencyCode, fuel.currencyCode) &&
                 Objects.equals(kilometers, fuel.kilometers) &&
                 Objects.equals(paymentMethod, fuel.paymentMethod) &&
                 Objects.equals(expedition, fuel.expedition);
@@ -117,6 +143,6 @@ public class Fuel {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, liters, placeOfRefueling, cost, currency, kilometers, paymentMethod, refuelingToFull, expedition);
+        return Objects.hash(id, liters, placeOfRefueling, cost, currencyCode, kilometers, paymentMethod, refuelingToFull, expedition);
     }
 }
