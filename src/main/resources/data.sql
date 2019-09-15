@@ -26,5 +26,10 @@ insert INTO EXTRA_COST (id, expedition_id, description, cost, currency, date_of_
 insert INTO EXTRA_COST (id, expedition_id, description, cost, currency, date_of_purchase) values (nextval('e_cost_seq'),2, 'Highway toll', 220, 'PLN', '2019-09-02');
 insert INTO EXTRA_COST (id, expedition_id, description, cost, currency, date_of_purchase) values (nextval('e_cost_seq'),2, 'Phone card', 50, 'PLN', '2019-09-05');
 
+insert INTO TRUCK_PARTS (id, expedition_id, description, cost, currency, date_of_purchase) values (nextval('truck_parts_seq'),1, 'Rearview mirror', 270, 'EUR', '2019-08-21');
+insert INTO TRUCK_PARTS (id, expedition_id, description, cost, currency, date_of_purchase) values (nextval('truck_parts_seq'),1, 'Cooler', 470, 'EUR', '2019-08-24');
+insert INTO TRUCK_PARTS (id, expedition_id, description, cost, currency, date_of_purchase) values (nextval('truck_parts_seq'),1, 'Exhaust pipe', 590, 'EUR', '2019-08-29');
+insert INTO TRUCK_PARTS (id, expedition_id, description, cost, currency, date_of_purchase) values (nextval('truck_parts_seq'),2, 'Timing belt', 280, 'PLN', '2019-09-01');
+insert INTO TRUCK_PARTS (id, expedition_id, description, cost, currency, date_of_purchase) values (nextval('truck_parts_seq'),2, 'Master cylinder', 550, 'PLN', '2019-09-05');
 
 commit;

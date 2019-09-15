@@ -11,6 +11,10 @@
 
 <br>
 
+<a href="/expedition/listOfTruckParts">Truck Parts</a>
+
+<br>
+
 <a href="/expedition/listOfFuels">Fuel</a>
 
 <br>
