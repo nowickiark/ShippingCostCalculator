@@ -10,4 +10,6 @@ public interface ExpeditionRepository extends JpaRepository<Expedition, Long> {
 
     List<Expedition> findExpeditionsByDriver(Driver driver);
 
+    List<Expedition> findExpeditionsByEndDayIsNull();
+
 }

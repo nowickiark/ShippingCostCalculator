@@ -31,6 +31,8 @@ public class ExpeditionService {
        return expeditionRepository.findById(id);
    }
 
-   public List<Expedition> findExpeditionsByDriver(Driver driver){return expeditionRepository.findExpeditionsByDriver(driver);};
+   public List<Expedition> findExpeditionsByDriver(Driver driver){return expeditionRepository.findExpeditionsByDriver(driver);}
+
+   public List<Expedition> findCurrentExpeditions(){return expeditionRepository.findExpeditionsByEndDayIsNull();}
 
 }

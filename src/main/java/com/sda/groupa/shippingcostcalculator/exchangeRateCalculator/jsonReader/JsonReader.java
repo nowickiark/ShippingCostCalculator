@@ -17,5 +17,5 @@ public class JsonReader {
         }
         return stringBuilder.toString();
     }
-    
+
 }
