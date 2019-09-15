@@ -22,7 +22,7 @@
                 <td>${extracost.expedition.id}</td>
                 <td>${extracost.description}</td>
                 <td>${extracost.cost}</td>
-                <td>${extracost.currency}</td>
+                <td>${extracost.currencyCode}</td>
                 <td>${extracost.dateOfPurchase}</td\
                 <td><a href="/extracost/add/${extracost.id}">Extracost/Details</a></td>
             </tr>

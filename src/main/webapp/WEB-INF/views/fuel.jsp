@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page session="true"%>
 
 <html>
 <body>
@@ -18,7 +19,6 @@
 
     <tr>
         <th>Fueling id</th>
-<%--        <th>Expedition</th>--%>
         <th>Expedition id</th>
         <th>Place of refueling</th>
         <th>Liters</th>
@@ -26,6 +26,7 @@
         <th>Currency</th>
         <th>Kilometers</th>
         <th>Payment method</th>
+        <th>Date</th>
         <th>Full</th>
         <th>Edit</th>
     </tr>
@@ -34,14 +35,14 @@
     <tr>
 
             <td>${singlefueling.id}</td> <br>
-                <%--        add Expedition--%>
             <td>${singlefueling.expedition.id}</td>
             <td>${singlefueling.placeOfRefueling}</td>
             <td>${singlefueling.liters}</td>
             <td>${singlefueling.cost}</td>
-            <td>${singlefueling.currency}</td>
+            <td>${singlefueling.currencyCode}</td>
             <td>${singlefueling.kilometers}</td>
             <td>${singlefueling.paymentMethod}</td>
+            <td>${singlefueling.dateOfFueling}</td>
             <td>${singlefueling.refuelingToFull}</td>
             <td><a href="/updatefuel/${singlefueling.id}">Edit</a></td>
 
