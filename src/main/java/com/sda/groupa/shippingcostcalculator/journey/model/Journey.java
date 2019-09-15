@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Objects;
 
@@ -18,15 +19,10 @@ public class Journey {
     @SequenceGenerator(name = "journeySeq", sequenceName = "journey_seq", allocationSize = 1)
     private Long id;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate startDate;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate endDate;
-
-    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
-    private LocalTime startTime;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
-    private LocalTime endTime;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime startDate;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime endDate;
 
     private String route;
     private String routeDestination;
@@ -38,11 +34,9 @@ public class Journey {
     public Journey() {
     }
 
-    public Journey(LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime, String route, String routeDestination, String meterReadingDeparture, String meterReadingArrival, String mileage, String comments) {
+    public Journey(LocalDateTime startDate, LocalDateTime endDate, String route, String routeDestination, String meterReadingDeparture, String meterReadingArrival, String mileage, String comments) {
         this.startDate = startDate;
         this.endDate = endDate;
-        this.startTime = startTime;
-        this.endTime = endTime;
         this.route = route;
         this.routeDestination = routeDestination;
         this.meterReadingDeparture = meterReadingDeparture;
@@ -59,36 +53,20 @@ public class Journey {
         this.id = id;
     }
 
-    public LocalDate getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate() {
+    public LocalDateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
-    }
-
-    public LocalTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalTime endTime) {
-        this.endTime = endTime;
     }
 
     public String getRoute() {
@@ -147,8 +125,6 @@ public class Journey {
         return Objects.equals(id, journey.id) &&
                 Objects.equals(startDate, journey.startDate) &&
                 Objects.equals(endDate, journey.endDate) &&
-                Objects.equals(startTime, journey.startTime) &&
-                Objects.equals(endTime, journey.endTime) &&
                 Objects.equals(route, journey.route) &&
                 Objects.equals(routeDestination, journey.routeDestination) &&
                 Objects.equals(meterReadingDeparture, journey.meterReadingDeparture) &&
@@ -159,6 +135,6 @@ public class Journey {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, startDate, endDate, startTime, endTime, route, routeDestination, meterReadingDeparture, meterReadingArrival, mileage, comments);
+        return Objects.hash(id, startDate, endDate, route, routeDestination, meterReadingDeparture, meterReadingArrival, mileage, comments);
     }
 }

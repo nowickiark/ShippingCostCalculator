@@ -10,9 +10,7 @@
         <tr>
             <th>Id</th>
             <th>Starting date</th>
-            <th>Starting time</th>
             <th>Ending date</th>
-            <th>Ending time</th>
             <th>Route</th>
             <th>Route destination</th>
             <th>Meter reading - departure</th>
@@ -25,9 +23,7 @@
             <tr>
                 <td>${onejourney.id}</td>
                 <td>${onejourney.startDate}</td>
-                <td>${onejourney.startTime}</td>
                 <td>${onejourney.endDate}</td>
-                <td>${onejourney.endTime}</td>
                 <td>${onejourney.route}</td>
                 <td>${onejourney.routeDestination}</td>
                 <td>${onejourney.meterReadingDeparture}</td>

@@ -23,20 +23,13 @@
         </tr>
         <tr>
             <td><form:label path="startDate">Starting date</form:label></td>
-            <td><form:input type="date" path="startDate"/></td>
+            <td><form:input type="datetime-local" path="startDate"/></td>
         </tr>
         <tr>
-            <td><form:label path="startTime">Starting time</form:label></td>
-            <td><form:input type="time" path="startTime"/></td>
+            <td><form:label path="endDate">Starting date</form:label></td>
+            <td><form:input type="datetime-local" path="endDate"/></td>
         </tr>
         <tr>
-            <td><form:label path="endDate">Ending date</form:label></td>
-            <td><form:input type="date" path="endDate"/></td>
-        </tr>
-         <tr>
-            <td><form:label path="endTime">Ending time</form:label></td>
-            <td><form:input type="time" path="endTime"/></td>
-        </tr>
             <td><form:label path="route">Route</form:label></td>
             <td><form:input  path="route"/></td>
         </tr>
