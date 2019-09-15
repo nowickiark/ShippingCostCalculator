@@ -15,5 +15,4 @@ public interface FuelRepository extends JpaRepository<Fuel, Long> {
     List<Fuel> findFuelsByExpedition(Expedition expedition);
     List<Fuel> findFuelsByExpeditionAndAndCurrencyCode(Expedition expedition, CurrencyCode currencyCode);
 
-
 }

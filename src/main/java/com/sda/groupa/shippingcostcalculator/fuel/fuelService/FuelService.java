@@ -58,13 +58,13 @@ public class FuelService implements CostCalculator {
         return fuelRepository.findFuelsByExpeditionAndAndCurrencyCode(expedition, currencyCode);
     }
 
-
-    private BigDecimal calculateSumOfCostsInCurrencyOtherThanPLN(CurrencyCode currencyCode, Expedition expedition) {
+    ///==== calculates sum of costs of fuelings payed in a choosen currency other than PLN
+    private BigDecimal calculateSumOfCostsInChoosenCurrencyAndOtherThanPLN(CurrencyCode currencyCode, Expedition expedition) {
 
 
         List<Fuel> listOfFuelingsWithOtherCurrencyCodes = fuelRepository.findFuelsByExpeditionAndAndCurrencyCode(expedition, currencyCode);
 
-        BigDecimal latestCurrencyExchangeRate = new BigDecimal(0.0);
+        BigDecimal latestCurrencyExchangeRate;
         BigDecimal sumOfCosts=new BigDecimal(0.0);
         for(int i=0; i<listOfFuelingsWithOtherCurrencyCodes.size(); i++){
             BigDecimal costOfSingleFueling = listOfFuelingsWithOtherCurrencyCodes.get(i).getCost();
@@ -90,16 +90,32 @@ public class FuelService implements CostCalculator {
                 sumOfCosts = sumOfCosts.add(costOfSingleFueling);
             }
         }else {
-            calculateSumOfCostsInCurrencyOtherThanPLN(currencyCode, expedition);
+            calculateSumOfCostsInChoosenCurrencyAndOtherThanPLN(currencyCode, expedition);
         }
         return sumOfCosts;
     }
 
 
-    //====need to be finished====
+    @Override
     public BigDecimal calculateSumOfCostsInAllCurrenciesOtherThanPLN(Expedition expedition){
-        List<Fuel> listOFFuelingsFromGivenExpedition;
+        List<Fuel> listOFFuelingsFromGivenExpedition = fuelRepository.findFuelsByExpedition(expedition);
+        List<Fuel> listOfFuelingsFromGivenExpeditionPayedInForeignCurrency = listOFFuelingsFromGivenExpedition.stream()
+                .filter(fuel -> !fuel.getCurrencyCode().equals(CurrencyCode.PLN)).collect(Collectors.toList());
 
-        return null;
+        BigDecimal latestCurrencyExchangeRate;
+        BigDecimal sumOfCosts=new BigDecimal(0.0);
+        for (int i =0; i<listOfFuelingsFromGivenExpeditionPayedInForeignCurrency.size(); i++){
+            BigDecimal costOfSingleFueling = listOfFuelingsFromGivenExpeditionPayedInForeignCurrency.get(i).getCost();
+            try {
+                latestCurrencyExchangeRate = currencyRateService.getLatestCurrencyExchangeRate(listOfFuelingsFromGivenExpeditionPayedInForeignCurrency.get(i));
+                sumOfCosts = sumOfCosts.add(costOfSingleFueling.multiply(latestCurrencyExchangeRate));
+            } catch (IOException e) {
+                throw  new NoLatestCurrencyExceptionReached();
+            } catch (JSONException e) {
+                throw new ProblemWithJsonParsingException();
+            }
+        }
+
+        return sumOfCosts;
     }
 }
