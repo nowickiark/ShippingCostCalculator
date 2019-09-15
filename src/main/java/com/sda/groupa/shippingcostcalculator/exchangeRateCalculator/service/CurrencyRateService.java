@@ -7,9 +7,7 @@ import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.Curren
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.ExchangeRateAndCode;
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.repository.CurrencyExchangeRatesRepository;
 import com.sda.groupa.shippingcostcalculator.fuel.fuelModel.Fuel;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -20,7 +18,6 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.time.LocalDate;
-import java.util.Currency;
 import java.util.Optional;
 
 @Service
@@ -42,7 +39,7 @@ public class CurrencyRateService {
 
     }
 
-    private ExchangeRateAndCode getLatestCurrencyExchangeRateAndCodeFromAPI(Fuel fuel) throws IOException, JSONException {
+    private ExchangeRateAndCode getLatestCurrencyExchangeRateAndCodeFromAPI(Fuel fuel) throws IOException {
 
         CurrencyCode currencyCode = fuel.getCurrencyCode();
         String code = currencyCode.toString().toLowerCase();
@@ -63,7 +60,7 @@ public class CurrencyRateService {
     }
 
 
-    public BigDecimal getLatestCurrencyExchangeRate (Fuel fuel) throws IOException, JSONException {
+    public BigDecimal getLatestCurrencyExchangeRate (Fuel fuel) throws IOException {
 
         LocalDate dateOfFueling = fuel.getDateOfFueling();
         CurrencyCode currencyCode = fuel.getCurrencyCode();

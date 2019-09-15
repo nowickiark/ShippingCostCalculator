@@ -19,10 +19,11 @@ public class DriverStrategy {
     private UserDetailsService userDetailsService;
     private UserProvider userProvider;
 
-    public DriverStrategy(DriverService driverService, ExpeditionService expeditionService, UserDetailsService userDetailsService) {
+    public DriverStrategy(DriverService driverService, ExpeditionService expeditionService, UserDetailsService userDetailsService, UserProvider userProvider) {
         this.driverService = driverService;
         this.expeditionService = expeditionService;
         this.userDetailsService = userDetailsService;
+        this.userProvider = userProvider;
     }
 
     public ModelAndView getDriverModelAndView(){
