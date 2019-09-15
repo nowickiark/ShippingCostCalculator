@@ -1,32 +1,29 @@
 package com.sda.groupa.shippingcostcalculator.login.controller;
 
-import com.sda.groupa.shippingcostcalculator.driver.driverModel.Driver;
-import com.sda.groupa.shippingcostcalculator.driver.driverService.DriverService;
-import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
 import com.sda.groupa.shippingcostcalculator.expedition.service.ExpeditionService;
-import com.sda.groupa.shippingcostcalculator.login.model.User;
-import com.sda.groupa.shippingcostcalculator.login.service.UserDetailsService;
+import com.sda.groupa.shippingcostcalculator.login.model.UserAuthority;
+import com.sda.groupa.shippingcostcalculator.login.model.UserProvider;
+import com.sda.groupa.shippingcostcalculator.login.strategy.DriverStrategy;
+import com.sda.groupa.shippingcostcalculator.login.strategy.LoggingSwitch;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 
 @Controller
 public class AppController {
 
-    private UserDetailsService userDetailsService;
-    private DriverService driverService;
+    private DriverStrategy driverStrategy;
     private ExpeditionService expeditionService;
+    private UserProvider userProvider;
+    private LoggingSwitch loggingSwitch;
 
-    public AppController(UserDetailsService userDetailsService, DriverService driverService, ExpeditionService expeditionService) {
-        this.userDetailsService = userDetailsService;
-        this.driverService = driverService;
+    public AppController(DriverStrategy driverStrategy, ExpeditionService expeditionService, UserProvider userProvider, LoggingSwitch loggingSwitch) {
+        this.driverStrategy = driverStrategy;
         this.expeditionService = expeditionService;
+        this.userProvider = userProvider;
+        this.loggingSwitch = loggingSwitch;
     }
 
     @GetMapping("/login")
@@ -35,22 +32,30 @@ public class AppController {
     }
 
     @GetMapping("/")
-    public ModelAndView getHomePage(Principal principal, HttpServletRequest request) {
+    public String getHomePage() {
 
-        ModelAndView modelAndView = new ModelAndView("home");
+        UserAuthority userAuthority = userProvider.getUser().getRole().getUserAuthority();
+        String redirect;
+        redirect = "redirect:/" + loggingSwitch.getLogindView(userAuthority);
 
-        String userName = principal.getName();
+        return redirect;
+    }
 
-        User user = userDetailsService.findUserByUsername(userName).orElseThrow(() -> new RuntimeException("Unavailable"));
+    @GetMapping("/driverHome")
+    public ModelAndView getUserHomePage(Principal principal) {
 
-        if (user.getRole().getAuthority().equals("DRIVER")){
+        ModelAndView modelAndView = driverStrategy.getDriverModelAndView();
 
-            Driver driver  = driverService.findDriverByUsername(userName).orElseThrow(() -> new RuntimeException("Unavailable"));
+        return modelAndView;
+    }
 
-            driver.setExpedition(expeditionService.getExpeditionById(1L).get());
 
-            request.getSession().setAttribute("driver",driver);
-        }
+    @GetMapping("/spedytorHome")
+    public ModelAndView getSpedytorHomePage(Principal principal) {
+
+        ModelAndView modelAndView = new ModelAndView("spedytorHome");
+
+        modelAndView.addObject("expeditions",expeditionService.getExpeditions());
 
         return modelAndView;
     }

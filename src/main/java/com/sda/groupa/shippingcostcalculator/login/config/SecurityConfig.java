@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -33,12 +35,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().loginPage("/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .successHandler(successHandler())
+                .successHandler(myAuthenticationSuccessHandler())
                 .and()
                 .exceptionHandling()
                 .accessDeniedPage("/accessDenied")
                 .and()
                 .headers().frameOptions().disable()
+                .and()
+                .sessionManagement()
+                .maximumSessions(1)
+                .sessionRegistry(sessionRegistry())
+                .and()
                 .and()
                 .logout()
                 .logoutSuccessUrl("/login?logout");
@@ -46,12 +53,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-    }
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder()); }
 
     @Bean
-    AuthenticationSuccessHandler successHandler() {
-        return new SavedRequestAwareAuthenticationSuccessHandler();
+    public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
+        return new UserLoginSuccessHandler();
     }
 
     @Bean
@@ -59,5 +65,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    SessionRegistry sessionRegistry() {
+        return new SessionRegistryImpl();
+    }
 }
 

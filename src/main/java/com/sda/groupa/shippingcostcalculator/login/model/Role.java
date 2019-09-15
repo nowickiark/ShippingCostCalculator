@@ -3,10 +3,7 @@ package com.sda.groupa.shippingcostcalculator.login.model;
 
 import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -16,7 +13,9 @@ public class Role implements GrantedAuthority {
     @GeneratedValue(generator = "roleSeq")
     @SequenceGenerator(name = "roleSeq", sequenceName = "role_seq", allocationSize = 1)
     private Long id;
-    private String authority;
+
+    @Enumerated(EnumType.STRING)
+    private UserAuthority userAuthority;
 
     public Long getId() {
         return id;
@@ -26,13 +25,12 @@ public class Role implements GrantedAuthority {
         this.id = id;
     }
 
-    @Override
-    public String getAuthority() {
-        return authority;
+    public UserAuthority getUserAuthority() {
+        return userAuthority;
     }
 
-    public void setAuthority(String authority) {
-        this.authority = authority;
+    public void setUserAuthority(UserAuthority userAuthority) {
+        this.userAuthority = userAuthority;
     }
 
     @Override
@@ -41,11 +39,16 @@ public class Role implements GrantedAuthority {
         if (o == null || getClass() != o.getClass()) return false;
         Role role = (Role) o;
         return Objects.equals(id, role.id) &&
-                Objects.equals(authority, role.authority);
+                Objects.equals(userAuthority, role.userAuthority);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, authority);
+        return Objects.hash(id, userAuthority);
+    }
+
+    @Override
+    public String getAuthority() {
+        return userAuthority.name();
     }
 }
