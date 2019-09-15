@@ -1,6 +1,7 @@
 package com.sda.groupa.shippingcostcalculator.fuel.fuelRepository;
 
 
+import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.CurrencyCode;
 import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
 import com.sda.groupa.shippingcostcalculator.fuel.fuelModel.Fuel;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,5 +13,7 @@ import java.util.List;
 public interface FuelRepository extends JpaRepository<Fuel, Long> {
 
     List<Fuel> findFuelsByExpedition(Expedition expedition);
+    List<Fuel> findFuelsByExpeditionAndAndCurrencyCode(Expedition expedition, CurrencyCode currencyCode);
+
 
 }

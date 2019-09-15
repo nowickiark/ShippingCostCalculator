@@ -2,6 +2,7 @@ package com.sda.groupa.shippingcostcalculator.fuel.fuelController;
 
 
 import com.sda.groupa.shippingcostcalculator.driver.driverModel.Driver;
+import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.CurrencyCode;
 import com.sda.groupa.shippingcostcalculator.fuel.fuelModel.Fuel;
 import com.sda.groupa.shippingcostcalculator.fuel.fuelService.FuelService;
 import org.springframework.stereotype.Controller;
@@ -66,11 +67,17 @@ public class FuelController {
     public ModelAndView addFuelingPage (){
         ModelAndView modelAndView = new ModelAndView("addFuel");
         modelAndView.addObject("fuel", new Fuel());
+        modelAndView.addObject("currencyCodeType", CurrencyCode.values()); //for drop-down list in the view
         return modelAndView;
     }
 
     @PostMapping(value = "/updatefuel")
-    public String updateFueling(@ModelAttribute Fuel fuel){
+    public String updateFueling(@ModelAttribute Fuel fuel, HttpServletRequest request){
+
+        Driver driver = (Driver)request.getSession().getAttribute("driver");
+
+        fuel.setExpedition(driver.getExpedition());
+
         fuelService.updateFueling(fuel);
         return "redirect:/fuelings";
 

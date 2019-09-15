@@ -1,6 +1,8 @@
 package com.sda.groupa.shippingcostcalculator.extraCosts.model;
 
+import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.CurrencyCode;
 import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -20,17 +22,18 @@ public class ExtraCost {
     private String description;
     private BigDecimal cost;
     @Enumerated(EnumType.STRING)
-    private Currency currency;
+    private CurrencyCode currencyCode;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfPurchase;
 
 
     public ExtraCost() {
     }
 
-    public ExtraCost(String description, BigDecimal cost, Currency currency, LocalDate dateOfPurchase, Expedition expedition) {
+    public ExtraCost(String description, BigDecimal cost, CurrencyCode currencyCode, LocalDate dateOfPurchase, Expedition expedition) {
         this.description = description;
         this.cost = cost;
-        this.currency = currency;
+        this.currencyCode = currencyCode;
         this.dateOfPurchase = dateOfPurchase;
         this.expedition = expedition;
     }
@@ -59,12 +62,12 @@ public class ExtraCost {
         this.cost = cost;
     }
 
-    public Currency getCurrency() {
-        return currency;
+    public CurrencyCode getCurrencyCode() {
+        return currencyCode;
     }
 
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
+    public void setCurrencyCode(CurrencyCode currencyCode) {
+        this.currencyCode = currencyCode;
     }
 
     public LocalDate getDateOfPurchase() {
@@ -91,13 +94,13 @@ public class ExtraCost {
         return Objects.equals(id, extraCost.id) &&
                 Objects.equals(description, extraCost.description) &&
                 Objects.equals(cost, extraCost.cost) &&
-                currency == extraCost.currency &&
+                currencyCode == extraCost.currencyCode &&
                 Objects.equals(dateOfPurchase, extraCost.dateOfPurchase) &&
                 Objects.equals(expedition, extraCost.expedition);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, description, cost, currency, dateOfPurchase, expedition);
+        return Objects.hash(id, description, cost, currencyCode, dateOfPurchase, expedition);
     }
 }

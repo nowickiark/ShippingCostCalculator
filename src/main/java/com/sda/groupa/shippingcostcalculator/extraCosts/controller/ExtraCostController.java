@@ -1,6 +1,7 @@
 package com.sda.groupa.shippingcostcalculator.extraCosts.controller;
 
 import com.sda.groupa.shippingcostcalculator.driver.driverModel.Driver;
+import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.CurrencyCode;
 import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
 import com.sda.groupa.shippingcostcalculator.extraCosts.model.ExtraCost;
 import com.sda.groupa.shippingcostcalculator.extraCosts.service.ExtraCostService;
@@ -30,6 +31,7 @@ public class ExtraCostController {
 
         ModelAndView modelAndView = new ModelAndView("extracost");
         modelAndView.addObject("extracost", extraCost);
+        modelAndView.addObject("currencyCodeType", CurrencyCode.values());
         return modelAndView;
     }
 
