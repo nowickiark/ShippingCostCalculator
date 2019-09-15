@@ -1,10 +1,11 @@
 package com.sda.groupa.shippingcostcalculator.fuel.fuelService;
 
 import com.sda.groupa.shippingcostcalculator.costCalculator.CostCalculator;
+import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.exception.NoLatestCurrencyReachedException;
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.CurrencyCode;
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.service.CurrencyRateService;
 import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
-import com.sda.groupa.shippingcostcalculator.fuel.exception.NoLatestCurrencyReachedException;
+
 import com.sda.groupa.shippingcostcalculator.fuel.fuelModel.Fuel;
 import com.sda.groupa.shippingcostcalculator.fuel.fuelRepository.FuelRepository;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,6 @@ public class FuelService implements CostCalculator {
         fuelRepository.delete(fuel);
     }
 
-
     public List<Fuel> findAll(){
         return fuelRepository.findAll();
     }
@@ -53,18 +53,16 @@ public class FuelService implements CostCalculator {
         return fuelRepository.findFuelsByExpeditionAndAndCurrencyCode(expedition, currencyCode);
     }
 
-    ///==== calculates sum of costs of fuelings payed in a choosen currency other than PLN
+    //==== calculates sum of costs of fuelings payed in a choosen currency other than PLN======
     private BigDecimal calculateSumOfCostsInChoosenCurrencyAndOtherThanPLN(CurrencyCode currencyCode, Expedition expedition) {
-
-
-        List<Fuel> listOfFuelingsWithOtherCurrencyCodes = fuelRepository.findFuelsByExpeditionAndAndCurrencyCode(expedition, currencyCode);
+        List<Fuel> listOfFuelingsWithGivenCurrencyCode = fuelRepository.findFuelsByExpeditionAndAndCurrencyCode(expedition, currencyCode);
 
         BigDecimal latestCurrencyExchangeRate;
         BigDecimal sumOfCosts=new BigDecimal(0.0);
-        for(int i=0; i<listOfFuelingsWithOtherCurrencyCodes.size(); i++){
-            BigDecimal costOfSingleFueling = listOfFuelingsWithOtherCurrencyCodes.get(i).getCost();
+        for(int i=0; i<listOfFuelingsWithGivenCurrencyCode.size(); i++){
+            BigDecimal costOfSingleFueling = listOfFuelingsWithGivenCurrencyCode.get(i).getCost();
             try {
-                latestCurrencyExchangeRate = currencyRateService.getLatestCurrencyExchangeRate(listOfFuelingsWithOtherCurrencyCodes.get(i));
+                latestCurrencyExchangeRate = currencyRateService.getLatestCurrencyExchangeRate(listOfFuelingsWithGivenCurrencyCode.get(i));
             } catch (IOException e) {
                 throw new NoLatestCurrencyReachedException();   //nie wyświeltlać stack traca!!!
             }
@@ -73,24 +71,36 @@ public class FuelService implements CostCalculator {
         return sumOfCosts;
     }
 
+    //=============sum of costs JUST for fuelings payed in PLN=========
     @Override
-    public BigDecimal calculateSumOfCostsInCurrencyOf(CurrencyCode currencyCode, Expedition expedition) {
+    public BigDecimal calculateSumOfCostsPayedInCurrencyOfPLN (Expedition expedition){
+        List<Fuel> listOfFuelingsPayedInPLN = fuelRepository.findFuelsByExpeditionAndAndCurrencyCode(expedition, CurrencyCode.PLN);
+        BigDecimal sumOfCosts=new BigDecimal(0.0);
+        for (int i = 0; i < listOfFuelingsPayedInPLN.size(); i++) {
+            BigDecimal costOfSingleFueling = listOfFuelingsPayedInPLN.get(i).getCost();
+            sumOfCosts = sumOfCosts.add(costOfSingleFueling);
+        }
+        return sumOfCosts;
+
+    }
+
+    //=============sum of costs for fuelings payed in PLN OR other choosen currency=====
+    @Override
+    public BigDecimal calculateSumOfCostsPayedInCurrencyOf(CurrencyCode currencyCode, Expedition expedition) {
         List<Fuel> listOfFuelingsWithGivenCurrencyCode = fuelRepository.findFuelsByExpeditionAndAndCurrencyCode(expedition, currencyCode);
+
         BigDecimal sumOfCosts=new BigDecimal(0.0);
         if(currencyCode.equals(CurrencyCode.PLN)) {
-            for (int i = 0; i < listOfFuelingsWithGivenCurrencyCode.size(); i++) {
-                BigDecimal costOfSingleFueling = listOfFuelingsWithGivenCurrencyCode.get(i).getCost();
-                sumOfCosts = sumOfCosts.add(costOfSingleFueling);
-            }
+                sumOfCosts = calculateSumOfCostsPayedInCurrencyOfPLN(expedition);
         }else {
             calculateSumOfCostsInChoosenCurrencyAndOtherThanPLN(currencyCode, expedition);
         }
         return sumOfCosts;
     }
 
-
+    //=============sum of costs for fuelings payed in ALL foreign currencies together==============
     @Override
-    public BigDecimal calculateSumOfCostsInAllCurrenciesOtherThanPLN(Expedition expedition){
+    public BigDecimal calculateSumOfCostsPayedInAllCurrenciesOtherThanPLN(Expedition expedition){
         List<Fuel> listOFFuelingsFromGivenExpedition = fuelRepository.findFuelsByExpedition(expedition);
         List<Fuel> listOfFuelingsFromGivenExpeditionPayedInForeignCurrency = listOFFuelingsFromGivenExpedition.stream()
                 .filter(fuel -> !fuel.getCurrencyCode().equals(CurrencyCode.PLN)).collect(Collectors.toList());
@@ -103,10 +113,9 @@ public class FuelService implements CostCalculator {
                 latestCurrencyExchangeRate = currencyRateService.getLatestCurrencyExchangeRate(listOfFuelingsFromGivenExpeditionPayedInForeignCurrency.get(i));
                 sumOfCosts = sumOfCosts.add(costOfSingleFueling.multiply(latestCurrencyExchangeRate));
             } catch (IOException e) {
-                throw  new NoLatestCurrencyReachedException();
+                throw new NoLatestCurrencyReachedException();
             }
         }
-
         return sumOfCosts;
     }
 }
