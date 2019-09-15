@@ -35,10 +35,10 @@ public class AppController {
         String redirect;
 
         if(userAuthority.equals(UserAuthority.DRIVER)){
-            redirect = "redirect:/DriverHome";
+            redirect = "redirect:/driverHome";
         }
         else if (userAuthority.equals(UserAuthority.SPEDYTOR)){
-            redirect = "redirect:/SpedytorHome";
+            redirect = "redirect:/spedytorHome";
         } else {
             redirect = "redirect:/login";
         }
@@ -46,7 +46,7 @@ public class AppController {
         return redirect;
     }
 
-    @GetMapping("/DriverHome")
+    @GetMapping("/driverHome")
     public ModelAndView getUserHomePage(Principal principal) {
 
         ModelAndView modelAndView = driverStrategy.getDriverModelAndView();
@@ -56,7 +56,7 @@ public class AppController {
     }
 
 
-    @GetMapping("/SpedytorHome")
+    @GetMapping("/spedytorHome")
     public ModelAndView getSpedytorHomePage(Principal principal) {
 
         ModelAndView modelAndView = new ModelAndView("spedytorHome");

@@ -19,11 +19,8 @@ public class UserLoginSuccessHandler extends SavedRequestAwareAuthenticationSucc
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-
         String name = authentication.getName();
-
         userProvider.saveLoggedUser(name);
-
         super.onAuthenticationSuccess(request, response, authentication);
     }
 

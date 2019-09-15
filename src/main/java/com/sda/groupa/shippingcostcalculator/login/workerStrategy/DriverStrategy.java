@@ -4,6 +4,7 @@ import com.sda.groupa.shippingcostcalculator.driver.driverModel.Driver;
 import com.sda.groupa.shippingcostcalculator.driver.driverService.DriverService;
 import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
 import com.sda.groupa.shippingcostcalculator.expedition.service.ExpeditionService;
+import com.sda.groupa.shippingcostcalculator.login.exceptions.UserNotFoundException;
 import com.sda.groupa.shippingcostcalculator.login.model.User;
 import com.sda.groupa.shippingcostcalculator.login.model.UserProvider;
 import com.sda.groupa.shippingcostcalculator.login.service.UserDetailsService;
@@ -38,7 +39,7 @@ public class DriverStrategy {
     }
 
     public Driver getDriver(){
-        return driverService.findDriverByUsername(getUser().getUsername()).orElseThrow(() -> new RuntimeException("Unavailable"));
+        return driverService.findDriverByUsername(getUser().getUsername()).orElseThrow(() -> new UserNotFoundException("Unavailable"));
     }
 
     public Expedition getExpedition(){

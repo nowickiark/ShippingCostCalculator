@@ -34,7 +34,6 @@ public class ExpeditionController {
         ModelAndView modelAndView = new ModelAndView("expedition");
 
         Expedition expedition = new Expedition();
-
         List<Truck> trucks = truckService.getTrucks();
 
         modelAndView.addObject("expedition",expedition);
@@ -49,7 +48,6 @@ public class ExpeditionController {
         ModelAndView modelAndView = new ModelAndView("expedition");
 
         Expedition expedition = expeditionService.getExpeditionById(id).orElseThrow(() -> new RuntimeException("Unavailable"));
-
         List<Truck> trucks = truckService.getTrucks();
 
         modelAndView.addObject("expedition",expedition);
@@ -63,7 +61,6 @@ public class ExpeditionController {
         ModelAndView modelAndView = new ModelAndView("expeditions");
 
         Driver driver = driverStrategy.getDriver();
-
         List<Expedition> expeditions = expeditionService.findExpeditionsByDriver(driver);
 
             modelAndView.addObject("expeditions",expeditions);
@@ -73,7 +70,6 @@ public class ExpeditionController {
     @GetMapping("expeditions/all")
     public ModelAndView getAllExpeditions(){
         ModelAndView modelAndView = new ModelAndView("spedytorHome");
-
         modelAndView.addObject("expeditions",expeditionService.getExpeditions());
 
         return modelAndView;
@@ -83,7 +79,6 @@ public class ExpeditionController {
     @GetMapping("expeditions/driver")
     public ModelAndView getDriversExpeditions(@ModelAttribute Driver driver){
         ModelAndView modelAndView = new ModelAndView("spedytorHome");
-
         modelAndView.addObject("expeditions",expeditionService.findExpeditionsByDriver(driver));
 
         return modelAndView;
@@ -92,11 +87,9 @@ public class ExpeditionController {
     @GetMapping("expeditions/current")
     public ModelAndView getCurrentExpeditions(){
         ModelAndView modelAndView = new ModelAndView("spedytorHome");
-
         modelAndView.addObject("expeditions",expeditionService.findCurrentExpeditions());
 
         return modelAndView;
-
     }
 
 

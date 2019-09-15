@@ -8,17 +8,11 @@
     <h1>Spedytor View</h1>
     <br>
 
-    <form method="get" action="/expeditions/all">
-        <button type="submit" >Show all expeditions</button>
-    </form>
-
-    <form method="get" action="/expeditions/current">
-        <button type="submit" >Show all active expeditions</button>
-    </form>
-
-    <form method="get" action="/expeditions/driver">
-        <button type="submit" >Show expeditions of the driver</button>
-    </form>
+    <a href="/expeditions/all">Show all expeditions</a>
+    <br>
+    <a href="/expeditions/current">Show all active expeditions</a>
+    <br>
+    <a href="/expeditions/driver">Show expeditions of the driver</a>
 
     <br>
 
