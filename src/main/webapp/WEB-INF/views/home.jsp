@@ -15,6 +15,11 @@
 
     <tr>
 
+<a href="/expedition/listOfTruckParts">Truck Parts</a>
+
+<br>
+
+<a href="/expedition/listOfFuels">Fuel</a>
         <td><a href="/expedition/listOfFuels">Fuel</a></td>
 
         <td><a href="/addfuel">Add Fuel</a></td>

@@ -29,5 +29,10 @@ insert INTO EXTRA_COST (id, expedition_id, description, cost, currency_code, dat
 
 UPDATE DRIVER SET EXPEDITION_ID = 1 WHERE ID=1;
 
+insert INTO TRUCK_PARTS (id, expedition_id, description, cost, currency_code, date_of_purchase) values (nextval('truck_parts_seq'),1, 'Rearview mirror', 270, 'EUR', '2019-08-21');
+insert INTO TRUCK_PARTS (id, expedition_id, description, cost, currency_code, date_of_purchase) values (nextval('truck_parts_seq'),1, 'Cooler', 470, 'EUR', '2019-08-24');
+insert INTO TRUCK_PARTS (id, expedition_id, description, cost, currency_code, date_of_purchase) values (nextval('truck_parts_seq'),1, 'Exhaust pipe', 590, 'EUR', '2019-08-29');
+insert INTO TRUCK_PARTS (id, expedition_id, description, cost, currency_code, date_of_purchase) values (nextval('truck_parts_seq'),2, 'Timing belt', 280, 'PLN', '2019-09-01');
+insert INTO TRUCK_PARTS (id, expedition_id, description, cost, currency_code, date_of_purchase) values (nextval('truck_parts_seq'),2, 'Master cylinder', 550, 'PLN', '2019-09-05');
 
 commit;
