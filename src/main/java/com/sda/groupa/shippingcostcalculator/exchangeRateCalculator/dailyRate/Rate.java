@@ -1,7 +1,13 @@
 package com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.dailyRate;
 
 import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
 
+import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,67 +31,64 @@ public class Rate {
     @JsonProperty("ask")
     private Double ask; // ask <- calculated exchangeAndCodeRate sell exchange rate
     @JsonProperty("mid")
-    private Double mid; // bid <- calculated exchangeAndCodeRate buy exchange rate
+    private BigDecimal mid; // mid <- calculated exchangeAndCodeRate medium exchange rate
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("no")
     public String getNo() {
         return no;
     }
 
-    @JsonProperty("no")
     public void setNo(String no) {
         this.no = no;
     }
 
-    @JsonProperty("effectiveDate")
     public String getEffectiveDate() {
         return effectiveDate;
     }
 
-    @JsonProperty("effectiveDate")
     public void setEffectiveDate(String effectiveDate) {
         this.effectiveDate = effectiveDate;
     }
 
-    @JsonProperty("bid")
     public Double getBid() {
         return bid;
     }
 
-    @JsonProperty("bid")
     public void setBid(Double bid) {
         this.bid = bid;
     }
 
-    @JsonProperty("ask")
     public Double getAsk() {
         return ask;
     }
 
-    @JsonProperty("ask")
     public void setAsk(Double ask) {
         this.ask = ask;
     }
 
-    @JsonProperty("mid")
-    public Double getMid() {
+    public BigDecimal getMid() {
         return mid;
     }
 
-    @JsonProperty("mid")
-    public void setMid(Double mid) {
+    public void setMid(BigDecimal mid) {
         this.mid = mid;
     }
 
-    @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
     }
 
-    @JsonAnySetter
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
+    }
+
+    private static class MoneySerializer extends JsonSerializer<BigDecimal> {
+        @Override
+        public void serialize(BigDecimal value, JsonGenerator jgen, SerializerProvider provider) throws IOException,
+                JsonProcessingException {
+            // put your desired money style here
+            jgen.writeString(value.setScale(2, BigDecimal.ROUND_HALF_UP).toString());
+        }
     }
 }

@@ -4,11 +4,10 @@ package com.sda.groupa.shippingcostcalculator.fuel.fuelService;
 
 import com.sda.groupa.shippingcostcalculator.costCalculator.CostCalculator;
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.CurrencyCode;
-import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.repository.CurrencyExchangeRatesRepository;
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.service.CurrencyRateService;
 import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
-import com.sda.groupa.shippingcostcalculator.fuel.exception.NoLatestCurrencyExceptionReached;
-import com.sda.groupa.shippingcostcalculator.fuel.exception.ProblemWithJsonParsingException;
+import com.sda.groupa.shippingcostcalculator.fuel.exception.NoLatestCurrencyReachedException;
+import com.sda.groupa.shippingcostcalculator.fuel.exception.JsonParsingException;
 import com.sda.groupa.shippingcostcalculator.fuel.fuelModel.Fuel;
 import com.sda.groupa.shippingcostcalculator.fuel.fuelRepository.FuelRepository;
 import org.json.JSONException;
@@ -71,9 +70,9 @@ public class FuelService implements CostCalculator {
             try {
                 latestCurrencyExchangeRate = currencyRateService.getLatestCurrencyExchangeRate(listOfFuelingsWithOtherCurrencyCodes.get(i));
             } catch (IOException e) {
-                throw new NoLatestCurrencyExceptionReached();   //nie wyświeltlać stack traca!!!
+                throw new NoLatestCurrencyReachedException();   //nie wyświeltlać stack traca!!!
             } catch (JSONException e) {
-                throw new ProblemWithJsonParsingException();    //nie wyświeltlać stack traca!!!
+                throw new JsonParsingException();    //nie wyświeltlać stack traca!!!
             }
             sumOfCosts = sumOfCosts.add(costOfSingleFueling.multiply(latestCurrencyExchangeRate));
         }
@@ -110,9 +109,9 @@ public class FuelService implements CostCalculator {
                 latestCurrencyExchangeRate = currencyRateService.getLatestCurrencyExchangeRate(listOfFuelingsFromGivenExpeditionPayedInForeignCurrency.get(i));
                 sumOfCosts = sumOfCosts.add(costOfSingleFueling.multiply(latestCurrencyExchangeRate));
             } catch (IOException e) {
-                throw  new NoLatestCurrencyExceptionReached();
+                throw  new NoLatestCurrencyReachedException();
             } catch (JSONException e) {
-                throw new ProblemWithJsonParsingException();
+                throw new JsonParsingException();
             }
         }
 

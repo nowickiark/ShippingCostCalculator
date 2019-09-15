@@ -1,5 +1,7 @@
 package com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.dailyRate.DailyRate;
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.jsonReader.JsonReader;
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.CurrencyCode;
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.ExchangeRateAndCode;
@@ -10,39 +12,47 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.net.URL;
+import java.nio.charset.Charset;
 import java.time.LocalDate;
+import java.util.Currency;
 import java.util.Optional;
 
 @Service
 public class CurrencyRateService {
     private final CurrencyExchangeRatesRepository currencyExchangeRatesRepository;
 
+    private final String basicURL = "http://api.nbp.pl/api/exchangerates/rates/a/";
     public CurrencyRateService (CurrencyExchangeRatesRepository currencyExchangeRatesRepository){
         this.currencyExchangeRatesRepository  = currencyExchangeRatesRepository;
 
     }
 
+    private DailyRate getDailyRateObjectFromJason(String url_str) throws IOException {
+        JsonReader jsonReader = new JsonReader();
+        InputStream inputStream = new URL(url_str).openStream();
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(jsonReader.readAll(bufferedReader), DailyRate.class);
+
+    }
 
     private ExchangeRateAndCode getLatestCurrencyExchangeRateAndCodeFromAPI(Fuel fuel) throws IOException, JSONException {
 
         CurrencyCode currencyCode = fuel.getCurrencyCode();
-
-        String basicURL = "http://api.nbp.pl/api/exchangerates/rates/a/";
         String code = currencyCode.toString().toLowerCase();
-        JsonReader jsonReader = new JsonReader();
 
         String url_str = basicURL + code + "?format=json";
 
-        JSONObject dailyRates = jsonReader.readJsonFromUrl(url_str);
-        JSONArray listrOfRates = new JSONArray(dailyRates.get("rates").toString());
-        JSONObject rate = new JSONObject(listrOfRates.get(0).toString());
+        DailyRate dailyRate = getDailyRateObjectFromJason(url_str);
+        BigDecimal midRate = dailyRate.getRates().get(0).getMid();
 
-        Double mid = rate.getDouble("mid");
-        BigDecimal midRate = new BigDecimal(mid);
-
-        String exchangeRateDate = rate.getString("effectiveDate");
+        String exchangeRateDate = dailyRate.getRates().get(0).getEffectiveDate();
         LocalDate dateOfExchangeRate = LocalDate.parse(exchangeRateDate);
 
         ExchangeRateAndCode exchangeRateAndCode = new ExchangeRateAndCode(dateOfExchangeRate, currencyCode, midRate);
@@ -55,8 +65,6 @@ public class CurrencyRateService {
 
     public BigDecimal getLatestCurrencyExchangeRate (Fuel fuel) throws IOException, JSONException {
 
-        BigDecimal exchangeRate;
-
         LocalDate dateOfFueling = fuel.getDateOfFueling();
         CurrencyCode currencyCode = fuel.getCurrencyCode();
 
@@ -65,13 +73,10 @@ public class CurrencyRateService {
 
         if(optionalExchangeRateAndCode.isPresent()){
             ExchangeRateAndCode exchangeRateAndCode = optionalExchangeRateAndCode.get();
-            exchangeRate = exchangeRateAndCode.getCurrencyRate();
-
-        }else {
-            exchangeRate = getLatestCurrencyExchangeRateAndCodeFromAPI(fuel).getCurrencyRate();
+            return exchangeRateAndCode.getCurrencyRate();
 
         }
-        return exchangeRate;
+        return getLatestCurrencyExchangeRateAndCodeFromAPI(fuel).getCurrencyRate();
 
     }
 
