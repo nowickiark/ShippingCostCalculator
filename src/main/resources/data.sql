@@ -27,4 +27,7 @@ insert INTO EXTRA_COST (id, expedition_id, description, cost, currency, date_of_
 insert INTO EXTRA_COST (id, expedition_id, description, cost, currency, date_of_purchase) values (nextval('e_cost_seq'),2, 'Phone card', 50, 'PLN', '2019-09-05');
 
 
+UPDATE DRIVER SET EXPEDITION_ID = 1 WHERE ID=1;
+
+
 commit;

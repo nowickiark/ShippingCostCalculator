@@ -2,6 +2,8 @@ package com.sda.groupa.shippingcostcalculator.login.service;
 
 import com.sda.groupa.shippingcostcalculator.login.model.User;
 import com.sda.groupa.shippingcostcalculator.login.repository.UserRepository;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -17,7 +19,6 @@ public class UserDetailsService implements org.springframework.security.core.use
     public UserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
