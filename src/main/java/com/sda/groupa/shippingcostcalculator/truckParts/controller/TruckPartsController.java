@@ -28,6 +28,7 @@ public class TruckPartsController {
 
         ModelAndView modelAndView = new ModelAndView("truckparts");
         modelAndView.addObject("truckparts", truckParts);
+        modelAndView.addObject("currencyCodeType", CurrencyCode.values());
         return modelAndView;
     }
 

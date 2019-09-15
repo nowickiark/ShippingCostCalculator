@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Service
 public class TruckPartsService {
-    private TruckPartsRepository truckPartsRepository;
+    private final TruckPartsRepository truckPartsRepository;
 
     public TruckPartsService(TruckPartsRepository truckPartsRepository) {
         this.truckPartsRepository = truckPartsRepository;

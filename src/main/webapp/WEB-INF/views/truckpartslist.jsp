@@ -12,7 +12,7 @@
             <th>Expedition Id</th>
             <th>Description</th>
             <th>Cost</th>
-            <th>Currency</th>
+            <th>Currency Code</th>
             <th>Date of Purchase</th>
         </tr>
 
@@ -22,7 +22,7 @@
                 <td>${truckparts.expedition.id}</td>
                 <td>${truckparts.description}</td>
                 <td>${truckparts.cost}</td>
-                <td>${truckparts.currency}</td>
+                <td>${truckparts.currencyCode}</td>
                 <td>${truckparts.dateOfPurchase}</td\
                 <td><a href="/truckparts/add/${truckparts.id}">Truckparts/Details</a></td>
             </tr>

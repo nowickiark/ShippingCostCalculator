@@ -20,8 +20,10 @@
             <td><form:input path="cost"/></td>
         </tr>
         <tr>
-            <td><form:label path="currency">Currency</form:label></td>
-            <td><form:input path="currency"/></td>
+            <td><form:select path="currencyCode" >
+            <form:option value="" label="Choose currency code"></form:option>
+            <form:options items="${currencyCodeType}"/>
+            </form:select>
         </tr>
         <tr>
             <td><form:label path="dateOfPurchase">Date of Purchase </form:label></td>

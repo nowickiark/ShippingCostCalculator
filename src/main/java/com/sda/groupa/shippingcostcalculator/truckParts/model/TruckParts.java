@@ -19,8 +19,7 @@ public class TruckParts {
     private Expedition expedition;
     private String description;
     private BigDecimal cost;
-    @Enumerated(EnumType.STRING)
-    private Currency currency;
+    private CurrencyCode currencyCode;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfPurchase;
 
@@ -28,10 +27,10 @@ public class TruckParts {
     public TruckParts() {
     }
 
-    public TruckParts(String description, BigDecimal cost, Currency currency, LocalDate dateOfPurchase, Expedition expedition) {
+    public TruckParts(String description, BigDecimal cost, CurrencyCode currencyCode, LocalDate dateOfPurchase, Expedition expedition) {
         this.description = description;
         this.cost = cost;
-        this.currency = currency;
+        this.currencyCode = currencyCode;
         this.dateOfPurchase = dateOfPurchase;
         this.expedition = expedition;
     }
@@ -60,12 +59,12 @@ public class TruckParts {
         this.cost = cost;
     }
 
-    public Currency getCurrency() {
-        return currency;
+    public CurrencyCode getCurrencyCode() {
+        return currencyCode;
     }
 
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
+    public void setCurrencyCode(CurrencyCode currencyCode) {
+        this.currencyCode = currencyCode;
     }
 
     public LocalDate getDateOfPurchase() {
@@ -94,7 +93,7 @@ public class TruckParts {
                 Objects.equals(expedition, that.expedition) &&
                 Objects.equals(description, that.description) &&
                 Objects.equals(cost, that.cost) &&
-                currency == that.currency &&
+                currencyCode == that.currencyCode &&
                 Objects.equals(dateOfPurchase, that.dateOfPurchase);
     }
 
@@ -105,14 +104,14 @@ public class TruckParts {
                 ", expedition=" + expedition +
                 ", description='" + description + '\'' +
                 ", cost=" + cost +
-                ", currency=" + currency +
+                ", currencyCode=" + currencyCode +
                 ", dateOfPurchase=" + dateOfPurchase +
                 '}';
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, description, cost, currency, dateOfPurchase, expedition);
+        return Objects.hash(id, description, cost, currencyCode, dateOfPurchase, expedition);
 
     }
 }
