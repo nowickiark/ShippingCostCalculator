@@ -7,6 +7,8 @@ import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.Curren
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.repository.CurrencyExchangeRatesRepository;
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.service.CurrencyRateService;
 import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
+import com.sda.groupa.shippingcostcalculator.fuel.exception.NoLatestCurrencyExceptionReached;
+import com.sda.groupa.shippingcostcalculator.fuel.exception.ProblemWithJsonParsingException;
 import com.sda.groupa.shippingcostcalculator.fuel.fuelModel.Fuel;
 import com.sda.groupa.shippingcostcalculator.fuel.fuelRepository.FuelRepository;
 import org.json.JSONException;
@@ -69,9 +71,9 @@ public class FuelService implements CostCalculator {
             try {
                 latestCurrencyExchangeRate = currencyRateService.getLatestCurrencyExchangeRate(listOfFuelingsWithOtherCurrencyCodes.get(i));
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new NoLatestCurrencyExceptionReached();   //nie wyświeltlać stack traca!!!
             } catch (JSONException e) {
-                e.printStackTrace();
+                throw new ProblemWithJsonParsingException();    //nie wyświeltlać stack traca!!!
             }
             sumOfCosts = sumOfCosts.add(costOfSingleFueling.multiply(latestCurrencyExchangeRate));
         }
@@ -92,6 +94,7 @@ public class FuelService implements CostCalculator {
         }
         return sumOfCosts;
     }
+
 
     //====need to be finished====
     public BigDecimal calculateSumOfCostsInAllCurrenciesOtherThanPLN(Expedition expedition){
