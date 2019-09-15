@@ -8,7 +8,6 @@
 <spring:url value="/extracost/add" var="addExtraCostUrl" />
 
 <spring:url value="/extracost/add/{id}" var="updateExtraCostUrl" />
-<%--action="/extracost/add" modelAttribute="extracost"--%>
 <form:form method="POST" action="${update? updateExtraCostUrl : addExtraCostUrl}" modelAttribute="extracost" >
             <table>
                 <tr ${update ? "" : "hidden"}>
@@ -40,8 +39,6 @@
         </table>
 
 </form:form>
-
-<br>
 
 <a href="/expedition/listOfExtraCosts">Go back to list of extra costs</a>
 
