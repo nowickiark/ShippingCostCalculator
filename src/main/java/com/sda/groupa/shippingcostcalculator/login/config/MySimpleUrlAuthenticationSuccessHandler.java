@@ -9,7 +9,6 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -72,7 +71,7 @@ public class MySimpleUrlAuthenticationSuccessHandler
         } else if (isAdmin) {
             return "/"; //do zmiany w przypadku spedytora
         } else if (isSpedytor) {
-            return "/"; //do zmiany w przypadku spedytora
+            return "/SpedytorHome"; //do zmiany w przypadku spedytora
         } else {
             throw new IllegalStateException();
         }

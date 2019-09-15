@@ -1,30 +1,22 @@
 package com.sda.groupa.shippingcostcalculator.login.controller;
 
-import com.sda.groupa.shippingcostcalculator.driver.driverModel.Driver;
-import com.sda.groupa.shippingcostcalculator.driver.driverService.DriverService;
-import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
 import com.sda.groupa.shippingcostcalculator.expedition.service.ExpeditionService;
-import com.sda.groupa.shippingcostcalculator.login.model.User;
-import com.sda.groupa.shippingcostcalculator.login.service.SteerRole;
-import com.sda.groupa.shippingcostcalculator.login.service.UserDetailsService;
-import com.sda.groupa.shippingcostcalculator.login.workerStrategy.WorkerStrategy;
+import com.sda.groupa.shippingcostcalculator.login.workerStrategy.DriverStrategy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 
 @Controller
 public class AppController {
 
-    private SteerRole steerRole;
+    private DriverStrategy driverStrategy;
+    private ExpeditionService expeditionService;
 
-    public AppController(SteerRole steerRole) {
-        this.steerRole = steerRole;
+    public AppController(DriverStrategy driverStrategy, ExpeditionService expeditionService) {
+        this.driverStrategy = driverStrategy;
+        this.expeditionService = expeditionService;
     }
 
     @GetMapping("/login")
@@ -33,9 +25,21 @@ public class AppController {
     }
 
     @GetMapping("/")
-    public ModelAndView getHomePage(Principal principal, HttpServletRequest request) {
+    public ModelAndView getHomePage(Principal principal) {
 
-        ModelAndView modelAndView = steerRole.runStrategy(principal.getName());
+        ModelAndView modelAndView = driverStrategy.getDriverModelAndView();
+
+        driverStrategy.setUpSession(principal.getName());
+
+        return modelAndView;
+    }
+
+    @GetMapping("/SpedytorHome")
+    public ModelAndView getSpedytorHomePage(Principal principal) {
+
+        ModelAndView modelAndView = new ModelAndView("spedytorHome");
+
+        modelAndView.addObject("expeditions",expeditionService.getExpeditions());
 
         return modelAndView;
     }
