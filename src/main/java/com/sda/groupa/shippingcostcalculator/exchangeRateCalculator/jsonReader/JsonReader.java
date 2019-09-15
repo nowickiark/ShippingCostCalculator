@@ -17,17 +17,5 @@ public class JsonReader {
         }
         return stringBuilder.toString();
     }
-
-//    public JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
-//        JsonReader jsonReader = new JsonReader();
-//        InputStream inputStream = new URL(url).openStream();
-//        try {
-//            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
-//            String jsonText = jsonReader.readAll(bufferedReader);
-//            JSONObject json = new JSONObject(jsonText);
-//            return json;
-//        } finally {
-//            inputStream.close();
-//        }
-//    }
+    
 }
