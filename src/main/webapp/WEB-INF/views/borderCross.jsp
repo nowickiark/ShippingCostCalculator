@@ -5,10 +5,14 @@
 
 <html>
 <body>
+<spring:url value="/borderCross/add" var="addBorderCrossUrl" />
 
-<form:form method="POST" action="/borderCross/add" modelAttribute="borderCross">
+<spring:url value="/borderCross/add/{id}" var="updateBorderCrossUrl" />
+<%--action="/extracost/add" modelAttribute="extracost"--%>
+<form:form method="POST" action="${update? updateBorderCrossUrl : addBorderCrossUrl}" modelAttribute="borderCross" >
+<%--<form:form method="POST" action="/borderCross/add" modelAttribute="borderCross">--%>
     <table>
-        <tr>
+        <tr ${update ? "" : "hidden"}>
             <td><form:label path="id">Id</form:label></td>
             <td><form:input path="id" readonly="true" /></td>
         </tr>
@@ -32,7 +36,7 @@
     </table>
 </form:form>
 
-<a href="/borderCross/add">Add border crossing</a>
+<a href="expedition/listOfBorderCrosses">Go back to list of border crosses</a>
 
 <br>
 

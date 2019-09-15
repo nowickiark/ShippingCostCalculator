@@ -4,10 +4,13 @@
 
 <html>
 <body>
+<h2>Add extra cost</h2>
+<spring:url value="/extracost/add" var="addExtraCostUrl" />
 
-<form:form method="POST" action="/extracost/add" modelAttribute="extracost">
+<spring:url value="/extracost/add/{id}" var="updateExtraCostUrl" />
+<form:form method="POST" action="${update? updateExtraCostUrl : addExtraCostUrl}" modelAttribute="extracost" >
             <table>
-                <tr>
+                <tr ${update ? "" : "hidden"}>
                     <td><form:label path="id">Id</form:label></td>
                     <td><form:input path="id" readonly="true "/></td>
                 </tr>
@@ -20,12 +23,15 @@
                     <td><form:input path="cost"/></td>
                 </tr>
                 <tr>
-                    <td><form:label path="currency">Currency</form:label></td>
-                    <td><form:input path="currency"/></td>
+                    <td><form:label path="currencyCode">Currency</form:label></td>
+                    <td><form:select path="currencyCode" >
+                            <form:option value="" label="Choose currency code"></form:option>
+                            <form:options items="${currencyCodeType}"/>
+                        </form:select>
                 </tr>
                 <tr>
                     <td><form:label path="dateOfPurchase">Date of Purchase</form:label></td>
-                    <td><form:input path="dateOfPurchase"/></td>
+                    <td><form:input type="date" path="dateOfPurchase"/></td>
                 </tr>
                 <tr>
                     <td><input type="submit" value="Add cost"/></td>
@@ -34,7 +40,7 @@
 
 </form:form>
 
-<a href="/extracost/add">Add Extra cost</a>
+<a href="/expedition/listOfExtraCosts">Go back to list of extra costs</a>
 
 <br>
 
