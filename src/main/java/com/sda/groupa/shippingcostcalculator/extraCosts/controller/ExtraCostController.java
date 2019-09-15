@@ -4,7 +4,7 @@ import com.sda.groupa.shippingcostcalculator.driver.driverService.DriverService;
 import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
 import com.sda.groupa.shippingcostcalculator.extraCosts.model.ExtraCost;
 import com.sda.groupa.shippingcostcalculator.extraCosts.service.ExtraCostService;
-import com.sda.groupa.shippingcostcalculator.login.workerStrategy.DriverStrategy;
+import com.sda.groupa.shippingcostcalculator.login.strategy.DriverStrategy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;

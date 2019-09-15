@@ -3,7 +3,7 @@ package com.sda.groupa.shippingcostcalculator.expedition.controller;
 import com.sda.groupa.shippingcostcalculator.driver.driverModel.Driver;
 import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
 import com.sda.groupa.shippingcostcalculator.expedition.service.ExpeditionService;
-import com.sda.groupa.shippingcostcalculator.login.workerStrategy.DriverStrategy;
+import com.sda.groupa.shippingcostcalculator.login.strategy.DriverStrategy;
 import com.sda.groupa.shippingcostcalculator.truck.model.Truck;
 import com.sda.groupa.shippingcostcalculator.truck.service.TruckService;
 import org.springframework.stereotype.Controller;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller

@@ -1,4 +1,4 @@
-package com.sda.groupa.shippingcostcalculator.login.workerStrategy;
+package com.sda.groupa.shippingcostcalculator.login.strategy;
 
 import com.sda.groupa.shippingcostcalculator.driver.driverModel.Driver;
 import com.sda.groupa.shippingcostcalculator.driver.driverService.DriverService;
@@ -8,8 +8,6 @@ import com.sda.groupa.shippingcostcalculator.login.exceptions.UserNotFoundExcept
 import com.sda.groupa.shippingcostcalculator.login.model.User;
 import com.sda.groupa.shippingcostcalculator.login.model.UserProvider;
 import com.sda.groupa.shippingcostcalculator.login.service.UserDetailsService;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,13 +19,11 @@ public class DriverStrategy {
     private UserDetailsService userDetailsService;
     private UserProvider userProvider;
 
-
     public DriverStrategy(DriverService driverService, ExpeditionService expeditionService, UserDetailsService userDetailsService) {
         this.driverService = driverService;
         this.expeditionService = expeditionService;
         this.userDetailsService = userDetailsService;
     }
-
 
     public ModelAndView getDriverModelAndView(){
         ModelAndView modelAndView = new ModelAndView("home");
@@ -45,8 +41,6 @@ public class DriverStrategy {
     public Expedition getExpedition(){
         return getDriver().getExpedition();
     }
-
-
 
 
 }
