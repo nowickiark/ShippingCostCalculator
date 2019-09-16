@@ -8,6 +8,8 @@
     <h1>Spedytor View</h1>
     <br>
 
+    <a href="/freightRate/add">Add freight rate</a>
+    <br>
     <a href="/expeditions/all">Show all expeditions</a>
     <br>
     <a href="/expeditions/current">Show all active expeditions</a>
