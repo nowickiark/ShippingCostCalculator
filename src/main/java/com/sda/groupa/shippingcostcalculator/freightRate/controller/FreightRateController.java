@@ -8,10 +8,12 @@ import com.sda.groupa.shippingcostcalculator.freightRate.service.FreightRateServ
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class FreightRateController {
@@ -31,9 +33,12 @@ public class FreightRateController {
         return modelAndView;
     }
 
-    @GetMapping("/expedition/freightRateList")
-    public ModelAndView getFreightRateListByExpedition(@ModelAttribute Expedition expedition){
+
+
+    @GetMapping("/expedition/freightRateList/{expeditionId}")
+    public ModelAndView getFreightRateListByExpedition(@PathVariable Long expeditionId){
         ModelAndView modelAndView = new ModelAndView("freightRateList");
+        Expedition expedition = expeditionService.getExpeditionById(expeditionId).orElseThrow(() -> new RuntimeException("Unavailable"));
         modelAndView.addObject("freightRates",freightRateService.findFreightRatesByExpedition(expedition));
         return modelAndView;
     }

@@ -2,6 +2,7 @@ package com.sda.groupa.shippingcostcalculator.freightRate.model;
 
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.CurrencyCode;
 import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -21,6 +22,7 @@ public class FreightRate {
     private long freightDistance;
     @ManyToOne(targetEntity = Expedition.class)
     private Expedition expedition;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
     public FreightRate(){};

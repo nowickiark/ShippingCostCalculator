@@ -6,7 +6,7 @@
 <html>
 <body>
 
-<form:form method="POST" action="/expedition/add" modelAttribute="freightRate">
+<form:form method="POST" action="/freightRate/add" modelAttribute="freightRate">
     <table>
         <tr>
             <td><form:label path="id">Id</form:label></td>
@@ -21,7 +21,7 @@
                 <%--<td><form:input path="truck"/></td>--%>
             <td><form:select path="expedition" >
                 <c:forEach var="ex" items="${expeditions}">
-                    <form:option value="${ex}">${ex.driver} / ${ex.startDay}</form:option>
+                    <form:option value="${ex}">${ex.driver.firstName} ${ex.driver.surname} / ${ex.startDay}</form:option>
                 </c:forEach>
             </td></form:select>
             <td><a href="/expedition/add">Add Expedition</a></td>
