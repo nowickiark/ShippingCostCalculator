@@ -54,7 +54,7 @@ public class FuelController {
         Driver driver = driverStrategy.getDriver();
         fuel.setExpedition(driver.getExpedition());
         fuelService.addFueling(fuel);
-        //=====check if currency code is already present in repository, if not then take it from API and add to repository=======
+        //=====check if currency rate for given code and date is already present in repository, if not then take it from API and add to repository=======
         currencyRateService.checkLatestCurrencyExchangeRate(fuel.getCurrencyCode(),fuel.getDateOfFueling());
         return "redirect:/fuelings";
     }
@@ -82,35 +82,4 @@ public class FuelController {
         modelAndView.addObject("update", true);
         return modelAndView;
     }
-
-//    //=========SUMMARY OF FUELINGS FOR THE VIEW OF SHIPPER ========
-//    @GetMapping(value = "...")//TODO uzupełnić
-//    public ModelAndView getFuelinsStatisicsView(){
-//        ModelAndView modelAndView = new ModelAndView("...");//TODO uzupełnić
-//        Expedition expedition = driverStrategy.getExpedition();
-//
-//        BigDecimal sumOfFuelingsPayedInCurrencyOfPLN = fuelService.calculateSumOfCostsPayedInCurrencyOfPLN(expedition);
-//        modelAndView.addObject("sumOfFuelingsPayedInCurrencyOfPLN", sumOfFuelingsPayedInCurrencyOfPLN);
-//        BigDecimal sumInPLNofFuelingsPayedInAllCurrenciesOtherThanPLN = fuelService.calculateSumOfCostsPayedInAllCurrenciesOtherThanPLN(expedition);
-//        modelAndView.addObject("sumInPLNofFuelingsPayedInAllCurrenciesOtherThanPLN", sumInPLNofFuelingsPayedInAllCurrenciesOtherThanPLN);
-//        BigDecimal totalCostOfAllFuelings = fuelService.calculateTotalCostsPayedInPLNandOtherCurrencies(expedition);
-//        modelAndView.addObject("totalCostOfAllFuelings", totalCostOfAllFuelings);
-//
-//        BigDecimal sumOfLitersInPoland = fuelService.calculateSumOfLitersInPoland(expedition);
-//        modelAndView.addObject("sumOfLitersInPoland", sumOfLitersInPoland);
-//        BigDecimal mediumPriceForOneLiterInPoland = fuelService.calculateMediumPriceForOneLiterInPoland(expedition);
-//        modelAndView.addObject("mediumPriceForOneLiterInPoland", mediumPriceForOneLiterInPoland);
-//
-//        BigDecimal sumOfLitersAbroad = fuelService.calculateSumOfLitersAbroad(expedition);
-//        modelAndView.addObject("sumOfLitersAbroad", sumOfLitersAbroad);
-//        BigDecimal mediumPriceForOneLiterInAbroad = fuelService.calculateMediumPriceForOneLiterInAbroad(expedition);
-//        modelAndView.addObject("mediumPriceForOneLiterInAbroad", mediumPriceForOneLiterInAbroad);
-//
-//        BigDecimal sumOfLiters = fuelService.calculateSumOfLiters(expedition);
-//        modelAndView.addObject("sumOfLiters", sumOfLiters);
-//        BigDecimal mediumPriceForOneLiter = fuelService.calculateMediumPriceForOneLiter(expedition);
-//        modelAndView.addObject("mediumPriceForOneLiter", mediumPriceForOneLiter);
-//
-//        return modelAndView;
-//    }
 }

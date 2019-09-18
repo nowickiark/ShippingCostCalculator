@@ -12,4 +12,5 @@ public interface ExpeditionRepository extends JpaRepository<Expedition, Long> {
 
     List<Expedition> findExpeditionsByEndDayIsNull();
 
+
 }

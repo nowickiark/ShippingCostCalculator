@@ -78,30 +78,10 @@ public class TruckPartsController {
         Driver driver = driverStrategy.getDriver();
         truckParts.setExpedition(driver.getExpedition());
         truckPartsService.addTruckParts(truckParts);
-        //=====check if currency code is already present in repository, if not then take it from API and add to repository=======
+        //==check if currency rate for given code and date is already present in repository, if not then take it from API and add to repository=======
         currencyRateService.checkLatestCurrencyExchangeRate(truckParts.getCurrencyCode(),truckParts.getDateOfPurchase());
         return "redirect:/expedition/listOfTruckParts";
     }
-
-
-
-//    //=========SUMMARY OF COSTS OF TRUCK PARTS AND REPAIRS FOR THE VIEW OF SHIPPER ========
-//    @GetMapping(value = "...")//TODO uzupełnić
-//    public ModelAndView calculateTotalCostOfAllFuelings (){
-//        Expedition expedition = driverStrategy.getExpedition();
-//        ModelAndView modelAndView = new ModelAndView("...");//TODO uzupełnić
-//
-//        BigDecimal sumInPLNofTruckPartCostsPayedInAllCurrenciesOtherThanPLN = truckPartsService.calculateSumOfCostsPayedInAllCurrenciesOtherThanPLN(expedition);
-//        modelAndView.addObject("sumInPLNofTruckPartCostsPayedInAllCurrenciesOtherThanPLN", sumInPLNofTruckPartCostsPayedInAllCurrenciesOtherThanPLN);
-//
-//        BigDecimal sumOfTruckPartCostsPayedInCurrencyOfPLN = truckPartsService.calculateSumOfCostsPayedInCurrencyOfPLN(expedition);
-//        modelAndView.addObject("sumOfCostsPayedInCurrencyOfPLN", sumOfTruckPartCostsPayedInCurrencyOfPLN);
-//
-//        BigDecimal totalCostOfAllTruckParts = truckPartsService.calculateTotalCostsPayedInPLNandOtherCurrencies(expedition);
-//        modelAndView.addObject("", totalCostOfAllTruckParts);
-//        return modelAndView;
-//    }
-
 }
 
 

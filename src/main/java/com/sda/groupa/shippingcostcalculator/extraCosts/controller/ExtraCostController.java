@@ -74,25 +74,8 @@ public class ExtraCostController {
         Expedition expedition = driverStrategy.getExpedition();
         extracost.setExpedition(expedition);
         extraCostService.addExtraCost(extracost);
-        //=====check if currency code is already present in repository, if not then take it from API and add to repository=======
+        //=====check if currency rate for given code and date is already present in repository, if not then take it from API and add to repository=======
         currencyRateService.checkLatestCurrencyExchangeRate(extracost.getCurrencyCode(),extracost.getDateOfPurchase());
         return "redirect:/expedition/listOfExtraCosts";
     }
-
-//    //=========SUMMARY OF EXTRA COSTS FOR THE VIEW OF SHIPPER ========
-//    @GetMapping(value = "...")//TODO uzupełnić
-//    public ModelAndView calculateTotalCostOfAllFuelings (){
-//        Expedition expedition = driverStrategy.getExpedition();
-//        ModelAndView modelAndView = new ModelAndView("...");//TODO uzupełnić
-//
-//        BigDecimal sumOfExtraCostsPayedInCurrencyOfPLN = extraCostService.calculateSumOfCostsPayedInCurrencyOfPLN(expedition);
-//        modelAndView.addObject("sumOfExtraCostsPayedInCurrencyOfPLN", sumOfExtraCostsPayedInCurrencyOfPLN);
-//
-//        BigDecimal sumInPLNofExtraCostsPayedInAllCurrenciesOtherThanPLN = extraCostService.calculateSumOfCostsPayedInAllCurrenciesOtherThanPLN(expedition);
-//        modelAndView.addObject("sumInPLNofExtraCostsPayedInAllCurrenciesOtherThanPLN", sumInPLNofExtraCostsPayedInAllCurrenciesOtherThanPLN);
-//
-//        BigDecimal totalCostOfAllExtraCosts = extraCostService.calculateTotalCostsPayedInPLNandOtherCurrencies(expedition);
-//        modelAndView.addObject("totalCostOfAllExtraCosts", totalCostOfAllExtraCosts);
-//        return modelAndView;
-//    }
 }
