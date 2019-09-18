@@ -38,6 +38,7 @@
                 <td>${expedition.startOdometerReading}</td>
                 <td>${expedition.startDay}</td>
                 <td><a href="/expedition/freightRateList/${expedition.id}">Show Freight Rates</a></td>
+                <td><a href="/freightRate/add/${expedition.id}">Add Freight Rate To This Expedition</a></td>
                 <td><a href="/expedition/add/${expedition.id}">Edit</a></td>
                     <%--<td><a href="/whipround/${whipround.whipRound.id}">Donate/Details</a></td>--%>
             </tr>

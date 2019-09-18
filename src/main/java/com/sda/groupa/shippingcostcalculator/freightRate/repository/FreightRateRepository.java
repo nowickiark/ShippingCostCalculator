@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface FreightRateRepository extends JpaRepository<FreightRate, Long> {
 
-   List<FreightRate> getFreightRatesByExpedition(Expedition expedition);
+   List<FreightRate> getFreightRatesByExpeditionId(Long id);
 
 }

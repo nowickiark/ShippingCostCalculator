@@ -17,6 +17,7 @@ public class FreightRate {
     @SequenceGenerator(name = "freightSeq", sequenceName = "freight_seq", allocationSize = 1)
     private long id;
     private BigDecimal amount;
+    @Enumerated(EnumType.STRING)
     private CurrencyCode currencyCode;
     private String freightCompany;
     private long freightDistance;

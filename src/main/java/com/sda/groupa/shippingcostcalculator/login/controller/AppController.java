@@ -33,30 +33,22 @@ public class AppController {
 
     @GetMapping("/")
     public String getHomePage() {
-
         UserAuthority userAuthority = userProvider.getUser().getRole().getUserAuthority();
         String redirect;
         redirect = "redirect:/" + loggingSwitch.getLogindView(userAuthority);
-
         return redirect;
     }
 
     @GetMapping("/driverHome")
     public ModelAndView getUserHomePage(Principal principal) {
-
         ModelAndView modelAndView = driverStrategy.getDriverModelAndView();
-
         return modelAndView;
     }
 
-
     @GetMapping("/spedytorHome")
     public ModelAndView getSpedytorHomePage(Principal principal) {
-
         ModelAndView modelAndView = new ModelAndView("spedytorHome");
-
         modelAndView.addObject("expeditions",expeditionService.getExpeditions());
-
         return modelAndView;
     }
 

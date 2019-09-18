@@ -6,6 +6,7 @@ import com.sda.groupa.shippingcostcalculator.freightRate.repository.FreightRateR
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FreightRateService {
@@ -21,12 +22,13 @@ public class FreightRateService {
     }
 
     public List<FreightRate> findFreightRatesByExpedition(Expedition expedition){
-        return freightRateRepository.getFreightRatesByExpedition(expedition);
+        return freightRateRepository.getFreightRatesByExpeditionId(expedition.getId());
     }
 
     public void saveFreightRate(FreightRate freightRate){
         freightRateRepository.save(freightRate);
     }
 
+    public Optional<FreightRate> getFreightrateById(Long id){return freightRateRepository.findById(id);}
 
 }

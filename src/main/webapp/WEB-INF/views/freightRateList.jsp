@@ -18,22 +18,21 @@
             <th>Date</th>
         </tr>
 
-        <c:forEach var="freightRate" items="${freighteRates}">
+        <c:forEach var="freightRate" items="${freightRates}">
             <tr>
                 <td>${freightRate.id}</td>
                 <td>${freightRate.freightCompany}</td>
-                <td>${freightRate.freightRateDistance}</td>
+                <td>${freightRate.freightDistance}</td>
                 <td>${freightRate.amount}</td>
                 <td>${freightRate.currencyCode}</td>
                 <td>${freightRate.date}</td>
-                <td><a href="/expedition/add/${freightRate.id}">Edit</a></td>
-                    <%--<td><a href="/whipround/${whipround.whipRound.id}">Donate/Details</a></td>--%>
+                <td><a href="/freightRate/edit/${freightRate.id}">Edit</a></td>
             </tr>
         </c:forEach>
 
     </table>
 
-    <a href="/expedition/add">Add expedition</a>
+    <a href="/freightRate/add/${freightRates[0].expedition.id}">Add new Freight Rate To This Expedition</a>
     <br>
     <a href="/">Back to home</a>
 

@@ -3,6 +3,7 @@ package com.sda.groupa.shippingcostcalculator.freightRate.controller;
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.CurrencyCode;
 import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
 import com.sda.groupa.shippingcostcalculator.expedition.service.ExpeditionService;
+import com.sda.groupa.shippingcostcalculator.freightRate.exception.FreightNotFoundException;
 import com.sda.groupa.shippingcostcalculator.freightRate.model.FreightRate;
 import com.sda.groupa.shippingcostcalculator.freightRate.service.FreightRateService;
 import org.springframework.stereotype.Controller;
@@ -45,8 +46,30 @@ public class FreightRateController {
 
     @GetMapping("/freightRate/add")
     public ModelAndView showFreightRateForm(){
-        ModelAndView modelAndView = new ModelAndView("addFreightRate");
         FreightRate freightRate = new FreightRate();
+        return getAddingView(freightRate);
+    }
+
+    @GetMapping("/freightRate/add/{idExpedition}")
+    public ModelAndView showFreightRateFormWithExpedition(@PathVariable Long idExpedition){
+        FreightRate freightRate = new FreightRate();
+        freightRate.setExpedition(expeditionService.getExpeditionById(idExpedition).orElseThrow(() -> new RuntimeException("Unavailable")));
+        return getAddingView(freightRate);
+    }
+
+    private ModelAndView getAddingView(FreightRate freightRate){
+        ModelAndView modelAndView = new ModelAndView("addFreightRate");
+        List<Expedition> expeditions = expeditionService.findCurrentExpeditions();
+        modelAndView.addObject("freightRate",freightRate);
+        modelAndView.addObject("expeditions",expeditions);
+        modelAndView.addObject("currencyCodeType", CurrencyCode.values());
+        return modelAndView;
+    }
+
+    @GetMapping("/freightRate/edit/{id}")
+    public ModelAndView editFreightRate(@PathVariable long id){
+        ModelAndView modelAndView = new ModelAndView("addFreightRate");
+        FreightRate freightRate = freightRateService.getFreightrateById(id).orElseThrow(() -> new FreightNotFoundException("Unavailable"));
         List<Expedition> expeditions = expeditionService.findCurrentExpeditions();
         modelAndView.addObject("freightRate",freightRate);
         modelAndView.addObject("expeditions",expeditions);

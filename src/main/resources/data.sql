@@ -35,4 +35,8 @@ insert INTO TRUCK_PARTS (id, expedition_id, description, cost, currency_code, da
 insert INTO TRUCK_PARTS (id, expedition_id, description, cost, currency_code, date_of_purchase) values (nextval('truck_parts_seq'),2, 'Timing belt', 280, 'PLN', '2019-09-01');
 insert INTO TRUCK_PARTS (id, expedition_id, description, cost, currency_code, date_of_purchase) values (nextval('truck_parts_seq'),2, 'Master cylinder', 550, 'PLN', '2019-09-05');
 
+insert into FREIGHT_RATE (id, amount, currency_code, freight_company, freight_distance,expedition_id, date) values (nextval('freight_seq'),145,'EUR','Big Company',789,1,'2019-08-07');
+insert into FREIGHT_RATE (id, amount, currency_code, freight_company, freight_distance,expedition_id, date) values (nextval('freight_seq'),587,'PLN','Bigger Company',1458,1,'2021-05-09');
+insert into FREIGHT_RATE (id, amount, currency_code, freight_company, freight_distance,expedition_id, date) values (nextval('freight_seq'),80,'EUR','Brand',457,1,'2019-09-10');
+
 commit;
