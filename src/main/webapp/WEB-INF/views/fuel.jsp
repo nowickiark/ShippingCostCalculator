@@ -9,10 +9,6 @@
     table, th, td {
         border: 1px solid black;
     }
-    .cornflowerblue {background: cornflowerblue}
-    .blanchedalmond{background: blanchedalmond}
-
-
 </style>
 
 <table>
@@ -34,7 +30,7 @@
 
     <tr>
 
-            <td>${singlefueling.id}</td> <br>
+            <td>${singlefueling.id}</td>
             <td>${singlefueling.expedition.id}</td>
             <td>${singlefueling.placeOfRefueling}</td>
             <td>${singlefueling.liters}</td>

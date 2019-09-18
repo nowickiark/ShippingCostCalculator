@@ -2,6 +2,8 @@ package com.sda.groupa.shippingcostcalculator.truckParts.controller;
 
 import com.sda.groupa.shippingcostcalculator.driver.driverModel.Driver;
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.CurrencyCode;
+import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.service.CurrencyRateService;
+import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
 import com.sda.groupa.shippingcostcalculator.login.strategy.DriverStrategy;
 import com.sda.groupa.shippingcostcalculator.truckParts.model.TruckParts;
 import com.sda.groupa.shippingcostcalculator.truckParts.service.TruckPartsService;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import javax.servlet.http.HttpServletRequest;
+
+import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,10 +23,12 @@ import java.util.Optional;
 public class TruckPartsController {
     private final TruckPartsService truckPartsService;
     private final DriverStrategy driverStrategy;
+    private final CurrencyRateService currencyRateService;
 
-    public TruckPartsController(TruckPartsService truckPartsService, DriverStrategy driverStrategy) {
+    public TruckPartsController(TruckPartsService truckPartsService, DriverStrategy driverStrategy, CurrencyRateService currencyRateService) {
         this.truckPartsService = truckPartsService;
         this.driverStrategy = driverStrategy;
+        this.currencyRateService = currencyRateService;
     }
 
     @GetMapping("/truckparts/add")
@@ -68,12 +74,33 @@ public class TruckPartsController {
     }
 
     @PostMapping("/truckparts/add")
-    public String truckParts (@ModelAttribute TruckParts truckParts) {
+    public String truckParts (@ModelAttribute TruckParts truckParts) throws IOException {
         Driver driver = driverStrategy.getDriver();
         truckParts.setExpedition(driver.getExpedition());
         truckPartsService.addTruckParts(truckParts);
+        //=====check if currency code is already present in repository, if not then take it from API and add to repository=======
+        currencyRateService.checkLatestCurrencyExchangeRate(truckParts.getCurrencyCode(),truckParts.getDateOfPurchase());
         return "redirect:/expedition/listOfTruckParts";
     }
+
+
+
+//    //=========SUMMARY OF COSTS OF TRUCK PARTS AND REPAIRS FOR THE VIEW OF SHIPPER ========
+//    @GetMapping(value = "...")//TODO uzupełnić
+//    public ModelAndView calculateTotalCostOfAllFuelings (){
+//        Expedition expedition = driverStrategy.getExpedition();
+//        ModelAndView modelAndView = new ModelAndView("...");//TODO uzupełnić
+//
+//        BigDecimal sumInPLNofTruckPartCostsPayedInAllCurrenciesOtherThanPLN = truckPartsService.calculateSumOfCostsPayedInAllCurrenciesOtherThanPLN(expedition);
+//        modelAndView.addObject("sumInPLNofTruckPartCostsPayedInAllCurrenciesOtherThanPLN", sumInPLNofTruckPartCostsPayedInAllCurrenciesOtherThanPLN);
+//
+//        BigDecimal sumOfTruckPartCostsPayedInCurrencyOfPLN = truckPartsService.calculateSumOfCostsPayedInCurrencyOfPLN(expedition);
+//        modelAndView.addObject("sumOfCostsPayedInCurrencyOfPLN", sumOfTruckPartCostsPayedInCurrencyOfPLN);
+//
+//        BigDecimal totalCostOfAllTruckParts = truckPartsService.calculateTotalCostsPayedInPLNandOtherCurrencies(expedition);
+//        modelAndView.addObject("", totalCostOfAllTruckParts);
+//        return modelAndView;
+//    }
 
 }
 

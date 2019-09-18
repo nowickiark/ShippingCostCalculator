@@ -2,11 +2,12 @@ package com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.dailyRate.DailyRate;
+import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.exception.NoLatestCurrencyReachedException;
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.jsonReader.JsonReader;
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.CurrencyCode;
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.ExchangeRateAndCode;
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.repository.CurrencyExchangeRatesRepository;
-import com.sda.groupa.shippingcostcalculator.fuel.fuelModel.Fuel;
+
 
 import org.springframework.stereotype.Service;
 
@@ -39,42 +40,54 @@ public class CurrencyRateService {
 
     }
 
-    private ExchangeRateAndCode getLatestCurrencyExchangeRateAndCodeFromAPI(Fuel fuel) throws IOException {
-
-        CurrencyCode currencyCode = fuel.getCurrencyCode();
+    private ExchangeRateAndCode getLatestCurrencyExchangeRateAndCodeFromAPI(CurrencyCode currencyCode) throws IOException {
         String code = currencyCode.toString().toLowerCase();
-
         String url_str = basicURL + code + "?format=json";
 
         DailyRate dailyRate = getDailyRateObjectFromJason(url_str);
         BigDecimal midRate = dailyRate.getRates().get(0).getMid();
-
         String exchangeRateDate = dailyRate.getRates().get(0).getEffectiveDate();
         LocalDate dateOfExchangeRate = LocalDate.parse(exchangeRateDate);
 
         ExchangeRateAndCode exchangeRateAndCode = new ExchangeRateAndCode(dateOfExchangeRate, currencyCode, midRate);
-
         currencyExchangeRatesRepository.save(exchangeRateAndCode);
-
         return exchangeRateAndCode;
     }
+    public void checkLatestCurrencyExchangeRate(CurrencyCode currencyCode, LocalDate dateOfPayment) throws IOException {
+        if(!currencyCode.equals(CurrencyCode.PLN)) {
+            Optional<ExchangeRateAndCode> optionalExchangeRateAndCode = currencyExchangeRatesRepository
+                    .findByCurrencyCodeAndAndDateOfExchangeRate(currencyCode, dateOfPayment);
 
+            if (!optionalExchangeRateAndCode.isPresent()) {
+                getLatestCurrencyExchangeRateAndCodeFromAPI(currencyCode).getCurrencyRate();
+            }
+        }
+    }
 
-    public BigDecimal getLatestCurrencyExchangeRate (Fuel fuel) throws IOException {
-
-        LocalDate dateOfFueling = fuel.getDateOfFueling();
-        CurrencyCode currencyCode = fuel.getCurrencyCode();
-
+    public BigDecimal getLatestCurrencyExchangeRate (CurrencyCode currencyCode, LocalDate dateOfPayment) throws IOException {
         Optional<ExchangeRateAndCode> optionalExchangeRateAndCode = currencyExchangeRatesRepository
-                .findByCurrencyCodeAndAndDateOfExchangeRate(currencyCode, dateOfFueling);
+                .findByCurrencyCodeAndAndDateOfExchangeRate(currencyCode, dateOfPayment);
 
         if(optionalExchangeRateAndCode.isPresent()){
             ExchangeRateAndCode exchangeRateAndCode = optionalExchangeRateAndCode.get();
             return exchangeRateAndCode.getCurrencyRate();
-
         }
-        return getLatestCurrencyExchangeRateAndCodeFromAPI(fuel).getCurrencyRate();
+        return getLatestCurrencyExchangeRateAndCodeFromAPI(currencyCode).getCurrencyRate();
 
     }
+
+    public BigDecimal calculateCostInPLNofSingleExpensePayedInForeignCurrency (BigDecimal costOfSingleCost, CurrencyCode currencyCode, LocalDate dateOfPayment){
+        BigDecimal latestCurrencyExchangeRate;
+        BigDecimal costOfExpensePayedInForeignCurrency;
+        try {
+            latestCurrencyExchangeRate = getLatestCurrencyExchangeRate(currencyCode, dateOfPayment);
+            costOfExpensePayedInForeignCurrency = costOfSingleCost.multiply(latestCurrencyExchangeRate);
+        } catch (IOException e) {
+            throw  new NoLatestCurrencyReachedException();
+        }
+        return costOfExpensePayedInForeignCurrency;
+    }
+
+
 
 }

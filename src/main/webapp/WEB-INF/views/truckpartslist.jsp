@@ -31,7 +31,6 @@
     </table>
 
     <a href="/truckparts/add">Add truck part</a>
-
     <br>
 
     <a href="/">Back to home</a>

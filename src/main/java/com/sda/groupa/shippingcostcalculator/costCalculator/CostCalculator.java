@@ -17,4 +17,7 @@ public interface CostCalculator {
 
     //====calculates all costs payed in all currencies other than PLN (given in parameter)====
     BigDecimal calculateSumOfCostsPayedInAllCurrenciesOtherThanPLN(Expedition expedition);
+
+    //====sum of costs payed in ALL currencies: PLN and other=====
+    BigDecimal calculateTotalCostsPayedInPLNandOtherCurrencies(Expedition expedition);
 }
