@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page session="true"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
 
 <html>
 <body>
@@ -33,7 +34,6 @@
     <a href="/truckparts/add">Add truck part</a>
 
     <br>
-
     <a href="/">Back to home</a>
 
 </div>
