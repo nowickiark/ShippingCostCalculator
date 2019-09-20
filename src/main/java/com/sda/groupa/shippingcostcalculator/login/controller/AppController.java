@@ -1,5 +1,7 @@
 package com.sda.groupa.shippingcostcalculator.login.controller;
 
+import com.sda.groupa.shippingcostcalculator.driver.driverModel.Driver;
+import com.sda.groupa.shippingcostcalculator.driver.driverService.DriverService;
 import com.sda.groupa.shippingcostcalculator.expedition.service.ExpeditionService;
 import com.sda.groupa.shippingcostcalculator.login.model.UserAuthority;
 import com.sda.groupa.shippingcostcalculator.login.model.UserProvider;
@@ -14,16 +16,19 @@ import java.security.Principal;
 @Controller
 public class AppController {
 
-    private DriverStrategy driverStrategy;
-    private ExpeditionService expeditionService;
-    private UserProvider userProvider;
-    private LoggingSwitch loggingSwitch;
+    private final DriverStrategy driverStrategy;
+    private final ExpeditionService expeditionService;
+    private final UserProvider userProvider;
+    private final LoggingSwitch loggingSwitch;
+    private final DriverService driverService;
 
-    public AppController(DriverStrategy driverStrategy, ExpeditionService expeditionService, UserProvider userProvider, LoggingSwitch loggingSwitch) {
+
+    public AppController(DriverStrategy driverStrategy, ExpeditionService expeditionService, UserProvider userProvider, LoggingSwitch loggingSwitch, DriverService driverService) {
         this.driverStrategy = driverStrategy;
         this.expeditionService = expeditionService;
         this.userProvider = userProvider;
         this.loggingSwitch = loggingSwitch;
+        this.driverService = driverService;
     }
 
     @GetMapping("/login")
@@ -49,6 +54,8 @@ public class AppController {
     public ModelAndView getSpedytorHomePage(Principal principal) {
         ModelAndView modelAndView = new ModelAndView("spedytorHome");
         modelAndView.addObject("expeditions",expeditionService.getExpeditions());
+        modelAndView.addObject("drivers",driverService.findAll());
+        modelAndView.addObject("driver",new Driver());
         return modelAndView;
     }
 

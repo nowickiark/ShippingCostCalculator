@@ -35,4 +35,6 @@ public class ExpeditionService {
 
    public List<Expedition> findCurrentExpeditions(){return expeditionRepository.findExpeditionsByEndDayIsNull();}
 
+   public List<Expedition> findExpeditionsByDriverId(Long driverId){return expeditionRepository.findExpeditionsByDriverId(driverId);}
+
 }

@@ -27,6 +27,17 @@
             <td><a href="/truck/add">Add truck</a></td>
         </tr>
         <tr>
+            <td><form:label path="driver">Driver</form:label></td>
+                <%--<td><form:input path="truck"/></td>--%>
+            <td><form:select path="driver" >
+                <c:forEach var="dr" items="${drivers}">
+                    <form:option value="${dr}">${dr.firstName} ${dr.surname}</form:option>
+                </c:forEach>
+            </td></form:select>
+            <td><a href="/driver/add">Add Driver</a></td>
+        </tr>
+
+        <tr>
             <td><form:label path="startOdometerReading">Start Odometer Reading</form:label></td>
             <td><form:input  path="startOdometerReading"/></td>
         </tr>
