@@ -77,15 +77,13 @@ public class CurrencyRateService {
     }
 
     public BigDecimal calculateCostInPLNofSingleExpensePayedInForeignCurrency (BigDecimal costOfSingleCost, CurrencyCode currencyCode, LocalDate dateOfPayment){
-        BigDecimal latestCurrencyExchangeRate;
-        BigDecimal costOfExpensePayedInForeignCurrency;
+
         try {
-            latestCurrencyExchangeRate = getLatestCurrencyExchangeRate(currencyCode, dateOfPayment);
-            costOfExpensePayedInForeignCurrency = costOfSingleCost.multiply(latestCurrencyExchangeRate);
+            BigDecimal latestCurrencyExchangeRate = getLatestCurrencyExchangeRate(currencyCode, dateOfPayment);
+            return costOfSingleCost.multiply(latestCurrencyExchangeRate);
         } catch (IOException e) {
             throw  new NoLatestCurrencyReachedException();
         }
-        return costOfExpensePayedInForeignCurrency;
     }
 
 
