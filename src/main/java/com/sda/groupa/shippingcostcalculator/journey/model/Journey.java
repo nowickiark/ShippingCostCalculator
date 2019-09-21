@@ -1,14 +1,11 @@
 package com.sda.groupa.shippingcostcalculator.journey.model;
 
+import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import java.time.LocalDate;
+import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Objects;
 
 @Entity
@@ -18,7 +15,8 @@ public class Journey {
     @GeneratedValue(generator = "journeySeq")
     @SequenceGenerator(name = "journeySeq", sequenceName = "journey_seq", allocationSize = 1)
     private Long id;
-
+    @ManyToOne(targetEntity = Expedition.class)
+    private Expedition expedition;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime startDate;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
@@ -26,15 +24,16 @@ public class Journey {
 
     private String route;
     private String routeDestination;
-    private String meterReadingDeparture;
-    private String meterReadingArrival;
-    private String mileage;
+    private Long meterReadingDeparture;
+    private Long meterReadingArrival;
+    private Long mileage;
     private String comments;
 
     public Journey() {
     }
 
-    public Journey(LocalDateTime startDate, LocalDateTime endDate, String route, String routeDestination, String meterReadingDeparture, String meterReadingArrival, String mileage, String comments) {
+    public Journey(Expedition expedition, LocalDateTime startDate, LocalDateTime endDate, String route, String routeDestination, Long meterReadingDeparture, Long meterReadingArrival, Long mileage, String comments) {
+        this.expedition = expedition;
         this.startDate = startDate;
         this.endDate = endDate;
         this.route = route;
@@ -51,6 +50,14 @@ public class Journey {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Expedition getExpedition() {
+        return expedition;
+    }
+
+    public void setExpedition(Expedition expedition) {
+        this.expedition = expedition;
     }
 
     public LocalDateTime getStartDate() {
@@ -85,27 +92,27 @@ public class Journey {
         this.routeDestination = routeDestination;
     }
 
-    public String getMeterReadingDeparture() {
+    public Long getMeterReadingDeparture() {
         return meterReadingDeparture;
     }
 
-    public void setMeterReadingDeparture(String meterReadingDeparture) {
+    public void setMeterReadingDeparture(Long meterReadingDeparture) {
         this.meterReadingDeparture = meterReadingDeparture;
     }
 
-    public String getMeterReadingArrival() {
+    public Long getMeterReadingArrival() {
         return meterReadingArrival;
     }
 
-    public void setMeterReadingArrival(String meterReadingArrival) {
+    public void setMeterReadingArrival(Long meterReadingArrival) {
         this.meterReadingArrival = meterReadingArrival;
     }
 
-    public String getMileage() {
+    public Long getMileage() {
         return mileage;
     }
 
-    public void setMileage(String mileage) {
+    public void setMileage(Long mileage) {
         this.mileage = mileage;
     }
 

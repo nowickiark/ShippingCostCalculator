@@ -68,13 +68,13 @@ public class ExtraCostService implements CostCalculator {
     //====calculates all costs payed in choosen currency (given in parameter)====
     @Override
     public BigDecimal calculateSumOfCostsPayedInCurrencyOf(CurrencyCode currencyCode, Expedition expedition) {
-        BigDecimal sumOfCosts=new BigDecimal(0.0);
+        //BigDecimal sumOfCosts=new BigDecimal(0.0);
         if(currencyCode.equals(CurrencyCode.PLN)) {
-            sumOfCosts = calculateSumOfCostsPayedInCurrencyOfPLN(expedition);
+            return calculateSumOfCostsPayedInCurrencyOfPLN(expedition);
         }else {
-            calculateSumOfCostsInChoosenCurrencyAndOtherThanPLN(currencyCode, expedition);
+            return calculateSumOfCostsInChoosenCurrencyAndOtherThanPLN(currencyCode, expedition);
         }
-        return sumOfCosts;
+//       return sumOfCosts;
     }
 
     //=============sum of costs for extra costs payed in ALL foreign currencies together==============
