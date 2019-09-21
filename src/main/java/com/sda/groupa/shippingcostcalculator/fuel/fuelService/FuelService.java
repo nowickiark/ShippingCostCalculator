@@ -81,13 +81,13 @@ public class FuelService implements CostCalculator {
     //=============sum of costs for fuelings payed in PLN OR other choosen currency=====
     @Override
     public BigDecimal calculateSumOfCostsPayedInCurrencyOf(CurrencyCode currencyCode, Expedition expedition) {
-        BigDecimal sumOfCosts=new BigDecimal(0.0);
+        ///BigDecimal sumOfCosts=new BigDecimal(0.0);
         if(currencyCode.equals(CurrencyCode.PLN)) {
-            sumOfCosts = calculateSumOfCostsPayedInCurrencyOfPLN(expedition);
+            return calculateSumOfCostsPayedInCurrencyOfPLN(expedition);
         }else {
-            calculateSumOfCostsInChoosenCurrencyAndOtherThanPLN(currencyCode, expedition);
+            return calculateSumOfCostsInChoosenCurrencyAndOtherThanPLN(currencyCode, expedition);
         }
-        return sumOfCosts;
+        //return sumOfCosts;
     }
 
     //=============sum of costs for fuelings payed in ALL foreign currencies together==============
