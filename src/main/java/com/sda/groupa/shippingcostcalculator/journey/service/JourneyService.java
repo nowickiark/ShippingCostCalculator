@@ -1,9 +1,11 @@
 package com.sda.groupa.shippingcostcalculator.journey.service;
 
+import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
 import com.sda.groupa.shippingcostcalculator.journey.model.Journey;
 import com.sda.groupa.shippingcostcalculator.journey.repository.JourneyRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +32,9 @@ public class JourneyService {
 
     public Optional<Journey> findById(Long id){
         return journeyRepository.findById(id);
+    }
+    public List<Journey> findByExpedition(Expedition expedition){
+        return journeyRepository.findAllByExpedition(expedition);
     }
 
 }

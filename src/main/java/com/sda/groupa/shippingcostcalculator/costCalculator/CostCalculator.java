@@ -9,12 +9,15 @@ import java.math.BigDecimal;
 
 public interface CostCalculator {
 
+    //====calculates all costs payed in PLN=======
+    BigDecimal calculateSumOfCostsPayedInCurrencyOfPLN (Expedition expedition);
 
     //====calculates all costs payed in choosen currency (given in parameter)====
-
-    BigDecimal calculateSumOfCostsInCurrencyOf(CurrencyCode currencyCode, Expedition expedition);
+    BigDecimal calculateSumOfCostsPayedInCurrencyOf(CurrencyCode currencyCode, Expedition expedition);
 
     //====calculates all costs payed in all currencies other than PLN (given in parameter)====
+    BigDecimal calculateSumOfCostsPayedInAllCurrenciesOtherThanPLN(Expedition expedition);
 
-    BigDecimal calculateSumOfCostsInAllCurrenciesOtherThanPLN(Expedition expedition);
+    //====sum of costs payed in ALL currencies: PLN and other=====
+    BigDecimal calculateTotalCostsPayedInPLNandOtherCurrencies(Expedition expedition);
 }

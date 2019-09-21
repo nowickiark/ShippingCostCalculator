@@ -39,9 +39,7 @@
 <br>
 
 <a href="/expedition/listOfTruckParts">Back to list</a>
-
 <br>
 
 <a href="/">Back to home</a>
-
 </body>

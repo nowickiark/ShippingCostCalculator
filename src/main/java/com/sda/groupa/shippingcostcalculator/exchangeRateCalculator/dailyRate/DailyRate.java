@@ -20,7 +20,7 @@ public class DailyRate {
 
     @JsonProperty("table")
     private String table;
-    @JsonProperty("exchangeAndCodeRate")
+    @JsonProperty("currency")
     private String currency;
     @JsonProperty("code")
     private String code;
