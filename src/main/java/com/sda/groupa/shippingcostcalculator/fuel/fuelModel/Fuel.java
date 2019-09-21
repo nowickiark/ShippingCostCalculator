@@ -20,20 +20,21 @@ public class Fuel {
     @GeneratedValue(generator = "fuelSeq")
     @SequenceGenerator(name = "fuelSeq", sequenceName = "fuel_seq", allocationSize = 1)
     private Long id;
+    @ManyToOne(targetEntity = Expedition.class)
+    private Expedition expedition;
     private BigDecimal liters;
     private String placeOfRefueling;
     private BigDecimal cost;
+    @Enumerated(EnumType.STRING)
     private CurrencyCode currencyCode;
     private Long kilometers;
     private String paymentMethod;
     private boolean refuelingToFull;
-    @ManyToOne(targetEntity = Expedition.class)
-    private Expedition expedition;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfFueling;
 
     public Fuel(){
-    };
+    }
 
     public Fuel(BigDecimal liters, String placeOfRefueling, BigDecimal cost, CurrencyCode currencyCode, Long kilometers, String paymentMethod, boolean refuelingToFull, Expedition expedition, LocalDate dateOfFueling) {
         this.liters = liters;

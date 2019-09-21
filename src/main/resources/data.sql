@@ -37,8 +37,14 @@ insert INTO TRUCK_PARTS (id, expedition_id, description, cost, currency_code, da
 insert INTO TRUCK_PARTS (id, expedition_id, description, cost, currency_code, date_of_purchase) values (nextval('truck_parts_seq'),2, 'Timing belt', 280, 'PLN', '2019-09-01');
 insert INTO TRUCK_PARTS (id, expedition_id, description, cost, currency_code, date_of_purchase) values (nextval('truck_parts_seq'),2, 'Master cylinder', 550, 'PLN', '2019-09-05');
 
-insert into FREIGHT_RATE (id, amount, currency_code, freight_company, freight_distance,expedition_id, date) values (nextval('freight_seq'),145,'EUR','Big Company',789,1,'2019-08-07');
-insert into FREIGHT_RATE (id, amount, currency_code, freight_company, freight_distance,expedition_id, date) values (nextval('freight_seq'),587,'PLN','Bigger Company',1458,1,'2021-05-09');
-insert into FREIGHT_RATE (id, amount, currency_code, freight_company, freight_distance,expedition_id, date) values (nextval('freight_seq'),80,'EUR','Brand',457,1,'2019-09-10');
+insert into Fuel (id, expedition_id, liters, place_of_refueling, cost, currency_code, kilometers, payment_method, refueling_to_full, date_of_fueling) values (nextval('fuel_seq'), 1, 50, 'Warszawa', 50, 'PLN', 200, 'cash', false, '2019-08-28');
+insert into Fuel (id, expedition_id, liters, place_of_refueling, cost, currency_code, kilometers, payment_method, refueling_to_full, date_of_fueling) values (nextval('fuel_seq'), 1, 45, 'Poznan', 50, 'PLN', 180, 'cash', false, '2019-08-30');
+insert into Fuel (id, expedition_id, liters, place_of_refueling, cost, currency_code, kilometers, payment_method, refueling_to_full, date_of_fueling) values (nextval('fuel_seq'), 1, 70, 'Gorzow Wlkp.', 20, 'PLN', 250, 'cash', true, '2019-09-10');
+insert into Fuel (id, expedition_id, liters, place_of_refueling, cost, currency_code, kilometers, payment_method, refueling_to_full, date_of_fueling) values (nextval('fuel_seq'), 1, 70, 'Berlin', 30, 'EUR', 250, 'cash', true, '2019-09-11');
+insert into Fuel (id, expedition_id, liters, place_of_refueling, cost, currency_code, kilometers, payment_method, refueling_to_full, date_of_fueling) values (nextval('fuel_seq'), 1, 30, 'Shell', 40, 'EUR', 20, 'cash', true, '2019-09-13');
+
+insert into FREIGHT_RATE (id, amount, currency_code, freight_company, freight_distance,expedition_id, date) values (nextval('freight_seq'),100,'EUR','Big Company',789,1,'2019-08-07');
+insert into FREIGHT_RATE (id, amount, currency_code, freight_company, freight_distance,expedition_id, date) values (nextval('freight_seq'),700,'PLN','Bigger Company',1458,1,'2021-05-09');
+insert into FREIGHT_RATE (id, amount, currency_code, freight_company, freight_distance,expedition_id, date) values (nextval('freight_seq'),300,'PLN','Brand',457,1,'2019-09-10');
 
 commit;

@@ -2,6 +2,7 @@ package com.sda.groupa.shippingcostcalculator.extraCosts.controller;
 
 import com.sda.groupa.shippingcostcalculator.driver.driverService.DriverService;
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.CurrencyCode;
+import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.service.CurrencyRateService;
 import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
 import com.sda.groupa.shippingcostcalculator.extraCosts.model.ExtraCost;
 import com.sda.groupa.shippingcostcalculator.extraCosts.service.ExtraCostService;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,11 +25,13 @@ public class ExtraCostController {
     private final ExtraCostService extraCostService;
     private final DriverStrategy driverStrategy;
     private final DriverService driverService;
+    private final CurrencyRateService currencyRateService;
 
-    public ExtraCostController(ExtraCostService extraCostService, DriverStrategy driverStrategy, DriverService driverService) {
+    public ExtraCostController(ExtraCostService extraCostService, DriverStrategy driverStrategy, DriverService driverService, CurrencyRateService currencyRateService) {
         this.extraCostService = extraCostService;
         this.driverStrategy = driverStrategy;
         this.driverService = driverService;
+        this.currencyRateService = currencyRateService;
     }
 
     @GetMapping("/extracost/add")
@@ -65,11 +70,12 @@ public class ExtraCostController {
     }
 
     @PostMapping("/extracost/add")
-    public String extraCosts (@ModelAttribute ExtraCost extracost) {
+    public String extraCosts (@ModelAttribute ExtraCost extracost) throws IOException {
         Expedition expedition = driverStrategy.getExpedition();
         extracost.setExpedition(expedition);
         extraCostService.addExtraCost(extracost);
+        //=====check if currency rate for given code and date is already present in repository, if not then take it from API and add to repository=======
+        currencyRateService.checkLatestCurrencyExchangeRate(extracost.getCurrencyCode(),extracost.getDateOfPurchase());
         return "redirect:/expedition/listOfExtraCosts";
     }
-
 }

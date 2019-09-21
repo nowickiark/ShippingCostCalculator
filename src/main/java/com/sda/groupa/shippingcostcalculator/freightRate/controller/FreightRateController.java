@@ -1,6 +1,7 @@
 package com.sda.groupa.shippingcostcalculator.freightRate.controller;
 
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.CurrencyCode;
+import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.service.CurrencyRateService;
 import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
 import com.sda.groupa.shippingcostcalculator.expedition.service.ExpeditionService;
 import com.sda.groupa.shippingcostcalculator.freightRate.exception.FreightNotFoundException;
@@ -13,18 +14,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class FreightRateController {
 
-    FreightRateService freightRateService;
-    ExpeditionService expeditionService;
+    private final FreightRateService freightRateService;
+    private final ExpeditionService expeditionService;
+    private final CurrencyRateService currencyRateService;
 
-    public FreightRateController(FreightRateService freightRateService, ExpeditionService expeditionService) {
+    public FreightRateController(FreightRateService freightRateService, ExpeditionService expeditionService, CurrencyRateService currencyRateService) {
         this.freightRateService = freightRateService;
         this.expeditionService = expeditionService;
+        this.currencyRateService = currencyRateService;
     }
 
     @GetMapping("/freightRateList")
@@ -78,8 +82,17 @@ public class FreightRateController {
     }
 
     @PostMapping("/freightRate/add")
-    public String addFreightrate(@ModelAttribute FreightRate freightRate){
+    public String addFreightrate(@ModelAttribute FreightRate freightRate) throws IOException {
+        currencyRateService.checkLatestCurrencyExchangeRate(freightRate.getCurrencyCode(),freightRate.getDate());
         freightRateService.saveFreightRate(freightRate);
+        return "redirect:/spedytorHome";
+    }
+
+    @GetMapping("/expedition/freightRateSum/{expeditionId}")
+    public String getSumOfFreightRates(@PathVariable Long expeditionId ){
+        BigDecimal sum = freightRateService.sumOfFreightRatesForExpedition(expeditionId);
+        System.out.println("############################# sum of all freight rates " + sum + "################################################################################");
+
         return "redirect:/spedytorHome";
     }
 

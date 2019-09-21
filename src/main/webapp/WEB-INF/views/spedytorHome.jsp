@@ -53,7 +53,7 @@
                 <td><a href="/freightRate/add/${expedition.id}">Add Freight Rate To This Expedition</a></td>
                 <td><a href="/expedition/add/${expedition.id}">Edit</a></td>
                 <td><a href="/expedition/close/${expedition.id}">Close</a></td>
-                <td><a href="/expedition/add/${expedition.id}">Summary</a></td>
+                <td><a href="/expedition/freightRateSum/${expedition.id}">Summary</a></td>
                     <%--<td><a href="/whipround/${whipround.whipRound.id}">Donate/Details</a></td>--%>
             </tr>
         </c:forEach>

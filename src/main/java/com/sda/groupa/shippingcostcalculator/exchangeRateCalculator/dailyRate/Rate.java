@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -31,6 +32,7 @@ public class Rate {
     @JsonProperty("ask")
     private Double ask; // ask <- calculated exchangeAndCodeRate sell exchange rate
     @JsonProperty("mid")
+    @JsonSerialize(using = MoneySerializer.class)
     private BigDecimal mid; // mid <- calculated exchangeAndCodeRate medium exchange rate
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();

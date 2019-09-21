@@ -37,32 +37,18 @@ public class FreightRateService {
 
     public Optional<FreightRate> getFreightrateById(Long id){return freightRateRepository.findById(id);}
 
-    public BigDecimal sumOfFreightRatesForExpedition(Expedition expedition){
-        List<FreightRate> freightRatesByExpedition = findFreightRatesByExpedition(expedition);
-        List<FreightRate> listOfFreightCostssFromGivenExpeditionPayedInForeignCurrency = freightRatesByExpedition.stream()
-                .filter(fR -> !fR.getCurrencyCode().equals(CurrencyCode.PLN)).collect(Collectors.toList());
-        BigDecimal latestCurrencyExchangeRate;
+    public BigDecimal sumOfFreightRatesForExpedition(Long expeditionId){
+        List<FreightRate> freightRatesByExpedition = freightRateRepository.getFreightRatesByExpeditionId(expeditionId);
         BigDecimal sumOfCosts=new BigDecimal(0.0);
-
-        for(FreightRate singleFreightCostWithForignCurreny:listOfFreightCostssFromGivenExpeditionPayedInForeignCurrency){
-            BigDecimal valueOfSingleFreightRate = singleFreightCostWithForignCurreny.getAmount();
-/*            try {
-                latestCurrencyExchangeRate = currencyRateService.getLatestCurrencyExchangeRate(singleFreightCostWithForignCurreny.getCurrencyCode());
-            }*/
+        for(FreightRate singleFreightCost:freightRatesByExpedition){
+            if(singleFreightCost.getCurrencyCode().equals(CurrencyCode.PLN)){
+                sumOfCosts = sumOfCosts.add(singleFreightCost.getAmount());
+            } else {
+                sumOfCosts = sumOfCosts.add(currencyRateService.calculateCostInPLNofSingleExpensePayedInForeignCurrency(singleFreightCost.getAmount(),singleFreightCost.getCurrencyCode(),singleFreightCost.getDate()));
+            }
         }
-
-        return null;
-
+        return sumOfCosts;
     }
-/*
-            for (int i =0; i<listOfFuelingsFromGivenExpeditionPayedInForeignCurrency.size(); i++){
-        BigDecimal costOfSingleFueling = listOfFuelingsFromGivenExpeditionPayedInForeignCurrency.get(i).getCost();
-        try {
-            latestCurrencyExchangeRate = currencyRateService.getLatestCurrencyExchangeRate(listOfFuelingsFromGivenExpeditionPayedInForeignCurrency.get(i));
-            sumOfCosts = sumOfCosts.add(costOfSingleFueling.multiply(latestCurrencyExchangeRate));
-        } catch (IOException e) {
-            throw  new NoLatestCurrencyReachedException();
-        }
-    }*/
+
 
 }
