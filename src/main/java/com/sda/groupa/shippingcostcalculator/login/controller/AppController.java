@@ -8,10 +8,9 @@ import com.sda.groupa.shippingcostcalculator.login.model.UserProvider;
 import com.sda.groupa.shippingcostcalculator.login.strategy.DriverStrategy;
 import com.sda.groupa.shippingcostcalculator.login.strategy.LoggingSwitch;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.security.Principal;
 
 @Controller
 public class AppController {
@@ -31,9 +30,10 @@ public class AppController {
         this.driverService = driverService;
     }
 
+
     @GetMapping("/login")
-    public ModelAndView getLoginPage() {
-        return new ModelAndView("login");
+    public String getLoginPage(){
+        return "page-login";
     }
 
     @GetMapping("/")
@@ -44,19 +44,18 @@ public class AppController {
         return redirect;
     }
 
-    @GetMapping("/driverHome")
-    public ModelAndView getUserHomePage(Principal principal) {
+/*    @GetMapping("/driverHome")
+    public ModelAndView getUserHomePage() {
         ModelAndView modelAndView = driverStrategy.getDriverModelAndView();
         return modelAndView;
-    }
+    }*/
 
     @GetMapping("/spedytorHome")
-    public ModelAndView getSpedytorHomePage(Principal principal) {
-        ModelAndView modelAndView = new ModelAndView("spedytorHome");
-        modelAndView.addObject("expeditions",expeditionService.getExpeditions());
-        modelAndView.addObject("drivers",driverService.findAll());
-        modelAndView.addObject("driver",new Driver());
-        return modelAndView;
+    public String getSpedytorHomePage(Model model) {
+        model.addAttribute("expeditions",expeditionService.getExpeditions());
+        model.addAttribute("drivers",driverService.findAll());
+        model.addAttribute("driver",new Driver());
+        return "index";
     }
 
 }
