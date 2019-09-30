@@ -73,7 +73,6 @@ public class CurrencyRateService {
             return exchangeRateAndCode.getCurrencyRate();
         }
         return getLatestCurrencyExchangeRateAndCodeFromAPI(currencyCode).getCurrencyRate();
-
     }
 
     public BigDecimal calculateCostInPLNofSingleExpensePayedInForeignCurrency (BigDecimal costOfSingleCost, CurrencyCode currencyCode, LocalDate dateOfPayment){
