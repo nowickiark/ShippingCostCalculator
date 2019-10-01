@@ -8,6 +8,7 @@ import com.sda.groupa.shippingcostcalculator.login.strategy.DriverStrategy;
 import com.sda.groupa.shippingcostcalculator.truck.model.Truck;
 import com.sda.groupa.shippingcostcalculator.truck.service.TruckService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,13 +33,13 @@ public class ExpeditionController {
     }
 
     @GetMapping("/expedition/add")
-    public ModelAndView getExpeditionform(){
+    public String getExpeditionform(Model model){
         ModelAndView modelAndView = new ModelAndView("expedition");
         Expedition expedition = new Expedition();
-        modelAndView.addObject("expedition",expedition);
-        modelAndView.addObject("trucks",truckService.getTrucks());
-        modelAndView.addObject("drivers",driverService.findAll());
-        return modelAndView;
+        model.addAttribute("expedition",expedition);
+        model.addAttribute("trucks",truckService.getTrucks());
+        model.addAttribute("drivers",driverService.findAll());
+        return "expedition-add";
     }
 
 

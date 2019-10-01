@@ -3,6 +3,7 @@ package com.sda.groupa.shippingcostcalculator.truck.controller;
 import com.sda.groupa.shippingcostcalculator.truck.model.Truck;
 import com.sda.groupa.shippingcostcalculator.truck.service.TruckService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class TruckController {
@@ -22,44 +22,32 @@ public class TruckController {
     }
 
     @GetMapping("/truckList")
-    public ModelAndView getTrucks(){
-        ModelAndView modelAndView = new ModelAndView("truckList");
-
+    public String getTrucks(Model model){
         List<Truck> trucks = truckService.getTrucks();
-
-        modelAndView.addObject("trucks",trucks);
-
-        return modelAndView;
+        model.addAttribute("trucks",trucks);
+        return "truck-list";
     }
 
     @GetMapping("/truck/add")
-        public ModelAndView addTruck(){
-        ModelAndView modelAndView = new ModelAndView("truck");
-
+        public String addTruck(Model model){
         Truck truck = new Truck();
-
-        modelAndView.addObject(truck);
-
-        return modelAndView;
+        model.addAttribute("truck",truck);
+        return "truck-add";
     }
 
 
     @GetMapping("/truck/add/{id}")
-    public ModelAndView addTruck(@PathVariable Long id){
-        ModelAndView modelAndView = new ModelAndView("truck");
-
+    public String addTruck(Model model,@PathVariable Long id){
         Truck truck = truckService.getTruckById(id).orElseThrow(() -> new RuntimeException("Unavailable"));
-
-        modelAndView.addObject("truck",truck);
-
-        return modelAndView;
+        model.addAttribute("truck",truck);
+        return "truck-add";
     }
+
+
 
     @PostMapping("/truck/add")
     public String addTruck(@ModelAttribute Truck truck){
-
         truckService.saveTruck(truck);
-
         return "redirect:/truckList";
     }
 
