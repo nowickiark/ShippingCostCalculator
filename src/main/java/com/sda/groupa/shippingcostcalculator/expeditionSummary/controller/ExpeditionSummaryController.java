@@ -49,8 +49,9 @@ public class ExpeditionSummaryController {
         modelAndView.addObject("expeditionSummary", expeditionSummary.toString());
         return modelAndView;
     }
-//
-//    @GetMapping("/download")
+
+
+//    @GetMapping("/download") //TODO czy to działa?
 //    public ResponseEntity<byte[]> downloadErrorData(@PathVariable Long idExpedition) throws Exception {
 //        Optional<Expedition> expeditionOptional = expeditionService.getExpeditionById(idExpedition);
 //        Expedition expedition = expeditionOptional.get();

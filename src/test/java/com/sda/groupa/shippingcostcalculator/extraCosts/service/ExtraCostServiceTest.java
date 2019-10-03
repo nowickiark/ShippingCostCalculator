@@ -23,7 +23,7 @@ public class ExtraCostServiceTest {
     private ExtraCostRepository extraCostRepository = mock(ExtraCostRepository.class);
     private CurrencyRateService currencyRateService =mock(CurrencyRateService.class) ;
 
-    
+
     @Test
     public void shouldCalculateSumOfCostsPayedInCurrencyOf(){
         //Given
