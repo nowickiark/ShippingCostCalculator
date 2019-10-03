@@ -2,17 +2,16 @@
 <%@page session="true"%>
 
 <html>
+
+
 <body>
-<h1>Fuelings</h1>
+<div>
+    <h1>Fuelings</h1>
+</div>
 
-<style>
-    table, th, td {
-        border: 1px solid black;
-    }
-</style>
-
-<table>
-
+<link href="/style.css" rel="stylesheet"/>
+<div>
+    <table class="table-dark">
     <tr>
         <th>Fueling id</th>
         <th>Expedition id</th>
@@ -26,7 +25,7 @@
         <th>Full</th>
         <th>Edit</th>
     </tr>
-<c:forEach var="singlefueling" items="${listOfFuelings}">
+    <c:forEach var="singlefueling" items="${listOfFuelings}">
 
     <tr>
 
@@ -40,17 +39,20 @@
             <td>${singlefueling.paymentMethod}</td>
             <td>${singlefueling.dateOfFueling}</td>
             <td>${singlefueling.refuelingToFull}</td>
-            <td><a href="/updatefuel/${singlefueling.id}">Edit</a></td>
-
+            <td><a style="text-decoration: none" href="/updatefuel/${singlefueling.id}" class="text-green">Edit</a></td>
     </tr>
 
 </c:forEach>
 </table>
-<a href="/addfuel">Add refueling</a>
+</div>
+<div class="container">
+    <a style="text-decoration: none" href="/addfuel" class="btn">ADD REFUELING</a>
+<%--    <a href="/addfuel" class="text-blue">Add refueling</a>--%>
 
-<br>
+    <a style="text-decoration: none" href="/" class="btn">GO BACK HOME</a>
+<%--    <a href="/" class="text-blue">Go Back Home</a>--%>
+</div>
 
-<a href="/">Go Back Home</a>
 
 </body>
 </html>

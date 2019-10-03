@@ -35,7 +35,6 @@
     <br>
 
     <a href="/">Back to home</a>
-
 </div>
 </body>
 </html>

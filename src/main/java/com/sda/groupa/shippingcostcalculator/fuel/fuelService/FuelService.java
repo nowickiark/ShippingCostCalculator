@@ -56,12 +56,13 @@ public class FuelService implements CostCalculator {
     //======================CALCULATIONS FOR COSTS OF FUELINGS================================
     //==== calculates sum of costs of fuelings payed in a choosen currency other than PLN======
     private BigDecimal calculateSumOfCostsInChoosenCurrencyAndOtherThanPLN(CurrencyCode currencyCode, Expedition expedition) {
-        List<Fuel> listOfFuelingsWithGivenCurrencyCode = fuelRepository.findFuelsByExpeditionAndAndCurrencyCode(expedition, currencyCode);
+        List<Fuel> listOfFuelingsWithGivenCurrencyCode = fuelRepository.findFuelsByExpeditionAndAndCurrencyCode(expedition, currencyCode)
+                .stream().filter(extraCost -> !extraCost.getCurrencyCode().equals(CurrencyCode.PLN)).collect(Collectors.toList());;
         BigDecimal sumOfCosts=new BigDecimal(0.0);
         for(Fuel fueling : listOfFuelingsWithGivenCurrencyCode){
             BigDecimal costOfSingleFueling = fueling.getCost();
             LocalDate dateOfPayment =fueling.getDateOfFueling();
-            sumOfCosts = sumOfCosts.add(costOfSingleFueling.multiply(currencyRateService.calculateCostInPLNofSingleExpensePayedInForeignCurrency(costOfSingleFueling,currencyCode,dateOfPayment)));
+            sumOfCosts = sumOfCosts.add(currencyRateService.calculateCostInPLNofSingleExpensePayedInForeignCurrency(costOfSingleFueling,currencyCode,dateOfPayment));
         }
         return sumOfCosts;
     }
@@ -81,13 +82,11 @@ public class FuelService implements CostCalculator {
     //=============sum of costs for fuelings payed in PLN OR other choosen currency=====
     @Override
     public BigDecimal calculateSumOfCostsPayedInCurrencyOf(CurrencyCode currencyCode, Expedition expedition) {
-        ///BigDecimal sumOfCosts=new BigDecimal(0.0);
         if(currencyCode.equals(CurrencyCode.PLN)) {
             return calculateSumOfCostsPayedInCurrencyOfPLN(expedition);
         }else {
             return calculateSumOfCostsInChoosenCurrencyAndOtherThanPLN(currencyCode, expedition);
         }
-        //return sumOfCosts;
     }
 
     //=============sum of costs for fuelings payed in ALL foreign currencies together==============

@@ -44,12 +44,14 @@ public class ExtraCostService implements CostCalculator {
     //======================CALCULATIONS FOR COSTS OF EXTRA COSTS================================
     //==== calculates sum of costs of extra costs payed in a choosen currency other than PLN======
     private BigDecimal calculateSumOfCostsInChoosenCurrencyAndOtherThanPLN(CurrencyCode currencyCode, Expedition expedition) {
-        List<ExtraCost> listOfExtraCostsWithGivenCurrencyCode = extraCostRepository.findExtraCostByExpeditionAndCurrencyCode(expedition, currencyCode);
+        List<ExtraCost> listOfExtraCostsWithGivenCurrencyCode = extraCostRepository
+                .findExtraCostByExpeditionAndCurrencyCode(expedition, currencyCode)
+                .stream().filter(extraCost -> !extraCost.getCurrencyCode().equals(CurrencyCode.PLN)).collect(Collectors.toList());
         BigDecimal sumOfCosts=new BigDecimal(0.0);
         for(ExtraCost extraCost : listOfExtraCostsWithGivenCurrencyCode){
             BigDecimal costOfSingleExtraCost = extraCost.getCost();
             LocalDate dateOfPayment = extraCost.getDateOfPurchase();
-            sumOfCosts = sumOfCosts.add(costOfSingleExtraCost.multiply(currencyRateService.calculateCostInPLNofSingleExpensePayedInForeignCurrency(costOfSingleExtraCost,currencyCode,dateOfPayment)));
+            sumOfCosts = sumOfCosts.add(currencyRateService.calculateCostInPLNofSingleExpensePayedInForeignCurrency(costOfSingleExtraCost,currencyCode,dateOfPayment));
         }
         return sumOfCosts;
     }
@@ -68,13 +70,11 @@ public class ExtraCostService implements CostCalculator {
     //====calculates all costs payed in choosen currency (given in parameter)====
     @Override
     public BigDecimal calculateSumOfCostsPayedInCurrencyOf(CurrencyCode currencyCode, Expedition expedition) {
-        //BigDecimal sumOfCosts=new BigDecimal(0.0);
         if(currencyCode.equals(CurrencyCode.PLN)) {
             return calculateSumOfCostsPayedInCurrencyOfPLN(expedition);
         }else {
             return calculateSumOfCostsInChoosenCurrencyAndOtherThanPLN(currencyCode, expedition);
         }
-//       return sumOfCosts;
     }
 
     //=============sum of costs for extra costs payed in ALL foreign currencies together==============

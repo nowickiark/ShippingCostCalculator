@@ -25,6 +25,9 @@ insert INTO EXTRA_COST (id, expedition_id, description, cost, currency_code, dat
 insert INTO EXTRA_COST (id, expedition_id, description, cost, currency_code, date_of_purchase) values (nextval('e_cost_seq'),1, 'Tire replacement', 390, 'EUR', '2019-08-22');
 insert INTO EXTRA_COST (id, expedition_id, description, cost, currency_code, date_of_purchase) values (nextval('e_cost_seq'),2, 'Highway toll', 220, 'PLN', '2019-09-02');
 insert INTO EXTRA_COST (id, expedition_id, description, cost, currency_code, date_of_purchase) values (nextval('e_cost_seq'),2, 'Phone card', 50, 'PLN', '2019-09-05');
+insert INTO EXTRA_COST (id, expedition_id, description, cost, currency_code, date_of_purchase) values (nextval('e_cost_seq'),1, 'Windshield replacement', 370, 'GBP', '2019-08-06');
+insert INTO EXTRA_COST (id, expedition_id, description, cost, currency_code, date_of_purchase) values (nextval('e_cost_seq'),1, 'Wash', 70, 'GBP', '2019-08-09');
+insert INTO EXTRA_COST (id, expedition_id, description, cost, currency_code, date_of_purchase) values (nextval('e_cost_seq'),1, 'Tire replacement', 390, 'GBP', '2019-08-22');
 
 
 UPDATE DRIVER SET EXPEDITION_ID = 1 WHERE ID=1;
