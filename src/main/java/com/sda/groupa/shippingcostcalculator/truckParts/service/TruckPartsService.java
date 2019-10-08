@@ -42,13 +42,13 @@ public class TruckPartsService implements CostCalculator {
     //======================CALCULATIONS FOR COSTS OF TRUCK PARTS================================
     //==== calculates sum of costs of truck parts payed in a choosen currency other than PLN======
     private BigDecimal calculateSumOfCostsInChoosenCurrencyAndOtherThanPLN(CurrencyCode currencyCode, Expedition expedition) {
-        List<TruckParts> listOfTruckPartsCostsWithGivenCurrencyCode = truckPartsRepository.findTruckPartsByExpeditionAndAndCurrencyCode(expedition, currencyCode);
+        List<TruckParts> listOfTruckPartsCostsWithGivenCurrencyCode = truckPartsRepository.findTruckPartsByExpeditionAndAndCurrencyCode(expedition, currencyCode)
+                .stream().filter(extraCost -> !extraCost.getCurrencyCode().equals(CurrencyCode.PLN)).collect(Collectors.toList());;
         BigDecimal sumOfTruckPartsCosts = new BigDecimal(0.0);
         for(TruckParts truckPart : listOfTruckPartsCostsWithGivenCurrencyCode){
             BigDecimal costOfSingleTruckPartCost = truckPart.getCost();
             LocalDate dateOfPayment = truckPart.getDateOfPurchase();
-            BigDecimal sumInPLN = currencyRateService.calculateCostInPLNofSingleExpensePayedInForeignCurrency(costOfSingleTruckPartCost, currencyCode, dateOfPayment);
-            sumOfTruckPartsCosts = sumOfTruckPartsCosts.add(sumInPLN);
+            sumOfTruckPartsCosts = sumOfTruckPartsCosts.add(currencyRateService.calculateCostInPLNofSingleExpensePayedInForeignCurrency(costOfSingleTruckPartCost, currencyCode, dateOfPayment));
         }
         return sumOfTruckPartsCosts;
     }
@@ -67,13 +67,11 @@ public class TruckPartsService implements CostCalculator {
     //====calculates all costs payed in choosen currency (given in parameter)====
     @Override
     public BigDecimal calculateSumOfCostsPayedInCurrencyOf(CurrencyCode currencyCode, Expedition expedition) {
-        //BigDecimal sumOfCosts=new BigDecimal(0.0);
         if(currencyCode.equals(CurrencyCode.PLN)) {
             return calculateSumOfCostsPayedInCurrencyOfPLN(expedition);
         }else {
             return calculateSumOfCostsInChoosenCurrencyAndOtherThanPLN(currencyCode, expedition);
         }
-        //return sumOfCosts;
     }
 
     //=============sum of costs for truck parts payed in ALL foreign currencies together==============

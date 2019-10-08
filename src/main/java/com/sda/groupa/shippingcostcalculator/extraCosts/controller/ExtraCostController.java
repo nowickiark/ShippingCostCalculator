@@ -4,6 +4,7 @@ import com.sda.groupa.shippingcostcalculator.driver.driverService.DriverService;
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.CurrencyCode;
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.service.CurrencyRateService;
 import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
+import com.sda.groupa.shippingcostcalculator.expedition.service.ExpeditionService;
 import com.sda.groupa.shippingcostcalculator.extraCosts.model.ExtraCost;
 import com.sda.groupa.shippingcostcalculator.extraCosts.service.ExtraCostService;
 import com.sda.groupa.shippingcostcalculator.login.strategy.DriverStrategy;
@@ -26,12 +27,15 @@ public class ExtraCostController {
     private final DriverStrategy driverStrategy;
     private final DriverService driverService;
     private final CurrencyRateService currencyRateService;
+    private final ExpeditionService expeditionService;
 
-    public ExtraCostController(ExtraCostService extraCostService, DriverStrategy driverStrategy, DriverService driverService, CurrencyRateService currencyRateService) {
+
+    public ExtraCostController(ExtraCostService extraCostService, DriverStrategy driverStrategy, DriverService driverService, CurrencyRateService currencyRateService, ExpeditionService expeditionService) {
         this.extraCostService = extraCostService;
         this.driverStrategy = driverStrategy;
         this.driverService = driverService;
         this.currencyRateService = currencyRateService;
+        this.expeditionService = expeditionService;
     }
 
     @GetMapping("/extracost/add")

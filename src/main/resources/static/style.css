@@ -1,0 +1,137 @@
+/*body {*/
+/*    margin: 0;*/
+/*    font-family: Georgia;*/
+/*    font-size: 1rem;*/
+/*    font-weight: 400;*/
+/*    line-height: 1.5;*/
+/*    color: white;*/
+/*    text-align: left;*/
+/*    background-color: rgba(0, 0, 0, 0);*/
+/*}*/
+
+body {
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin: 0;
+    font-family: Georgia;
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 0;
+    line-height: 1.5;
+    text-align: left;
+    background-position: 50% 50%;
+
+}
+
+table {
+    border-collapse: collapse;
+    text-align: center;
+}
+h1{
+    font-size: 40px;
+    text-align: center;
+    color: #009879;
+    padding: 10px;
+    font-style: italic;
+    font-family: Georgia;
+}
+
+.table-dark
+{
+    background-color: white;
+    text-align: center;
+    font-size: 15px;
+    width:100%;
+    color: black;
+}
+
+.table-dark th
+{
+    background-color: #009879;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    color: white;
+    font-weight: bold;
+    background: -moz-linear-gradient(top, #40b29a 0%, #19a286 66%, #009879 100%);
+    background: -webkit-linear-gradient(top, #40b29a 0%, #19a286 66%, #009879 100%);
+    background: linear-gradient(to bottom, #40b29a 0%, #19a286 66%, #009879 100%);
+    border-bottom: 1px solid #158581;
+}
+
+.table-dark td
+{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.table-dark tr:nth-child(even) {
+    background: #ebf5eb;
+}
+.table-dark tr:hover td{
+    background-color: #97c497;
+    color: white;
+}
+
+.container{
+    text-align: center;
+    /*margin-top: 360px;*/
+}
+a.btn{
+    border: 1px solid #009879;
+    background: none;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-family: Georgia;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.8s;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+.btn:hover{
+    color: white;
+    background: #009879;
+}
+
+.btn:hover::before{
+    height: 180%;
+    border-radius: 50% 50% 0% 0%;
+}
+
+
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 10rem;
+    padding: 0.5rem 0;
+    margin: 0.125rem 0 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+}
+.text-green {
+    color: #009879;
+    font-weight: bold;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.text-align-center{
+    text-align: center;
+}
