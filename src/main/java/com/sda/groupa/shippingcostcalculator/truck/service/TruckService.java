@@ -17,6 +17,7 @@ public class TruckService {
     }
 
     public void saveTruck(Truck truck){
+
         truckRepository.save(truck);
     }
 

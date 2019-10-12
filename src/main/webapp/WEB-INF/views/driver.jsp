@@ -24,6 +24,8 @@
     <br>
 </c:forEach>
 <a href="/driver/add">Add driver</a>
+<br>
+<a href="/spedytorHome">Go back home</a>
 
 </body>
 </html>

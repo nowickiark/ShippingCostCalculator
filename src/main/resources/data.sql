@@ -19,6 +19,8 @@ INSERT INTO TRUCK(id,plate_number,brand,model,horse_Power) values (nextval('truc
 INSERT INTO EXPEDITION(id,truck_id,driver_id,starting_place,start_odometer_reading,start_day) values (nextval('expedition_seq'),2,1,'Leszno',1457,'2005-02-04');
 INSERT INTO EXPEDITION(id,truck_id,driver_id,starting_place,start_odometer_reading,start_day) values (nextval('expedition_seq'),1,1,'Poznań',204754,'2015-02-04');
 INSERT INTO EXPEDITION(id,truck_id,driver_id,starting_place,start_odometer_reading,start_day) values (nextval('expedition_seq'),3,1,'Wrocław',6325478,'2099-02-04');
+INSERT INTO EXPEDITION(id,truck_id,driver_id,starting_place,start_odometer_reading,start_day) values (nextval('expedition_seq'),1,2,'Kolobrzeg',2999,'2015-02-04');
+INSERT INTO EXPEDITION(id,truck_id,driver_id,starting_place,start_odometer_reading,start_day) values (nextval('expedition_seq'),3,3,'Berlin',456123,'2099-02-04');
 
 insert INTO EXTRA_COST (id, expedition_id, description, cost, currency_code, date_of_purchase) values (nextval('e_cost_seq'),1, 'Windshield replacement', 370, 'EUR', '2019-08-06');
 insert INTO EXTRA_COST (id, expedition_id, description, cost, currency_code, date_of_purchase) values (nextval('e_cost_seq'),1, 'Wash', 70, 'EUR', '2019-08-09');
@@ -43,4 +45,9 @@ insert into Fuel (id, expedition_id, liters, place_of_refueling, cost, currency_
 insert into Fuel (id, expedition_id, liters, place_of_refueling, cost, currency_code, kilometers, payment_method, refueling_to_full, date_of_fueling) values (nextval('fuel_seq'), 1, 70, 'Gorzow Wlkp.', 20, 'PLN', 250, 'cash', true, '2019-09-10');
 insert into Fuel (id, expedition_id, liters, place_of_refueling, cost, currency_code, kilometers, payment_method, refueling_to_full, date_of_fueling) values (nextval('fuel_seq'), 1, 70, 'Berlin', 30, 'EUR', 250, 'cash', true, '2019-09-11');
 insert into Fuel (id, expedition_id, liters, place_of_refueling, cost, currency_code, kilometers, payment_method, refueling_to_full, date_of_fueling) values (nextval('fuel_seq'), 1, 30, 'Shell', 40, 'EUR', 20, 'cash', true, '2019-09-13');
+
+insert into FREIGHT_RATE (id, amount, currency_code, freight_company, freight_distance,expedition_id, date) values (nextval('freight_seq'),100,'EUR','Big Company',789,1,'2019-08-07');
+insert into FREIGHT_RATE (id, amount, currency_code, freight_company, freight_distance,expedition_id, date) values (nextval('freight_seq'),700,'PLN','Bigger Company',1458,1,'2021-05-09');
+insert into FREIGHT_RATE (id, amount, currency_code, freight_company, freight_distance,expedition_id, date) values (nextval('freight_seq'),300,'PLN','Brand',457,1,'2019-09-10');
+
 commit;

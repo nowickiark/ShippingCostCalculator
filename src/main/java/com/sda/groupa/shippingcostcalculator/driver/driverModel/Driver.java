@@ -21,7 +21,7 @@ public class Driver {
     @OneToOne(targetEntity = User.class)
     private User user;
 
-    @OneToOne(targetEntity = Expedition.class)
+    @OneToOne(targetEntity = Expedition.class, cascade = {CascadeType.ALL})
     private Expedition expedition;
 
     public Driver() {

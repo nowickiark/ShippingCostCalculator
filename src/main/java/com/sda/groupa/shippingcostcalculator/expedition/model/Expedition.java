@@ -16,22 +16,19 @@ public class Expedition {
     @GeneratedValue(generator = "expeditionSeq")
     @SequenceGenerator(name = "expeditionSeq", sequenceName = "expedition_seq", allocationSize = 1)
     private Long id;
-
     @ManyToOne(targetEntity = Truck.class)
     private Truck truck;
-
-    @OneToOne(targetEntity = Driver.class)
+    @ManyToOne(targetEntity = Driver.class)
     private Driver driver;
-
     private String startingPlace;
     private Long startOdometerReading;
     private Long endOdometerReading;
-
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate startDay;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate endDay;
-
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate closingDate;
     private BigDecimal cashBeginingZl;
     private BigDecimal cashEndZl;
     private BigDecimal cashBeginingEur;
@@ -47,7 +44,7 @@ public class Expedition {
         this.startDay = startDay;
     }
 
-    public Expedition(Truck truck, Driver driver, String startingPlace, Long startOdometerReading, Long endOdometerReading, LocalDate startDay, LocalDate endDay, BigDecimal cashBeginingZl, BigDecimal cashEndZl, BigDecimal cashBeginingEur, BigDecimal cashEndEur) {
+    public Expedition(Truck truck, Driver driver, String startingPlace, Long startOdometerReading, Long endOdometerReading, LocalDate startDay, LocalDate endDay,LocalDate closingDate, BigDecimal cashBeginingZl, BigDecimal cashEndZl, BigDecimal cashBeginingEur, BigDecimal cashEndEur) {
         this.truck = truck;
         this.driver = driver;
         this.startingPlace = startingPlace;
@@ -59,6 +56,7 @@ public class Expedition {
         this.cashEndZl = cashEndZl;
         this.cashBeginingEur = cashBeginingEur;
         this.cashEndEur = cashEndEur;
+        this.closingDate = closingDate;
     }
 
     public Long getId() {
