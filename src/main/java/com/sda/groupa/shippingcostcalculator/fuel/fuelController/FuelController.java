@@ -95,10 +95,21 @@ public class FuelController {
         return "redirect:/expedition/" + fuel.getExpedition().getId() + "/addFuel";
     }
 
+    @GetMapping(value = "/expedition/addFuel/{fuelId}")
+    public String showPageToEditExistingFuel(Model model,@PathVariable("fuelId") Long fuelId){
+        Fuel fuel = fuelService.findById(fuelId).orElseThrow(()-> new RuntimeException("Unavailable"));
+        Expedition expedition = fuel.getExpedition();
+        List<Fuel> fuelList = Lists.reverse(fuelService.findFuelsByExpedition(expedition));
+        model.addAttribute("fuelList",fuelList);
+        model.addAttribute("newFuel",fuel);
+        model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
+        return "fuel-list-add";
+    }
+
     //Thymeleaf
     @GetMapping(value = "/expedition/{id}/addFuel")
-    public String showPageOfFuelingsByExpedition (Model model,@PathVariable Long id ){
-        Expedition expedition = expeditionService.getExpeditionById(id).orElseThrow(RuntimeException::new);
+    public String showPageOfFuelingsByExpedition (Model model,@PathVariable("id") Long id ){
+        Expedition expedition = expeditionService.getExpeditionById(id).orElseThrow(() -> new RuntimeException("Unavailable"));
         List<Fuel> fuelList = Lists.reverse(fuelService.findFuelsByExpedition(expedition));
         model.addAttribute("fuelList",fuelList);
         Fuel fuel = new Fuel();

@@ -291,7 +291,7 @@
                                                                                 placeholder=""
                                                                                 class="form-control"
                                                                                 readonly>
-                                                <!--<small class="form-text text-muted">Id of the fuel</small>-->
+                                                <small class="form-text text-muted">Id of the fuel</small>
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -303,7 +303,7 @@
                                                                                 placeholder="Number"
                                                                                 class="form-control"
                                                                                 readonly>
-                                                <!--<small class="form-text text-muted">Expedition id</small>-->
+                                                <small class="form-text text-muted">Expedition id</small>
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -315,7 +315,7 @@
                                                                                 id="place-input"
                                                                                 placeholder="eg Poznań"
                                                                                 class="form-control">
-                                              <!--  <small class="form-text text-muted">City of fueling</small>-->
+                                                <small class="form-text text-muted">City of fueling</small>
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -326,7 +326,7 @@
                                                                                 type="text"
                                                                                 id="liters-input" placeholder="eg 124"
                                                                                 class="form-control">
-                                                <!--<small class="form-text text-muted">Number of liters fueld</small>-->
+                                                <small class="form-text text-muted">Number of liters fueld</small>
                                             </div>
                                         </div>
                                          <div class="row form-group">
@@ -334,25 +334,26 @@
                                                                                  class=" form-control-label">Cost</label>
                                                 </div>
 
+                                             <div class="col-12 col-md-9">
                                                 <div class="row">
-                                                    <div class="col-4 col-md-9">
+                                                    <div class="col-12 col-md-9">
                                                                 <input th:field="*{cost}" type="text"
                                                                                                 id="cost-input" placeholder="eg 1457.45"
                                                                                                 class="form-control">
-                                                        <!--<small class="form-text text-muted">Total cost for fuel</small>-->
+                                                        <small class="form-text text-muted">Total cost for fuel</small>
                                                     </div>
 
-                                                    <div class="col-3 pl-n2">
+                                                    <div class="col col-md-3 ">
                                                         <select th:field="*{currencyCode}" data-placeholder="Choose a Currency..." class="standardSelect form-control" id="payment-currency-input">
                                                             <option value="" label="default"></option>
                                                             <option th:each="currencyCodeType:${currencyCodeTypeList}" th:value="${currencyCodeType}" th:text="${currencyCodeType}" ></option>
                                                         </select>
                                                     </div>
                                                 </div>
+                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
-
                                         <div class="row form-group">
                                             <div class="col col-md-3"><label for="kilometers-input"
                                                                              class=" form-control-label">Kilometers</label>
@@ -361,7 +362,7 @@
                                                                                 id="kilometers-input"
                                                                                 placeholder="eg 440"
                                                                                 class="form-control">
-                                                <!--<small class="form-text text-muted">Number of kilometers while loading</small>-->
+                                                <small class="form-text text-muted">Number of kilometers while loading</small>
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -373,7 +374,7 @@
                                                                                 id="payment-input"
                                                                                 placeholder="eg cash"
                                                                                 class="form-control">
-                                                <!--<small class="form-text text-muted">Payment method</small>-->
+                                                <small class="form-text text-muted">Payment method</small>
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -383,7 +384,7 @@
                                             <div class="col-12 col-md-9"><input th:field="*{dateOfFueling}" type="date"
                                                                                 id="date-input" placeholder=""
                                                                                 class="form-control">
-                                                <!--<small class="form-text text-muted">Dote of fuling</small>-->
+                                                <small class="form-text text-muted">Dote of fuling</small>
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -394,7 +395,7 @@
                                                                                 type="text"
                                                                                 id="full-input" placeholder="eg true or false"
                                                                                 class="form-control">
-                                                <!--<small class="form-text text-muted">Fueling tank to full?</small>-->
+                                                <small class="form-text text-muted">Fueling tank to full?</small>
                                             </div>
                                         </div>
                                     </div>
@@ -455,6 +456,7 @@
                                     <td><span class="product"
                                               th:text="${fuel.refuelingToFull}">Was is fueled to full</span>
                                     </td>
+                                    <td><a class="px-1 fa fa-gear" th:href="@{/expedition/addFuel/{fuelId} (fuelId=${fuel.id})}"  title="fuel"></a></td>
                                     <!--<td><a class="btn btn-secondary active" role="button" aria-pressed="true" th:href="@{/fuel/add/{id}(id=${fuel.id})}">Fuel details</a></td>-->
                                 </tr>
 
@@ -492,8 +494,9 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-<script src="../static/js/main.js"></script>
-
+<!--<script src="../static/js/main.js"></script>-->
+<script th:src="@{/../js/main.js}"></script>
+<!--th:href="@{/../css/style.css}-->
 
 </body>
 </html>
