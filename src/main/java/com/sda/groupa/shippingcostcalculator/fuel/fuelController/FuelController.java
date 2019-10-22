@@ -1,22 +1,25 @@
 package com.sda.groupa.shippingcostcalculator.fuel.fuelController;
 
 
+import com.google.common.collect.Lists;
 import com.sda.groupa.shippingcostcalculator.driver.driverModel.Driver;
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.CurrencyCode;
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.service.CurrencyRateService;
 import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
+import com.sda.groupa.shippingcostcalculator.expedition.service.ExpeditionService;
 import com.sda.groupa.shippingcostcalculator.fuel.fuelModel.Fuel;
 import com.sda.groupa.shippingcostcalculator.fuel.fuelService.FuelService;
 import com.sda.groupa.shippingcostcalculator.login.strategy.DriverStrategy;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.thymeleaf.Thymeleaf;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
@@ -25,11 +28,13 @@ public class FuelController {
     private final FuelService fuelService;
     private final DriverStrategy driverStrategy;
     private final CurrencyRateService currencyRateService;
+    private final ExpeditionService expeditionService;
 
-    public FuelController(FuelService fuelService, DriverStrategy driverStrategy, CurrencyRateService currencyRateService){
+    public FuelController(FuelService fuelService, DriverStrategy driverStrategy, CurrencyRateService currencyRateService, ExpeditionService expeditionService){
         this.fuelService=fuelService;
         this.driverStrategy = driverStrategy;
         this.currencyRateService = currencyRateService;
+        this.expeditionService = expeditionService;
     }
 
     @GetMapping(value = "/fuelings")
@@ -82,4 +87,37 @@ public class FuelController {
         modelAndView.addObject("update", true);
         return modelAndView;
     }
+
+    //Thymeleaf
+    @PostMapping(value = "/expedition/addFuel")
+    public String addFuelToTheExpedition(@ModelAttribute Fuel fuel){
+        fuelService.addFueling(fuel);
+        return "redirect:/expedition/" + fuel.getExpedition().getId() + "/addFuel";
+    }
+
+    @GetMapping(value = "/expedition/addFuel/{fuelId}")
+    public String showPageToEditExistingFuel(Model model,@PathVariable("fuelId") Long fuelId){
+        Fuel fuel = fuelService.findById(fuelId).orElseThrow(()-> new RuntimeException("Unavailable"));
+        Expedition expedition = fuel.getExpedition();
+        List<Fuel> fuelList = Lists.reverse(fuelService.findFuelsByExpedition(expedition));
+        model.addAttribute("fuelList",fuelList);
+        model.addAttribute("newFuel",fuel);
+        model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
+        return "fuel-list-add";
+    }
+
+    //Thymeleaf
+    @GetMapping(value = "/expedition/{id}/addFuel")
+    public String showPageOfFuelingsByExpedition (Model model,@PathVariable("id") Long id ){
+        Expedition expedition = expeditionService.getExpeditionById(id).orElseThrow(() -> new RuntimeException("Unavailable"));
+        List<Fuel> fuelList = Lists.reverse(fuelService.findFuelsByExpedition(expedition));
+        model.addAttribute("fuelList",fuelList);
+        Fuel fuel = new Fuel();
+        fuel.setExpedition(expedition);
+        model.addAttribute("newFuel",fuel);
+        model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
+        return "fuel-list-add";
+    }
+
+
 }
