@@ -274,10 +274,10 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong>Add Truck</strong>
+                            <strong>Add Journey</strong>
                         </div>
                         <div class="card-body card-block">
-                            <form th:action="@{/expedition/addFuel}" th:object="${newFuel}" method="post"
+                            <form th:action="@{/expedition/addJourney}" th:object="${newJourney}" method="post"
                                   enctype="multipart/form-data" class="form-horizontal">
 
                                 <div class="row">
@@ -291,68 +291,44 @@
                                                                                 placeholder=""
                                                                                 class="form-control"
                                                                                 readonly>
-                                                <small class="form-text text-muted">Id of the fuel</small>
+                                                <small class="form-text text-muted">Id of the freight rate</small>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3"><label for="place-input"
-                                                                             class=" form-control-label">Place</label>
+                                            <div class="col col-md-3"><label for="sdate-input"
+                                                                             class=" form-control-label">Start date </label>
                                             </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{placeOfRefueling}"
-                                                                                type="text"
-                                                                                id="place-input"
-                                                                                placeholder="eg Poznań"
-                                                                                class="form-control"
-                                                                                autofocus>
-                                                <small class="form-text text-muted">City of fueling</small>
-                                            </div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="liters-input"
-                                                                             class=" form-control-label">Liters</label>
-                                            </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{liters}"
-                                                                                type="text"
-                                                                                id="liters-input" placeholder="eg 124"
+                                            <div class="col-12 col-md-9"><input th:field="*{startDate}" type="date"
+                                                                                id="sdate-input" placeholder=""
                                                                                 class="form-control">
-                                                <small class="form-text text-muted">Number of liters fueld</small>
+                                                <small class="form-text text-muted">Date of starting</small>
                                             </div>
-                                        </div>
-                                         <div class="row form-group">
-                                                <div class="col col-md-3"><label for="cost-input"
-                                                                                 class=" form-control-label">Cost</label>
-                                                </div>
-
-                                             <div class="col-12 col-md-9">
-                                                <div class="row">
-                                                    <div class="col-12 col-md-9">
-                                                                <input th:field="*{cost}" type="text"
-                                                                                                id="cost-input" placeholder="eg 1457.45"
-                                                                                                class="form-control">
-                                                        <small class="form-text text-muted">Total cost for fuel</small>
-                                                    </div>
-
-                                                    <div class="col col-md-3 ">
-                                                        <select th:field="*{currencyCode}" data-placeholder="Choose a Currency..." class="standardSelect form-control" id="payment-currency-input">
-                                                            <option value="" label="default"></option>
-                                                            <option th:each="currencyCodeType:${currencyCodeTypeList}" th:value="${currencyCodeType}" th:text="${currencyCodeType}" ></option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3"><label for="payment-input"
-                                                                             class=" form-control-label">Payment</label>
+                                            <div class="col col-md-3"><label for="splace-input"
+                                                                             class=" form-control-label">Start place</label>
                                             </div>
-                                            <div class="col-12 col-md-9">
-                                                <input th:field="*{paymentMethod}" type="text"
-                                                       id="payment-input"
-                                                       placeholder="eg cash"
-                                                       class="form-control">
-                                                <small class="form-text text-muted">Payment method</small>
+                                            <div class="col-12 col-md-9"><input th:field="*{startPlace}"
+                                                                                type="text"
+                                                                                id="splace-input"
+                                                                                placeholder="eg Poznań"
+                                                                                class="form-control">
+                                                <small class="form-text text-muted">City of departure</small>
                                             </div>
                                         </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="skm-input"
+                                                                             class=" form-control-label">Start km</label>
+                                            </div>
+                                            <div class="col-12 col-md-9"><input th:field="*{meterReadingDeparture}"
+                                                                                type="text"
+                                                                                id="skm-input"
+                                                                                placeholder="eg 123"
+                                                                                class="form-control">
+                                                <small class="form-text text-muted">Kilometer meter reading when starting</small>
+                                            </div>
+                                        </div>
+
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="row form-group">
@@ -368,38 +344,53 @@
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3"><label for="kilometers-input"
-                                                                             class=" form-control-label">Kilometers</label>
+                                            <div class="col col-md-3"><label for="edate-input"
+                                                                             class=" form-control-label">End date </label>
                                             </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{kilometers}" type="text"
-                                                                                id="kilometers-input"
-                                                                                placeholder="eg 440"
+                                            <div class="col-12 col-md-9"><input th:field="*{endDate}" type="date"
+                                                                                id="edate-input" placeholder=""
                                                                                 class="form-control">
-                                                <small class="form-text text-muted">Number of kilometers while loading</small>
+                                                <small class="form-text text-muted">Date of ending</small>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="eplace-input"
+                                                                             class=" form-control-label">End place</label>
+                                            </div>
+                                            <div class="col-12 col-md-9"><input th:field="*{endPlace}"
+                                                                                type="text"
+                                                                                id="eplace-input"
+                                                                                placeholder="eg Wrocław"
+                                                                                class="form-control">
+                                                <small class="form-text text-muted">City of arrival</small>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="ekm-input"
+                                                                             class=" form-control-label">End km</label>
+                                            </div>
+                                            <div class="col-12 col-md-9"><input th:field="*{meterReadingArrival}"
+                                                                                type="text"
+                                                                                id="ekm-input"
+                                                                                placeholder="eg 321"
+                                                                                class="form-control">
+                                                <small class="form-text text-muted">Kilometer meter reading when ending</small>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="comments-input"
+                                                                             class=" form-control-label">Comments</label>
+                                            </div>
+                                            <div class="col-12 col-md-9"><input th:field="*{comments}"
+                                                                                type="text"
+                                                                                id="comments-input"
+                                                                                placeholder="eg it was awesome"
+                                                                                class="form-control">
+                                                <small class="form-text text-muted">Possible notes regarding the journey</small>
                                             </div>
                                         </div>
 
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="date-input"
-                                                                             class=" form-control-label">Date</label>
-                                            </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{dateOfFueling}" type="date"
-                                                                                id="date-input" placeholder=""
-                                                                                class="form-control">
-                                                <small class="form-text text-muted">Dote of fuling</small>
-                                            </div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="full-input"
-                                                                             class=" form-control-label">Full</label>
-                                            </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{refuelingToFull}"
-                                                                                type="text"
-                                                                                id="full-input" placeholder="eg true or false"
-                                                                                class="form-control">
-                                                <small class="form-text text-muted">Fueling tank to full?</small>
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
 
@@ -422,41 +413,37 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Fuelings of expedition </strong>
+                            <strong class="card-title">Freight rates for expedition </strong>
                         </div>
                         <div class="table-stats order-table ov-h">
                             <table class="table ">
                                 <thead>
                                 <tr>
-                                    <th>Fueling id</th>
+                                    <th>Id</th>
                                     <th>Expedition</th>
-                                    <th>Place</th>
-                                    <th>Liters</th>
-                                    <th>Cost</th>
-                                    <th>Currency</th>
-                                    <th>Kilometers</th>
-                                    <th>Payment</th>
-                                    <th>Date</th>
-                                    <th>Full</th>
+                                    <th>Start date</th>
+                                    <th>Start place</th>
+                                    <th>Start km</th>
+                                    <th>End date</th>
+                                    <th>End place</th>
+                                    <th>End km</th>
+                                    <th>Comments</th>
                                     <th>Edit</th>
                                 </tr>
                                 </thead>
                                 <tbody>
 
-                                <tr th:each="fuel : ${fuelList}">
-                                    <td><span class="serial" th:text="${fuel.id}">Id</span></td>
-                                    <td><span class="serial" th:text="${fuel.expedition.getId()}">Id</span></td>
-                                    <td><span class="product"
-                                              th:text="${fuel.placeOfRefueling}">Place of Refueling</span>
-                                    </td>
-                                    <td><span class="product" th:text="${fuel.liters}">Number of Liter</span></td>
-                                    <td><span class="product" th:text="${fuel.cost}">Total cost</span></td>
-                                    <td><span class="product" th:text="${fuel.currencyCode}">Currency</span></td>
-                                    <td><span class="product" th:text="${fuel.kilometers}">Kilometers on gauge</span></td>
-                                    <td><span class="product" th:text="${fuel.paymentMethod}">Payment Method</span></td>
-                                    <td><span class="productt" th:text="${fuel.dateOfFueling}">Date</span></td>
-                                    <td><span class="product" th:text="${fuel.refuelingToFull}">Was is fueled to full</span></td>
-                                    <td><a class="px-1 fa fa-gear" th:href="@{/expedition/addFuel/{fuelId} (fuelId=${fuel.id})}"  title="fuel"></a></td>
+                                <tr th:each="journey : ${journeysList}">
+                                    <td><span class="serial" th:text="${journey.id}">Id</span></td>
+                                    <td><span class="serial" th:text="${journey.expedition.getId()}">Id</span></td>
+                                    <td><span class="product" th:text="${journey.startDate}">Start date</span></td>
+                                    <td><span class="product" th:text="${journey.startPlace}">Start place</span></td>
+                                    <td><span class="product" th:text="${journey.meterReadingDeparture}">Start km</span></td>
+                                    <td><span class="product" th:text="${journey.endDate}">End date</span></td>
+                                    <td><span class="product" th:text="${journey.endPlace}">End place</span></td>
+                                    <td><span class="product" th:text="${journey.meterReadingArrival}">End km</span></td>
+                                    <td><span class="product" th:text="${journey.comments}">comments</span></td>
+                                    <td><a class="px-1 fa fa-gear" th:href="@{/expedition/addJourney/{id} (id=${journey.id})}"  title="edit"></a></td>
                                     <!--<td><a class="btn btn-secondary active" role="button" aria-pressed="true" th:href="@{/fuel/add/{id}(id=${fuel.id})}">Fuel details</a></td>-->
                                 </tr>
 

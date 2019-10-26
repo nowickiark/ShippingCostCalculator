@@ -95,6 +95,7 @@ public class FuelController {
         return "redirect:/expedition/" + fuel.getExpedition().getId() + "/addFuel";
     }
 
+    //Thymeleaf
     @GetMapping(value = "/expedition/addFuel/{fuelId}")
     public String showPageToEditExistingFuel(Model model,@PathVariable("fuelId") Long fuelId){
         Fuel fuel = fuelService.findById(fuelId).orElseThrow(()-> new RuntimeException("Unavailable"));

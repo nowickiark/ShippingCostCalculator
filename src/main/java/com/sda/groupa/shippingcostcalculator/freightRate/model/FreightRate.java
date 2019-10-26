@@ -9,6 +9,12 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
+//ToDo Pełny adres załadunku i rozładunku
+//Osobna klasa na firmy
+//Data pozyskania ładunku
+//Przewidywana data załadunku
+//Przewidywana data rozładunku
+
 @Entity
 public class FreightRate {
 
@@ -25,16 +31,20 @@ public class FreightRate {
     private Expedition expedition;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
+    private String cityDeparture;
+    private String cityArrival;
 
     public FreightRate(){};
 
-    public FreightRate(BigDecimal amount, CurrencyCode currencyCode, String freightCompany, long freightDistance, Expedition expedition, LocalDate date) {
+    public FreightRate(BigDecimal amount, CurrencyCode currencyCode, String freightCompany, long freightDistance, Expedition expedition, LocalDate date,String cityDeparture, String cityArrival ) {
         this.amount = amount;
         this.currencyCode = currencyCode;
         this.freightCompany = freightCompany;
         this.freightDistance = freightDistance;
         this.expedition = expedition;
         this.date = date;
+        this.cityDeparture = cityDeparture;
+        this.cityArrival = cityArrival;
     }
 
     public long getId() {
@@ -91,6 +101,22 @@ public class FreightRate {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public String getCityDeparture() {
+        return cityDeparture;
+    }
+
+    public void setCityDeparture(String cityDeparture) {
+        this.cityDeparture = cityDeparture;
+    }
+
+    public String getCityArrival() {
+        return cityArrival;
+    }
+
+    public void setCityArrival(String cityArrival) {
+        this.cityArrival = cityArrival;
     }
 
     @Override

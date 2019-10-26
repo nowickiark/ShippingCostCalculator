@@ -4,7 +4,7 @@ import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -17,30 +17,27 @@ public class Journey {
     private Long id;
     @ManyToOne(targetEntity = Expedition.class)
     private Expedition expedition;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private LocalDateTime startDate;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private LocalDateTime endDate;
-
-    private String route;
-    private String routeDestination;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate startDate;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate endDate;
+    private String startPlace;
+    private String endPlace;
     private Long meterReadingDeparture;
     private Long meterReadingArrival;
-    private Long mileage;
     private String comments;
 
     public Journey() {
     }
 
-    public Journey(Expedition expedition, LocalDateTime startDate, LocalDateTime endDate, String route, String routeDestination, Long meterReadingDeparture, Long meterReadingArrival, Long mileage, String comments) {
+    public Journey(Expedition expedition, LocalDate startDate, LocalDate endDate, String startPlace, String endPlace, Long meterReadingDeparture, Long meterReadingArrival, String comments) {
         this.expedition = expedition;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.route = route;
-        this.routeDestination = routeDestination;
+        this.startPlace = startPlace;
+        this.endPlace = endPlace;
         this.meterReadingDeparture = meterReadingDeparture;
         this.meterReadingArrival = meterReadingArrival;
-        this.mileage = mileage;
         this.comments = comments;
     }
 
@@ -60,36 +57,36 @@ public class Journey {
         this.expedition = expedition;
     }
 
-    public LocalDateTime getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDateTime getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDateTime endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
-    public String getRoute() {
-        return route;
+    public String getStartPlace() {
+        return startPlace;
     }
 
-    public void setRoute(String route) {
-        this.route = route;
+    public void setStartPlace(String startPlace) {
+        this.startPlace = startPlace;
     }
 
-    public String getRouteDestination() {
-        return routeDestination;
+    public String getEndPlace() {
+        return endPlace;
     }
 
-    public void setRouteDestination(String routeDestination) {
-        this.routeDestination = routeDestination;
+    public void setEndPlace(String endPlace) {
+        this.endPlace = endPlace;
     }
 
     public Long getMeterReadingDeparture() {
@@ -108,14 +105,6 @@ public class Journey {
         this.meterReadingArrival = meterReadingArrival;
     }
 
-    public Long getMileage() {
-        return mileage;
-    }
-
-    public void setMileage(Long mileage) {
-        this.mileage = mileage;
-    }
-
     public String getComments() {
         return comments;
     }
@@ -132,16 +121,15 @@ public class Journey {
         return Objects.equals(id, journey.id) &&
                 Objects.equals(startDate, journey.startDate) &&
                 Objects.equals(endDate, journey.endDate) &&
-                Objects.equals(route, journey.route) &&
-                Objects.equals(routeDestination, journey.routeDestination) &&
+                Objects.equals(startPlace, journey.startPlace) &&
+                Objects.equals(endPlace, journey.endPlace) &&
                 Objects.equals(meterReadingDeparture, journey.meterReadingDeparture) &&
                 Objects.equals(meterReadingArrival, journey.meterReadingArrival) &&
-                Objects.equals(mileage, journey.mileage) &&
                 Objects.equals(comments, journey.comments);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, startDate, endDate, route, routeDestination, meterReadingDeparture, meterReadingArrival, mileage, comments);
+        return Objects.hash(id, startDate, endDate, startPlace, endPlace, meterReadingDeparture, meterReadingArrival, comments);
     }
 }

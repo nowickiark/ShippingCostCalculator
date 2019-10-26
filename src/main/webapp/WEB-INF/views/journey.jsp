@@ -24,11 +24,11 @@
                 <td>${onejourney.id}</td>
                 <td>${onejourney.startDate}</td>
                 <td>${onejourney.endDate}</td>
-                <td>${onejourney.route}</td>
-                <td>${onejourney.routeDestination}</td>
+                <td>${onejourney.startPlace}</td>
+                <td>${onejourney.endPlace}</td>
                 <td>${onejourney.meterReadingDeparture}</td>
                 <td>${onejourney.meterReadingArrival}</td>
-                <td>${onejourney.mileage}</td>
+                <td>${onejourney.kilometerReading}</td>
                 <td>${onejourney.comments}</td>
                 <td><a href="/journey/update/${onejourney.id}">Edit journey</a></td>
             </tr>

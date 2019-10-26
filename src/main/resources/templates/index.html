@@ -367,11 +367,12 @@
                                                 <td><span class="product" th:text="${ex.startDay}"> start day </span></td>
                                               <!--  <td><span class="badge badge-complete btn"><a th:href="asd.pl">Freight Rates</a></span></td>-->
                                                 <td>
-                                                    <a href='#' class="fa fa-suitcase" title="freight rate"></a>
+                                                    <a class="px-1 fa fa-suitcase" th:href="@{/expedition/{id}/addFreightRate (id=${ex.id})}"  title="freight rate"></a>
                                                     <a class="px-1 fa fa-flask" th:href="@{/expedition/{id}/addFuel (id=${ex.id})}"  title="fuel"></a>
+                                                    <a class="px-1 fa fa-coffee" th:href="@{/expedition/{id}/addExtraCost (id=${ex.id})}"  title="extra cost"></a>
+                                                    <a class="px-1 fa fa-wrench" th:href="@{/expedition/{id}/addTruckPart (id=${ex.id})}"  title="extra parts"></a>
+                                                    <a class="px-1 fa fa-road" th:href="@{/expedition/{id}/addJourney (id=${ex.id})}"  title="journey"></a>
                                                     <a href='#' class="px-1 fa fa-plane" title="border croos"></a>
-                                                    <a href='#' class="px-1 fa fa-coffee" title="aditional cost"></a>
-                                                    <a href='#' class="px-1 fa fa-wrench" title="extra parts"></a>
                                                     <a href='#' class="px-1 fa fa-gear" title="edit"></a>
                                                     <a href="" class="px-1 fa fa-times-circle-o" title="close expedition"></a>
                                                 </td>

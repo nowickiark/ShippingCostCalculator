@@ -31,7 +31,6 @@ insert INTO EXTRA_COST (id, expedition_id, description, cost, currency_code, dat
 insert INTO EXTRA_COST (id, expedition_id, description, cost, currency_code, date_of_purchase) values (nextval('e_cost_seq'),1, 'Wash', 70, 'GBP', '2019-08-09');
 insert INTO EXTRA_COST (id, expedition_id, description, cost, currency_code, date_of_purchase) values (nextval('e_cost_seq'),1, 'Tire replacement', 390, 'GBP', '2019-08-22');
 
-
 UPDATE DRIVER SET EXPEDITION_ID = 1 WHERE ID=1;
 
 insert INTO TRUCK_PARTS (id, expedition_id, description, cost, currency_code, date_of_purchase) values (nextval('truck_parts_seq'),1, 'Rearview mirror', 270, 'EUR', '2019-08-21');
@@ -46,8 +45,14 @@ insert into Fuel (id, expedition_id, liters, place_of_refueling, cost, currency_
 insert into Fuel (id, expedition_id, liters, place_of_refueling, cost, currency_code, kilometers, payment_method, refueling_to_full, date_of_fueling) values (nextval('fuel_seq'), 1, 70, 'Berlin', 30, 'EUR', 250, 'cash', true, '2019-09-11');
 insert into Fuel (id, expedition_id, liters, place_of_refueling, cost, currency_code, kilometers, payment_method, refueling_to_full, date_of_fueling) values (nextval('fuel_seq'), 1, 30, 'Shell', 40, 'EUR', 20, 'cash', true, '2019-09-13');
 
-insert into FREIGHT_RATE (id, amount, currency_code, freight_company, freight_distance,expedition_id, date) values (nextval('freight_seq'),100,'EUR','Big Company',789,1,'2019-08-07');
-insert into FREIGHT_RATE (id, amount, currency_code, freight_company, freight_distance,expedition_id, date) values (nextval('freight_seq'),700,'PLN','Bigger Company',1458,1,'2021-05-09');
-insert into FREIGHT_RATE (id, amount, currency_code, freight_company, freight_distance,expedition_id, date) values (nextval('freight_seq'),300,'PLN','Brand',457,1,'2019-09-10');
+insert into FREIGHT_RATE (id, amount, currency_code, freight_company, freight_distance,expedition_id, date, city_departure,city_arrival) values (nextval('freight_seq'),100,'EUR','Big Company',789,1,'2019-08-07','Leszno','Poznań');
+insert into FREIGHT_RATE (id, amount, currency_code, freight_company, freight_distance,expedition_id, date, city_departure,city_arrival) values (nextval('freight_seq'),700,'PLN','Bigger Company',1458,1,'2021-05-09','Wroclaw','Warszawa');
+insert into FREIGHT_RATE (id, amount, currency_code, freight_company, freight_distance,expedition_id, date, city_departure,city_arrival) values (nextval('freight_seq'),300,'PLN','Brand',457,1,'2019-09-10','Kraków','Berlin');
+
+insert into JOURNEY(id,expedition_id,start_date,end_date,start_place,end_place,meter_reading_departure,meter_reading_arrival,comments) values (nextval('journey_seq'),1,'2019-08-07','2019-08-26','Leszno','Poznań',14578,14687,'it was awesome');
+insert into JOURNEY(id,expedition_id,start_date,end_date,start_place,end_place,meter_reading_departure,meter_reading_arrival,comments) values (nextval('journey_seq'),1,'2019-08-26','2019-08-30','Poznań','Helsinki',14687,14900,'');
+insert into JOURNEY(id,expedition_id,start_date,end_date,start_place,end_place,meter_reading_departure,meter_reading_arrival,comments) values (nextval('journey_seq'),1,'2019-08-07','2019-08-26','Helsinki','Barcelona',14900,15500,'finally something warmer');
+insert into JOURNEY(id,expedition_id,start_date,end_date,start_place,end_place,meter_reading_departure,meter_reading_arrival,comments) values (nextval('journey_seq'),2,'2099-01-02','2099-01-03','Poznań','Mars',4567854,5248965,'quick jump into another planet');
+insert into JOURNEY(id,expedition_id,start_date,end_date,start_place,end_place,meter_reading_departure,meter_reading_arrival,comments) values (nextval('journey_seq'),2,'2099-01-04','2099-02-06','Mars','Earths Moon',5248965,6458965,'small crash with asteroid');
 
 commit;
