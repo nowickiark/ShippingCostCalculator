@@ -37,7 +37,7 @@
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="index.html"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+                        <a href="/spedytorHome"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
                     <li class="menu-title">Details</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
@@ -269,12 +269,11 @@
                                     <div class="col col-md-3">
                                         <label for="truck-input" class=" form-control-label">Truck</label></div>
                                     <div class="col-12 col-md-9">
-                                        <div class="card-body">
-                                            <select th:field="*{truck}" data-placeholder="Choose a Truck..." class="standardSelect" tabindex="1" id="truck-input">
+                                            <select th:field="*{truck.id}" data-placeholder="Choose a Truck..." class="standardSelect form-control" tabindex="1" id="truck-input">
                                                 <option value="" label="default"></option>
-                                                <option th:each="truck:${trucks}" th:value="${truck}" th:text="${truck.getPlateNumber()}"></option>
+                                                <option th:each="singleTruck:${trucks}" th:value="${singleTruck.id}" th:text="${singleTruck.getPlateNumber()}" ></option>
                                             </select>
-                                        </div>
+                                        <small class="form-text text-muted">Choose a truck, if he's is not ont the please add <a class="px-1 fa fa-plus-square" th:href="@{/truck/add}"  title="add new truck"></a></small>
                                     </div>
                                 </div>
 
@@ -282,18 +281,18 @@
                                     <div class="col col-md-3">
                                         <label for="driver-input" class=" form-control-label">Driver</label></div>
                                     <div class="col-12 col-md-9">
-                                        <div class="card-body">
-                                            <select th:field="*{driver}" data-placeholder="Choose a Driver..." class="standardSelect" tabindex="1" id="driver-input">
+
+                                            <select th:field="*{driver.id}" data-placeholder="Choose a Driver..." class="standardSelect form-control" tabindex="1" id="driver-input">
                                                 <option value="" label="default"></option>
-                                                <option th:each="driver:${drivers}" th:value="${driver}" th:text="${driver.getFirstName() + ' ' + driver.getSurname()}"></option>
+                                                <option th:each="driver:${drivers}" th:value="${driver.id}" th:text="${driver.getFirstName() + ' ' + driver.getSurname()}"></option>
                                             </select>
-                                        </div>
+                                        <small class="form-text text-muted">Choose a driver, if he's is not ont the please add <a class="px-1 fa fa-plus-square" th:href="@{/driver/add}"  title="add new driver"></a></small>
                                     </div>
                                 </div>
 
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="start-odometer-input" class=" form-control-label">Odometer reading</label></div>
-                                    <div class="col-12 col-md-9"><input th:field="*{startOdometerReading}" type="text" id="start-odometer-input" placeholder="" class="form-control"><small class="form-text text-muted">Odometer reading when starting expedition</small></div>
+                                    <div class="col-12 col-md-9"><input th:field="*{startOdometerReading}" type="number" id="start-odometer-input" placeholder="" class="form-control"><small class="form-text text-muted">Odometer reading when starting expedition</small></div>
                                 </div>
 
                                 <div class="row form-group">

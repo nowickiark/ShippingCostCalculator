@@ -1,5 +1,3 @@
-insert into BORDERS (id, country_from, city_from, country_to, city_to) values (nextval('bord_seq'), 'Poland', 'Zgorzelec', 'Germany', 'Gorlitz');
-
 insert into ROLE (id, user_authority) values (nextval('role_seq'), 'DRIVER');
 insert into ROLE (id, user_authority) values (nextval('role_seq'), 'SPEDYTOR');
 insert into ROLE (id, user_authority) values (nextval('role_seq'), 'ADMIN');
@@ -21,6 +19,18 @@ INSERT INTO EXPEDITION(id,truck_id,driver_id,starting_place,start_odometer_readi
 INSERT INTO EXPEDITION(id,truck_id,driver_id,starting_place,start_odometer_reading,start_day) values (nextval('expedition_seq'),3,1,'Wrocław',6325478,'2099-02-04');
 INSERT INTO EXPEDITION(id,truck_id,driver_id,starting_place,start_odometer_reading,start_day) values (nextval('expedition_seq'),1,2,'Kolobrzeg',2999,'2015-02-04');
 INSERT INTO EXPEDITION(id,truck_id,driver_id,starting_place,start_odometer_reading,start_day) values (nextval('expedition_seq'),3,3,'Berlin',456123,'2099-02-04');
+
+insert into BORDERS (id, country_from, city_from, country_to, city_to) values (nextval('bord_seq'), 'Poland', 'Zgorzelec', 'Germany', 'Gorlitz');
+insert into BORDERS (id, country_from, city_from, country_to, city_to) values (nextval('bord_seq'), 'Germany', 'Gorlitz', 'Poland', 'Zgorzelec');
+insert into BORDERS (id, country_from, city_from, country_to, city_to) values (nextval('bord_seq'), 'Poland', 'Bobolin', 'Germany', 'Schwennenz');
+insert into BORDERS (id, country_from, city_from, country_to, city_to) values (nextval('bord_seq'), 'Germany', 'Schwennenz', 'Poland', 'Bobolin');
+insert into BORDERS (id, country_from, city_from, country_to, city_to) values (nextval('bord_seq'), 'Poland', 'Buk', 'Germany', 'Mescherin');
+insert into BORDERS (id, country_from, city_from, country_to, city_to) values (nextval('bord_seq'), 'Germany', 'Mescherin', 'Poland', 'Buk');
+
+insert into BORDER_CROSS(id,expedition_id,borders_id, date_of_border_crossing) values (nextval('cross_seq'),1,1,'2019-08-05');
+insert into BORDER_CROSS(id,expedition_id,borders_id, date_of_border_crossing) values (nextval('cross_seq'),1,2,'2019-08-20');
+insert into BORDER_CROSS(id,expedition_id,borders_id, date_of_border_crossing) values (nextval('cross_seq'),1,3,'2019-09-01');
+insert into BORDER_CROSS(id,expedition_id,borders_id, date_of_border_crossing) values (nextval('cross_seq'),1,4,'2019-09-18');
 
 insert INTO EXTRA_COST (id, expedition_id, description, cost, currency_code, date_of_purchase) values (nextval('e_cost_seq'),1, 'Windshield replacement', 370, 'EUR', '2019-08-06');
 insert INTO EXTRA_COST (id, expedition_id, description, cost, currency_code, date_of_purchase) values (nextval('e_cost_seq'),1, 'Wash', 70, 'EUR', '2019-08-09');

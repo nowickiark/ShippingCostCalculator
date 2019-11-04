@@ -277,12 +277,12 @@
                             <strong>Add Freight Rate</strong>
                         </div>
                         <div class="card-body card-block">
-                            <form th:action="@{/expedition/addExtraCost}" th:object="${newextraCost}" method="post"
+                            <form th:action="@{/border/add}" th:object="${newBorder}" method="post"
                                   enctype="multipart/form-data" class="form-horizontal">
 
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <div class="row form-group">
+                                        <div class="row form-group d-none">
                                             <div class="col col-md-3"><label for="id-input"
                                                                              class=" form-control-label">Id</label>
                                             </div>
@@ -291,66 +291,64 @@
                                                                                 placeholder=""
                                                                                 class="form-control"
                                                                                 readonly>
-                                                <small class="form-text text-muted">Id of the freight rate</small>
+                                                <small class="form-text text-muted">Id of the border cross</small>
                                             </div>
                                         </div>
+
                                         <div class="row form-group">
-                                            <div class="col col-md-3"><label for="description-input"
-                                                                             class=" form-control-label">Description</label>
+                                            <div class="col col-md-3"><label for="cFrom-input"
+                                                                             class=" form-control-label">Country from</label>
                                             </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{description}"
+                                            <div class="col-12 col-md-9"><input th:field="*{countryFrom}"
                                                                                 type="text"
-                                                                                id="description-input"
-                                                                                placeholder="eg Higway Toll"
-                                                                                class="form-control">
-                                                <small class="form-text text-muted">Description of the cost</small>
+                                                                                id="cFrom-input"
+                                                                                placeholder="eg Poland"
+                                                                                class="form-control"
+                                                                                autofocus>
+                                                <small class="form-text text-muted">Country of departure</small>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3"><label for="amount-input"
-                                                                             class=" form-control-label">Cost</label>
+                                            <div class="col col-md-3"><label for="ciFrom-input"
+                                                                             class=" form-control-label">City from</label>
                                             </div>
-
-                                            <div class="col-12 col-md-9">
-                                                <div class="row">
-                                                    <div class="col-12 col-md-9">
-                                                        <input th:field="*{cost}" type="number"
-                                                               id="amount-input" placeholder="eg 1457.45"
-                                                               class="form-control">
-                                                        <small class="form-text text-muted">Amount of money payed.</small>
-                                                    </div>
-
-                                                    <div class="col col-md-3 ">
-                                                        <select th:field="*{currencyCode}" data-placeholder="Choose a Currency..." class="standardSelect form-control" id="payment-currency-input">
-                                                            <option value="" label="default"></option>
-                                                            <option th:each="currencyCodeType:${currencyCodeTypeList}" th:value="${currencyCodeType}" th:text="${currencyCodeType}" ></option>
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                            <div class="col-12 col-md-9"><input th:field="*{cityFrom}"
+                                                                                type="text"
+                                                                                id="ciFrom-input"
+                                                                                placeholder="eg Poznań"
+                                                                                class="form-control"
+                                                                                autofocus>
+                                                <small class="form-text text-muted">City of departure</small>
                                             </div>
                                         </div>
+
+
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="row form-group">
-                                            <div class="col col-md-3"><label for="expedition-input"
-                                                                             class=" form-control-label">Expedition</label>
+                                            <div class="col col-md-3"><label for="cTo-input"
+                                                                             class=" form-control-label">Country to</label>
                                             </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{expedition}" type="text"
-                                                                                id="expedition-input"
-                                                                                placeholder="Number"
+                                            <div class="col-12 col-md-9"><input th:field="*{countryTo}"
+                                                                                type="text"
+                                                                                id="cTo-input"
+                                                                                placeholder="eg Poland"
                                                                                 class="form-control"
-                                                                                readonly tabindex="-1">
-                                                <small class="form-text text-muted">Expedition id</small>
+                                                                                autofocus>
+                                                <small class="form-text text-muted">Country of border</small>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3"><label for="date-input"
-                                                                             class=" form-control-label">Date</label>
+                                            <div class="col col-md-3"><label for="ciTo-input"
+                                                                             class=" form-control-label">City to</label>
                                             </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{dateOfPurchase}" type="date"
-                                                                                id="date-input" placeholder=""
-                                                                                class="form-control">
-                                                <small class="form-text text-muted">Dote of starting freight</small>
+                                            <div class="col-12 col-md-9"><input th:field="*{cityTo}"
+                                                                                type="text"
+                                                                                id="ciTo-input"
+                                                                                placeholder="eg Poznań"
+                                                                                class="form-control"
+                                                                                autofocus>
+                                                <small class="form-text text-muted">City of border</small>
                                             </div>
                                         </div>
                                     </div>
@@ -375,31 +373,30 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Extra costs for expedition </strong>
+                            <strong class="card-title">List of borders</strong>
                         </div>
                         <div class="table-stats order-table ov-h">
                             <table class="table ">
                                 <thead>
                                 <tr>
-                                    <th>Fueling id</th>
-                                    <th>Expedition</th>
-                                    <th>Description</th>
-                                    <th>Cost</th>
-                                    <th>Currency</th>
-                                    <th>Date</th>
+                                    <th>Id</th>
+                                    <th>Country from</th>
+                                    <th>City from</th>
+                                    <th>Country to</th>
+                                    <th>City to</th>
                                     <th>Edit</th>
                                 </tr>
                                 </thead>
                                 <tbody>
 
-                                <tr th:each="eC : ${extraCostsList}">
-                                    <td><span class="serial" th:text="${eC.id}">Id</span></td>
-                                    <td><span class="serial" th:text="${eC.expedition.getId()}">Id</span></td>
-                                    <td><span class="product" th:text="${eC.description}">Description</span></td>
-                                    <td><span class="product" th:text="${eC.cost}">Cost</span></td>
-                                    <td><span class="product" th:text="${eC.currencyCode}">Currency</span></td>
-                                    <td><span class="product" th:text="${eC.dateOfPurchase}">Date</span></td>
-                                    <td><a class="px-1 fa fa-gear" th:href="@{/expedition/addExtraCost/{id} (id=${eC.id})}"  title="Edit"></a></td>
+                                <tr th:each="bo : ${bordersList}">
+                                    <td><span class="serial" th:text="${bo.id}">Id</span></td>
+                                    <td><span class="product" th:text="${bo.countryFrom}">Company</span></td>
+                                    <td><span class="product" th:text="${bo.cityFrom}">Departure</span></td>
+                                    <td><span class="product" th:text="${bo.countryTo}">Company</span></td>
+                                    <td><span class="product" th:text="${bo.cityTo}">Departure</span></td>
+                                    <td><a class="px-1 fa fa-gear" th:href="@{/border/add/{id} (id=${bo.id})}"  title="Edit"></a></td>
+                                    <!--<td><a class="btn btn-secondary active" role="button" aria-pressed="true" th:href="@{/fuel/add/{id}(id=${fuel.id})}">Fuel details</a></td>-->
                                 </tr>
 
                                 </tbody>

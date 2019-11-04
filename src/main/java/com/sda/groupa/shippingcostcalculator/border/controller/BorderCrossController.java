@@ -1,31 +1,37 @@
 package com.sda.groupa.shippingcostcalculator.border.controller;
 
 //import com.sda.groupa.shippingcostcalculator.border.exception.BorderCrossNotFoundException;
+import com.google.common.collect.Lists;
 import com.sda.groupa.shippingcostcalculator.border.exception.BorderCrossNotFoundException;
 import com.sda.groupa.shippingcostcalculator.border.model.BorderCross;
 import com.sda.groupa.shippingcostcalculator.border.model.Borders;
 import com.sda.groupa.shippingcostcalculator.border.service.BorderCrossService;
 
 import com.sda.groupa.shippingcostcalculator.driver.driverModel.Driver;
+import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.CurrencyCode;
+import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
+import com.sda.groupa.shippingcostcalculator.expedition.service.ExpeditionService;
 import com.sda.groupa.shippingcostcalculator.login.strategy.DriverStrategy;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
 public class BorderCrossController {
     private final BorderCrossService borderCrossService;
     private final DriverStrategy driverStrategy;
+    private final ExpeditionService expeditionService;
 
-    public BorderCrossController(BorderCrossService borderCrossService, DriverStrategy driverStrategy) {
+    public BorderCrossController(BorderCrossService borderCrossService, DriverStrategy driverStrategy, ExpeditionService expeditionService) {
         this.borderCrossService = borderCrossService;
         this.driverStrategy = driverStrategy;
+        this.expeditionService = expeditionService;
     }
 
     @GetMapping("/borderCross/add")
@@ -99,5 +105,72 @@ public class BorderCrossController {
         borderCrossService.addBorder(borders);
         return "redirect:/listOfBorders";
     }
+
+    //Thymeleaf
+    @GetMapping(value = "/expedition/{id}/addBorderCross")
+    public String showAddPageOfBorderCrossByExpedition (Model model, @PathVariable("id") Long id ){
+        Expedition expedition = expeditionService.getExpeditionById(id).orElseThrow(() -> new RuntimeException("Unavailable"));
+        List<BorderCross> borderCrossList = Lists.reverse(borderCrossService.findListOfBorderCrossesByExpedition(expedition));
+        List<Borders> bordersList = borderCrossService.getListOfBorders();
+        BorderCross borderCross = new BorderCross();
+        borderCross.setExpedition(expedition);
+        model.addAttribute("borderCrossList",borderCrossList);
+        model.addAttribute("bordersList",bordersList);
+        model.addAttribute("newBorderCross",borderCross);
+        model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
+        return "borderCross-list-add";
+    }
+
+    //Thymeleaf
+    @GetMapping(value = "/expedition/addBorderCross/{id}")
+    public String showEditPageOfBorderCrossByExpedition (Model model, @PathVariable("id") Long id ){
+        BorderCross borderCross = borderCrossService.findBorderCrossById(id).orElseThrow(() -> new RuntimeException("Unavailable"));
+        Expedition expedition = borderCross.getExpedition();
+        List<BorderCross> borderCrossList = Lists.reverse(borderCrossService.findListOfBorderCrossesByExpedition(expedition));
+        List<Borders> bordersList = borderCrossService.getListOfBorders();
+        model.addAttribute("borderCrossList",borderCrossList);
+        model.addAttribute("bordersList",bordersList);
+        model.addAttribute("newBorderCross",borderCross);
+        model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
+        return "borderCross-list-add";
+    }
+
+    //Thymeleaf
+    @PostMapping(value = "/expedition/addBorderCross")
+    public String addBorderCross(@ModelAttribute BorderCross borderCross){
+        borderCrossService.addBorderCrossing(borderCross);
+        return "redirect:/expedition/" + borderCross.getExpedition().getId() + "/addBorderCross";
+    }
+
+    //Thymeleaf
+    @GetMapping(value = "/border/add")
+    public String showViewAddBorder(Model model){
+        List<Borders> bordersList = Lists.reverse(borderCrossService.getListOfBorders());
+        model.addAttribute("newBorder",new Borders());
+        model.addAttribute("bordersList",bordersList);
+        return "border-add";
+     }
+
+     @GetMapping(value = "/border/add/{id}")
+     public String showViewEditBorder(@PathVariable long id, Model model){
+         Borders borders = borderCrossService.findBorderById(id).orElseThrow(() -> new RuntimeException("Unavailable"));
+         List<Borders> bordersList = Lists.reverse(borderCrossService.getListOfBorders());
+         model.addAttribute("newBorder",borders);
+         model.addAttribute("bordersList",bordersList);
+         return "border-add";
+     }
+
+     //ThymeLeaf
+     @PostMapping(value = "/border/add")
+    public String addNewBorder(@ModelAttribute Borders borders){
+        borderCrossService.addBorder(borders);
+        return "redirect:/border/add";
+     }
+
+
+
+
+
+
 
 }

@@ -34,7 +34,6 @@ public class ExpeditionController {
 
     @GetMapping("/expedition/add")
     public String getExpeditionform(Model model){
-        ModelAndView modelAndView = new ModelAndView("expedition");
         Expedition expedition = new Expedition();
         model.addAttribute("expedition",expedition);
         model.addAttribute("trucks",truckService.getTrucks());
@@ -42,15 +41,13 @@ public class ExpeditionController {
         return "expedition-add";
     }
 
-
     @GetMapping("/expedition/add/{id}")
-    public ModelAndView getExpeditionform(@PathVariable Long id){
-        ModelAndView modelAndView = new ModelAndView("expedition");
-        Expedition expedition = expeditionService.getExpeditionById(id).orElseThrow(() -> new RuntimeException("Unavailable"));
-        List<Truck> trucks = truckService.getTrucks();
-        modelAndView.addObject("expedition",expedition);
-        modelAndView.addObject("trucks",trucks);
-        return modelAndView;
+    public String getExpeditionFormEdit(@PathVariable long id, Model model){
+        Expedition expedition = expeditionService.getExpeditionById(id).orElseThrow(()-> new RuntimeException("Unavailable"));
+        model.addAttribute("expedition",expedition);
+        model.addAttribute("trucks",truckService.getTrucks());
+        model.addAttribute("drivers",driverService.findAll());
+        return "expedition-add";
     }
 
     @GetMapping("/expeditions")

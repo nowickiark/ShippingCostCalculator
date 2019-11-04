@@ -277,7 +277,7 @@
                             <strong>Add Freight Rate</strong>
                         </div>
                         <div class="card-body card-block">
-                            <form th:action="@{/expedition/addExtraCost}" th:object="${newextraCost}" method="post"
+                            <form th:action="@{/expedition/addBorderCross}" th:object="${newBorderCross}" method="post"
                                   enctype="multipart/form-data" class="form-horizontal">
 
                                 <div class="row">
@@ -291,44 +291,26 @@
                                                                                 placeholder=""
                                                                                 class="form-control"
                                                                                 readonly>
-                                                <small class="form-text text-muted">Id of the freight rate</small>
+                                                <small class="form-text text-muted">Id of the border cross</small>
                                             </div>
                                         </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="description-input"
-                                                                             class=" form-control-label">Description</label>
-                                            </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{description}"
-                                                                                type="text"
-                                                                                id="description-input"
-                                                                                placeholder="eg Higway Toll"
-                                                                                class="form-control">
-                                                <small class="form-text text-muted">Description of the cost</small>
-                                            </div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="amount-input"
-                                                                             class=" form-control-label">Cost</label>
-                                            </div>
 
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="border-input"
+                                                                             class=" form-control-label">
+                                                                                Border</label>
+                                            </div>
                                             <div class="col-12 col-md-9">
-                                                <div class="row">
-                                                    <div class="col-12 col-md-9">
-                                                        <input th:field="*{cost}" type="number"
-                                                               id="amount-input" placeholder="eg 1457.45"
-                                                               class="form-control">
-                                                        <small class="form-text text-muted">Amount of money payed.</small>
-                                                    </div>
-
-                                                    <div class="col col-md-3 ">
-                                                        <select th:field="*{currencyCode}" data-placeholder="Choose a Currency..." class="standardSelect form-control" id="payment-currency-input">
-                                                            <option value="" label="default"></option>
-                                                            <option th:each="currencyCodeType:${currencyCodeTypeList}" th:value="${currencyCodeType}" th:text="${currencyCodeType}" ></option>
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                                <select th:field="*{borders.id}" data-placeholder="Choose a Currency..." class="standardSelect form-control" id="border-input">
+                                                    <option value="" label="default"></option>
+                                                    <option th:each="singleBorders:${bordersList}" th:value="${singleBorders.id}" th:text="${singleBorders.getCountryFrom() + ' ' + singleBorders.getCityFrom() + ' to ' + singleBorders.getCountryTo() + ' ' + singleBorders.getCityTo()} " ></option>
+                                                </select>
+                                                <small class="form-text text-muted">Choose a border, if border is not ont the please add <a class="px-1 fa fa-plus-square" th:href="@{/border/add}"  title="add new border"></a></small>
                                             </div>
+
                                         </div>
+
+
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="row form-group">
@@ -347,10 +329,10 @@
                                             <div class="col col-md-3"><label for="date-input"
                                                                              class=" form-control-label">Date</label>
                                             </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{dateOfPurchase}" type="date"
+                                            <div class="col-12 col-md-9"><input th:field="*{dateOfBorderCrossing}" type="date"
                                                                                 id="date-input" placeholder=""
                                                                                 class="form-control">
-                                                <small class="form-text text-muted">Dote of starting freight</small>
+                                                <small class="form-text text-muted">Dote of crossing the border</small>
                                             </div>
                                         </div>
                                     </div>
@@ -375,7 +357,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Extra costs for expedition </strong>
+                            <strong class="card-title">Freight rates for expedition </strong>
                         </div>
                         <div class="table-stats order-table ov-h">
                             <table class="table ">
@@ -383,23 +365,27 @@
                                 <tr>
                                     <th>Fueling id</th>
                                     <th>Expedition</th>
-                                    <th>Description</th>
-                                    <th>Cost</th>
-                                    <th>Currency</th>
                                     <th>Date</th>
+                                    <th>Country from</th>
+                                    <th>City from</th>
+                                    <th>Country to</th>
+                                    <th>City to</th>
+                                    <th>Distance</th>
                                     <th>Edit</th>
                                 </tr>
                                 </thead>
                                 <tbody>
 
-                                <tr th:each="eC : ${extraCostsList}">
-                                    <td><span class="serial" th:text="${eC.id}">Id</span></td>
-                                    <td><span class="serial" th:text="${eC.expedition.getId()}">Id</span></td>
-                                    <td><span class="product" th:text="${eC.description}">Description</span></td>
-                                    <td><span class="product" th:text="${eC.cost}">Cost</span></td>
-                                    <td><span class="product" th:text="${eC.currencyCode}">Currency</span></td>
-                                    <td><span class="product" th:text="${eC.dateOfPurchase}">Date</span></td>
-                                    <td><a class="px-1 fa fa-gear" th:href="@{/expedition/addExtraCost/{id} (id=${eC.id})}"  title="Edit"></a></td>
+                                <tr th:each="bC : ${borderCrossList}">
+                                    <td><span class="serial" th:text="${bC.id}">Id</span></td>
+                                    <td><span class="serial" th:text="${bC.expedition.getId()}">Id</span></td>
+                                    <td><span class="product" th:text="${bC.getDateOfBorderCrossing()}">Date</span></td>
+                                    <td><span class="product" th:text="${bC.borders.getCountryFrom()}">Company</span></td>
+                                    <td><span class="product" th:text="${bC.borders.getCityFrom()}">Departure</span></td>
+                                    <td><span class="product" th:text="${bC.borders.getCountryTo()}">Arrival</span></td>
+                                    <td><span class="product" th:text="${bC.borders.getCityTo()}">Amount</span></td>
+                                    <td><a class="px-1 fa fa-gear" th:href="@{/expedition/addBorderCross/{id} (id=${bC.id})}"  title="Edit"></a></td>
+                                    <!--<td><a class="btn btn-secondary active" role="button" aria-pressed="true" th:href="@{/fuel/add/{id}(id=${fuel.id})}">Fuel details</a></td>-->
                                 </tr>
 
                                 </tbody>

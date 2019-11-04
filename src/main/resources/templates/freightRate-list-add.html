@@ -348,7 +348,7 @@
                                             <div class="col col-md-3"><label for="kilometers-input"
                                                                              class=" form-control-label">Distance</label>
                                             </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{freightDistance}" type="text"
+                                            <div class="col-12 col-md-9"><input th:field="*{freightDistance}" type="number"
                                                                                 id="kilometers-input"
                                                                                 placeholder="eg 440"
                                                                                 class="form-control">
@@ -364,7 +364,7 @@
                                             <div class="col-12 col-md-9">
                                                 <div class="row">
                                                     <div class="col-12 col-md-9">
-                                                        <input th:field="*{amount}" type="text"
+                                                        <input th:field="*{amount}" type="number"
                                                                id="amount-input" placeholder="eg 1457.45"
                                                                class="form-control">
                                                         <small class="form-text text-muted">Amount of money getting for freight rate</small>

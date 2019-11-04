@@ -372,8 +372,8 @@
                                                     <a class="px-1 fa fa-coffee" th:href="@{/expedition/{id}/addExtraCost (id=${ex.id})}"  title="extra cost"></a>
                                                     <a class="px-1 fa fa-wrench" th:href="@{/expedition/{id}/addTruckPart (id=${ex.id})}"  title="extra parts"></a>
                                                     <a class="px-1 fa fa-road" th:href="@{/expedition/{id}/addJourney (id=${ex.id})}"  title="journey"></a>
-                                                    <a href='#' class="px-1 fa fa-plane" title="border croos"></a>
-                                                    <a href='#' class="px-1 fa fa-gear" title="edit"></a>
+                                                    <a class="px-1 fa fa-plane" th:href="@{/expedition/{id}/addBorderCross (id=${ex.id})}"  title="border cross"></a>
+                                                    <a class="px-1 fa fa-gear" th:href="@{/expedition/add/{id} (id=${ex.id})}" title="edit"></a>
                                                     <a href="" class="px-1 fa fa-times-circle-o" title="close expedition"></a>
                                                 </td>
                                             </tr>

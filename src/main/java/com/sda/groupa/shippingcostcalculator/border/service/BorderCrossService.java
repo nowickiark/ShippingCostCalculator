@@ -24,7 +24,6 @@ private final BordersRepository bordersRepository;
 
     public void addBorderCrossing(BorderCross borderCross) {
         borderCrossRepository.save(borderCross);
-
     }
 
     public List<BorderCross> getListOfBorderCrosses() {
