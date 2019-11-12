@@ -52,24 +52,24 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong>Add Fueling</strong>
+                            <strong>Add Extra Cost</strong>
                         </div>
                         <div class="card-body card-block">
-                            <form th:action="@{/driver/addFuel}" th:object="${newFuel}" method="post"
+                            <form th:action="@{/driver/extracosts/add}" th:object="${newExtraCost}" method="post"
                                   enctype="multipart/form-data" class="form-horizontal">
 
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="row form-group">
-<!--                                            <div class="col col-md-3">-->
-<!--                                                <label for="id-input"class=" form-control-label">Id</label>-->
-<!--                                            </div>-->
+                                            <!--                                            <div class="col col-md-3">-->
+                                            <!--                                                <label for="id-input"class=" form-control-label">Id</label>-->
+                                            <!--                                            </div>-->
                                             <div class="col-12 col-md-9 d-none" ><input th:field="*{id}" type="number"
-                                                                                id="id-input"
-                                                                                placeholder=""
-                                                                                class="form-control"
-                                                                                readonly>
-                                                <small class="form-text text-muted">Id of the fuel</small>
+                                                                                        id="id-input"
+                                                                                        placeholder=""
+                                                                                        class="form-control"
+                                                                                        readonly>
+                                                <small class="form-text text-muted">Id of the extra cost</small>
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -77,34 +77,22 @@
                                                                              class=" form-control-label">Expedition</label>
                                             </div>
                                             <div class="col-12 col-md-9 d-none"><input th:field="*{expedition}" type="text"
-                                                                                id="expedition-input"
-                                                                                placeholder="Number"
-                                                                                class="form-control"
-                                                                                readonly>
+                                                                                       id="expedition-input"
+                                                                                       placeholder="Number"
+                                                                                       class="form-control"
+                                                                                       readonly>
                                                 <small class="form-text text-muted">Expedition id</small>
                                             </div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3"><label for="place-input"
-                                                                             class=" form-control-label">Place</label>
+                                                                             class=" form-control-label">Description</label>
                                             </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{placeOfRefueling}"
+                                            <div class="col-12 col-md-9"><input th:field="*{description}"
                                                                                 type="text"
                                                                                 id="place-input"
-                                                                                placeholder="eg Poznań"
+                                                                                placeholder="eg tire replacement"
                                                                                 class="form-control">
-                                                <small class="form-text text-muted">City of fueling</small>
-                                            </div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="liters-input"
-                                                                             class=" form-control-label">Liters</label>
-                                            </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{liters}"
-                                                                                type="number"
-                                                                                id="liters-input" placeholder="eg 124"
-                                                                                class="form-control">
-                                                <small class="form-text text-muted">Number of liters fueld</small>
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -118,7 +106,6 @@
                                                         <input th:field="*{cost}" type="number"
                                                                id="cost-input" placeholder="eg 1457.45"
                                                                class="form-control">
-                                                        <small class="form-text text-muted">Total cost for fuel</small>
                                                     </div>
 
                                                     <div class="col col-md-3 ">
@@ -130,57 +117,33 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="kilometers-input"
-                                                                             class=" form-control-label">Kilometers</label>
-                                            </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{kilometers}" type="number"
-                                                                                id="kilometers-input"
-                                                                                placeholder="eg 440"
-                                                                                class="form-control">
-                                                <small class="form-text text-muted">Number of kilometers while loading</small>
-                                            </div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="payment-input"
-                                                                             class=" form-control-label">Payment</label>
-                                            </div>
-                                            <div class="col-12 col-md-9">
-                                                <input th:field="*{paymentMethod}" type="text"
-                                                       id="payment-input"
-                                                       placeholder="eg cash"
-                                                       class="form-control">
-                                                <small class="form-text text-muted">Payment method</small>
-                                            </div>
-                                        </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3"><label for="date-input"
-                                                                             class=" form-control-label">Date</label>
+                                                                                 class=" form-control-label">Date</label>
                                             </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{dateOfFueling}" type="date"
-                                                                                id="date-input" placeholder=""
-                                                                                class="form-control">
-                                                <small class="form-text text-muted">Date of fuelling</small>
-                                            </div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-3">
-                                                <label for="full-input" class=" form-control-label">Full</label>
-                                            </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{refuelingToFull}"
-                                                                                type="checkbox"
-                                                                                id="full-input" placeholder="eg true or false">
-                                                <small class="form-text text-muted">Fueling tank to full?</small>
+                                            <div class="col-12 col-md-9"><input th:field="*{dateOfPurchase}" type="date"
+                                                                                    id="date-input" placeholder=""
+                                                                                    class="form-control">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
+<!--                                    <div class="col-lg-6">-->
+<!--                                        <div class="row form-group">-->
+<!--                                        <div class="col col-md-3"><label for="payment-input"-->
+<!--                                                                         class=" form-control-label">Payment</label>-->
+<!--                                        </div>-->
+<!--                                        <div class="col-12 col-md-9">-->
+<!--                                            <input th:field="*{paymentMethod}" type="text"-->
+<!--                                                   id="payment-input"-->
+<!--                                                   placeholder="eg cash"-->
+<!--                                                   class="form-control">-->
+<!--                                            <small class="form-text text-muted">Payment method</small>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
                                 <div class="card-footer">
                                     <input type="submit" class="btn btn-primary btn-sm" value="Save"/>
-                                    <a style="text-decoration: none" href="/driver/listOfFuels" class="btn btn-primary btn-sm"/>List of fuelings</a>
+                                    <a style="text-decoration: none" href="/driver/listOfExtraCosts" class="btn btn-primary btn-sm"/>List of extra costs</a>
                                     <a style="text-decoration: none" href="/" class="btn btn-primary btn-sm">Go Back Home</a>
                                 </div>
 
@@ -191,6 +154,7 @@
             </div>
         </div>
     </div>
+
     <div class="clearfix"></div>
 
     <footer class="site-footer">
@@ -205,19 +169,18 @@
             </div>
         </div>
     </footer>
-
 </div><!-- /#right-panel -->
 
-<!-- Right Panel -->
+        <!-- Right Panel -->
 
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-<!--<script src="../static/js/main.js"></script>-->
-<script th:src="@{/../js/main.js}"></script>
-<!--th:href="@{/../css/style.css}-->
+        <!-- Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+        <!--<script src="../static/js/main.js"></script>-->
+        <script th:src="@{/../js/main.js}"></script>
+        <!--th:href="@{/../css/style.css}-->
 
 </body>
 </html>

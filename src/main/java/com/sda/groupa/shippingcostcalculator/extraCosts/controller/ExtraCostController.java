@@ -1,5 +1,6 @@
 package com.sda.groupa.shippingcostcalculator.extraCosts.controller;
 
+import com.sda.groupa.shippingcostcalculator.driver.driverModel.Driver;
 import com.sda.groupa.shippingcostcalculator.driver.driverService.DriverService;
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.CurrencyCode;
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.service.CurrencyRateService;
@@ -9,6 +10,7 @@ import com.sda.groupa.shippingcostcalculator.extraCosts.model.ExtraCost;
 import com.sda.groupa.shippingcostcalculator.extraCosts.service.ExtraCostService;
 import com.sda.groupa.shippingcostcalculator.login.strategy.DriverStrategy;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,54 +27,57 @@ public class ExtraCostController {
 
     private final ExtraCostService extraCostService;
     private final DriverStrategy driverStrategy;
-    private final DriverService driverService;
     private final CurrencyRateService currencyRateService;
-    private final ExpeditionService expeditionService;
+
 
 
     public ExtraCostController(ExtraCostService extraCostService, DriverStrategy driverStrategy, DriverService driverService, CurrencyRateService currencyRateService, ExpeditionService expeditionService) {
         this.extraCostService = extraCostService;
         this.driverStrategy = driverStrategy;
-        this.driverService = driverService;
         this.currencyRateService = currencyRateService;
-        this.expeditionService = expeditionService;
     }
 
-    @GetMapping("/extracost/add")
-    public ModelAndView getFormPage() {
-        ExtraCost extraCost = new ExtraCost();
-        ModelAndView modelAndView = new ModelAndView("extracost");
-        modelAndView.addObject("extracost", extraCost);
-        modelAndView.addObject("currencyCodeType", CurrencyCode.values());
-        return modelAndView;
+    //Thymeleaf - Asia
+    @GetMapping(value = "/driver/extracosts/add")
+    public String getPageForAddingExtraCost(Model model) {
+        model.addAttribute("newExtraCost", new ExtraCost());
+        model.addAttribute("currencyCodeTypeList", CurrencyCode.values()); //for drop-down list in the view
+        return "extraCostsAdd-DriverView";
     }
 
-    @GetMapping("/extracosts/list")
-    public ModelAndView getExtraCosts(){
-        ModelAndView modelAndView = new ModelAndView("extracostslist");
-        List<ExtraCost> extraCosts = extraCostService.getExtraCosts();
-        modelAndView.addObject("extracosts",extraCosts);
-        return modelAndView;
+    //Thymeleaf - Asia
+    @PostMapping(value = "/driver/extracosts/add")
+    public String addExtraCost(@ModelAttribute ExtraCost extraCost, Model model) throws IOException {
+        Driver driver = driverStrategy.getDriver();
+        extraCost.setExpedition(driver.getExpedition());
+        model.addAttribute("newExtraCost", new ExtraCost());
+        extraCostService.addExtraCost(extraCost);
+        //=====check if currency rate for given code and date is already present in repository, if not then take it from API and add to repository=======
+        currencyRateService.checkLatestCurrencyExchangeRate(extraCost.getCurrencyCode(),extraCost.getDateOfPurchase());
+        return "extraCostsAdd-DriverView";
+    }
+    //Thymleaf - Asia
+    @GetMapping(value = "/driver/updateExtraCost/{extraCostId}")
+    public String updateExtraCostPage (Model model, @PathVariable("extraCostId") Long extraCostId){
+        ExtraCost extraCost = extraCostService.getById(extraCostId).orElseThrow(()-> new RuntimeException("Unavailable"));
+        model.addAttribute("extraCost", extraCostService.getById(extraCostId).orElseThrow(()-> new RuntimeException("Unavailable")));
+        model.addAttribute("newExtraCost", extraCost);
+        model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
+        return "extraCostsAdd-DriverView";
+    }
+
+    //Thymeleaf - Asia
+    @GetMapping(value = "/driver/listOfExtraCosts")
+    public String getExtraCosts(Model model){
+        Driver driver = driverStrategy.getDriver();
+        List<ExtraCost> extraCosts = extraCostService.getExtraCostsByExpetion(driver.getExpedition());
+        model.addAttribute("listOfExtraCosts",extraCosts);
+        return "extraCostsList-DriverView";
 
     }
 
-    @GetMapping("/expedition/listOfExtraCosts")
-    public ModelAndView getExtraCostsByExpedition(){
-        Expedition expedition = driverStrategy.getExpedition();
-        ModelAndView modelAndView = new ModelAndView("extracostslist");
-        List<ExtraCost> extraCosts = extraCostService.getExtraCostsByExpetionId(expedition);
-        modelAndView.addObject("extracosts",extraCosts);
-        return modelAndView;
-    }
 
-    @GetMapping("/extracost/add/{id}")
-    public ModelAndView getExtraCostsForm(@PathVariable Long id) {
-        Optional<ExtraCost> extraCost = extraCostService.getById(id);
-        ModelAndView modelAndView = new ModelAndView("extracost");
-        modelAndView.addObject("extracost", extraCost);
-        return modelAndView;
-    }
-
+    //Thymeleaf - Arek
     @PostMapping("/extracost/add")
     public String extraCosts (@ModelAttribute ExtraCost extracost) throws IOException {
         Expedition expedition = driverStrategy.getExpedition();
