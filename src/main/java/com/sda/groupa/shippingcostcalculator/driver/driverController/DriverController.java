@@ -3,6 +3,7 @@ package com.sda.groupa.shippingcostcalculator.driver.driverController;
 import com.sda.groupa.shippingcostcalculator.driver.driverModel.Driver;
 import com.sda.groupa.shippingcostcalculator.driver.driverService.DriverService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -60,6 +61,14 @@ public class DriverController {
         ModelAndView modelAndView = new ModelAndView("driversMainMenu");
         return modelAndView;
     }
+
+    //Thymeleaf
+    @GetMapping(value = "/driver/all")
+    public String showViewWithDriverList(Model model){
+        model.addAttribute("driverList",driverService.findAll());
+        return "driver-list";
+    }
+
 }
 
 

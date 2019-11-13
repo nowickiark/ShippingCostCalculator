@@ -36,6 +36,8 @@ public class ExpeditionService {
 
    public List<Expedition> findCurrentExpeditions(){return expeditionRepository.findExpeditionsByEndDayIsNull();}
 
+   public List<Expedition> findOpenExpeditions(){return expeditionRepository.findExpeditionsByClosingDateIsNull();}
+
    public List<Expedition> findExpeditionsByDriverId(Long driverId){return expeditionRepository.findExpeditionsByDriverId(driverId);}
 
    public Long countKilometersTravelled(Expedition expedition){

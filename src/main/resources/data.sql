@@ -20,6 +20,9 @@ INSERT INTO EXPEDITION(id,truck_id,driver_id,starting_place,start_odometer_readi
 INSERT INTO EXPEDITION(id,truck_id,driver_id,starting_place,start_odometer_reading,start_day) values (nextval('expedition_seq'),1,2,'Kolobrzeg',2999,'2015-02-04');
 INSERT INTO EXPEDITION(id,truck_id,driver_id,starting_place,start_odometer_reading,start_day) values (nextval('expedition_seq'),3,3,'Berlin',456123,'2099-02-04');
 
+UPDATE EXPEDITION SET CLOSING_DATE = '2019-02-06' WHERE ID=2;
+UPDATE EXPEDITION SET CLOSING_DATE = '2019-03-06' WHERE ID=3;
+
 insert into BORDERS (id, country_from, city_from, country_to, city_to) values (nextval('bord_seq'), 'Poland', 'Zgorzelec', 'Germany', 'Gorlitz');
 insert into BORDERS (id, country_from, city_from, country_to, city_to) values (nextval('bord_seq'), 'Germany', 'Gorlitz', 'Poland', 'Zgorzelec');
 insert into BORDERS (id, country_from, city_from, country_to, city_to) values (nextval('bord_seq'), 'Poland', 'Bobolin', 'Germany', 'Schwennenz');
