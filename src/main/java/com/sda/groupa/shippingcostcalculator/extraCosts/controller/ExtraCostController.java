@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,7 +63,7 @@ public class ExtraCostController {
         ExtraCost extraCost = extraCostService.getById(extraCostId).orElseThrow(()-> new RuntimeException("Unavailable"));
         model.addAttribute("extraCost", extraCostService.getById(extraCostId).orElseThrow(()-> new RuntimeException("Unavailable")));
         model.addAttribute("newExtraCost", extraCost);
-        model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
+        //model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
         return "extraCostsAdd-DriverView";
     }
 

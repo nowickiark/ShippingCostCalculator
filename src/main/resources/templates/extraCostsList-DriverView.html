@@ -69,7 +69,8 @@
                             <td><span class="serial" th:text="${extraCost.id}"></span></td>
                             <td><span class="serial" th:text="${extraCost.expedition.getId()}"></span></td>
                             <td><span class="product" th:text="${extraCost.description}"></span></td>
-                            <td><span class="count" th:text="${extraCost.cost}"></span></td>
+<!--                            <td><span class="count" th:text="${extraCost.cost}"></span></td>-->
+                            <td><span class="product" th:text="${#numbers.formatDecimal(extraCost.cost,1,2, 'POINT')}"></span></td>
                             <td><span class="product" th:text="${extraCost.currencyCode}"></span></td>
 <!--                            <td><span class="product" th:text="${extraCost.paymentMethod}"></span></td>-->
                             <td><span class="product" th:text="${extraCost.dateOfPurchase}"></span></td>
