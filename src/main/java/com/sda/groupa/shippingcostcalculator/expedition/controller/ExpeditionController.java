@@ -41,6 +41,12 @@ public class ExpeditionController {
         return "expedition-add";
     }
 
+    @GetMapping("/expedition/all")
+    public  String showExpeditionList(Model model){
+        model.addAttribute("expeditionList",expeditionService.getExpeditions());
+        return "expedition/expedition-list";
+    }
+
     @GetMapping("/expedition/add/{id}")
     public String getExpeditionFormEdit(@PathVariable long id, Model model){
         Expedition expedition = expeditionService.getExpeditionById(id).orElseThrow(()-> new RuntimeException("Unavailable"));
@@ -80,7 +86,6 @@ public class ExpeditionController {
         modelAndView.addObject("expeditions",expeditionService.findCurrentExpeditions());
         return modelAndView;
     }
-
 
     @PostMapping("/expedition/add")
     public ModelAndView addExpedition(@ModelAttribute Expedition expedition){

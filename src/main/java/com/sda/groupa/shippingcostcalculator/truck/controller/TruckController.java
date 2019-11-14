@@ -34,15 +34,12 @@ public class TruckController {
         return "truck-add";
     }
 
-
     @GetMapping("/truck/add/{id}")
     public String addTruck(Model model,@PathVariable Long id){
         Truck truck = truckService.getTruckById(id).orElseThrow(() -> new RuntimeException("Unavailable"));
         model.addAttribute("truck",truck);
         return "truck-add";
     }
-
-
 
     @PostMapping("/truck/add")
     public String addTruck(@ModelAttribute Truck truck){

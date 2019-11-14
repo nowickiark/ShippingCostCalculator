@@ -29,18 +29,18 @@ public class DriverController {
         return modelAndView;
     }
 
-    @PostMapping(value = "/driver/add")
+/*    @PostMapping(value = "/driver/add")
     public String addDriver(@ModelAttribute Driver driver) {
         driverService.addDriver(driver);
         return "redirect:/drivers";
-    }
+    }*/
 
-    @GetMapping(value = "/driver/add")
+/*    @GetMapping(value = "/driver/add")
     public ModelAndView addDriverPage() {
         ModelAndView modelAndView = new ModelAndView("addDriver");
         modelAndView.addObject("driver", new Driver());
         return modelAndView;
-    }
+    }*/
 
     @PostMapping(value = "/driver/update")
     public String updateDriver(@ModelAttribute Driver driver) {
@@ -66,10 +66,27 @@ public class DriverController {
     @GetMapping(value = "/driver/all")
     public String showViewWithDriverList(Model model){
         model.addAttribute("driverList",driverService.findAll());
-        return "driver-list";
+        return "driver/driver-list";
+    }
+
+    //Thymeleaf
+    @GetMapping(value = "/driver/add")
+    public String showViewWithDriverForm(Model model){
+        model.addAttribute("driver",new Driver());
+        return "driver/driver-add";
+    }
+
+    @PostMapping(value = "/driver/add")
+    private String addDriverFromView(@ModelAttribute Driver driver){
+        driverService.addDriver(driver);
+        return "redirect:/driver/all";
+    }
+
+    @GetMapping(value = "driver/add/{id}")
+    public String editDriver(@PathVariable Long id, Model model){
+        Driver driver = driverService.findById(id).orElseThrow(() -> new RuntimeException("Driver Unavailable"));
+        model.addAttribute("driver",driver);
+        return "driver/driver-add";
     }
 
 }
-
-
-
