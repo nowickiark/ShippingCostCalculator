@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.thymeleaf.Thymeleaf;
 
 import java.io.IOException;
 import java.util.List;
@@ -37,64 +36,52 @@ public class FuelController {
         this.expeditionService = expeditionService;
     }
 
-    @GetMapping(value = "/fuelings")
-    public ModelAndView getFuelPageWithListOfFuelings(){
-        List<Fuel> listOfFuelings = fuelService.findAll();
-        ModelAndView modelAndView = new ModelAndView("fuel");
-        modelAndView.addObject("listOfFuelings", listOfFuelings);
-        return modelAndView;
-    }
-
-    @GetMapping(value = "/expedition/listOfFuels")
-    public ModelAndView getFuelsByExpeditions(){
-        ModelAndView modelAndView = new ModelAndView("fuel");
+    //Thymeleaf - Asia
+    @GetMapping(value = "/driver/listOfFuels")
+    public String getFuelsByExpeditions(Model model){
         Driver driver = driverStrategy.getDriver();
         List<Fuel> listOfFuelings = fuelService.findFuelsByExpedition(driver.getExpedition());
-        modelAndView.addObject("listOfFuelings", listOfFuelings);
-        return modelAndView;
+        model.addAttribute("listOfFuelings", listOfFuelings);
+        return "fuelList-DriverView";
     }
 
-    @PostMapping(value = "/addfuel")    //fuel
-    public String addFueling(@ModelAttribute Fuel fuel) throws IOException {
+    //Thymeleaf - Asia
+    @PostMapping(value = "/driver/addFuel")
+    public String addFueling(@ModelAttribute Fuel fuel, Model model) throws IOException {
         Driver driver = driverStrategy.getDriver();
         fuel.setExpedition(driver.getExpedition());
+        model.addAttribute("newFuel", new Fuel());
         fuelService.addFueling(fuel);
         //=====check if currency rate for given code and date is already present in repository, if not then take it from API and add to repository=======
         currencyRateService.checkLatestCurrencyExchangeRate(fuel.getCurrencyCode(),fuel.getDateOfFueling());
-        return "redirect:/fuelings";
+        return "fuelAdd-DriverView";
+    }
+    //Thymeleaf - Asia
+    @GetMapping(value = "/driver/addFuel")
+    public String addFuelingPage (Model model){
+        model.addAttribute("newFuel", new Fuel());
+        model.addAttribute("currencyCodeTypeList", CurrencyCode.values()); //for drop-down list in the view
+        return "fuelAdd-DriverView";
     }
 
-    @GetMapping(value = "/addfuel")   //fuel/add
-    public ModelAndView addFuelingPage (){
-        ModelAndView modelAndView = new ModelAndView("addFuel");
-        modelAndView.addObject("fuel", new Fuel());
-        modelAndView.addObject("currencyCodeType", CurrencyCode.values()); //for drop-down list in the view
-        return modelAndView;
+    //Thymleaf - Asia
+    @GetMapping(value = "/driver/updatefuel/{fuelId}")
+    public String updateFuelingPage (Model model, @PathVariable("fuelId") Long fuelId){
+        Fuel fuel = fuelService.findById(fuelId).orElseThrow(()-> new RuntimeException("Unavailable"));
+        model.addAttribute("fuel", fuelService.findById(fuelId).orElseThrow(()-> new RuntimeException("Unavailable")));
+        model.addAttribute("newFuel",fuel);
+        model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
+        return "fuelAdd-DriverView";
     }
 
-    @PostMapping(value = "/updatefuel")
-    public String updateFueling(@ModelAttribute Fuel fuel){
-        Driver driver = driverStrategy.getDriver();
-        fuel.setExpedition(driver.getExpedition());
-        fuelService.updateFueling(fuel);
-        return "redirect:/fuelings";
-    }
-
-    @GetMapping(value = "/updatefuel/{id}")
-    public ModelAndView updateFuelingPage (@PathVariable Long id){
-        ModelAndView modelAndView = new ModelAndView("addFuel");
-        modelAndView.addObject("fuel", fuelService.findById(id));
-        modelAndView.addObject("update", true);
-        return modelAndView;
-    }
-
-    //Thymeleaf
+    //Thymeleaf - Arek
     @PostMapping(value = "/expedition/addFuel")
     public String addFuelToTheExpedition(@ModelAttribute Fuel fuel){
         fuelService.addFueling(fuel);
         return "redirect:/expedition/" + fuel.getExpedition().getId() + "/addFuel";
     }
 
+    //Thymeleaf - Arek
     @GetMapping(value = "/expedition/addFuel/{fuelId}")
     public String showPageToEditExistingFuel(Model model,@PathVariable("fuelId") Long fuelId){
         Fuel fuel = fuelService.findById(fuelId).orElseThrow(()-> new RuntimeException("Unavailable"));
@@ -106,7 +93,7 @@ public class FuelController {
         return "fuel-list-add";
     }
 
-    //Thymeleaf
+    //Thymeleaf - Arek
     @GetMapping(value = "/expedition/{id}/addFuel")
     public String showPageOfFuelingsByExpedition (Model model,@PathVariable("id") Long id ){
         Expedition expedition = expeditionService.getExpeditionById(id).orElseThrow(() -> new RuntimeException("Unavailable"));
@@ -118,6 +105,5 @@ public class FuelController {
         model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
         return "fuel-list-add";
     }
-
 
 }
