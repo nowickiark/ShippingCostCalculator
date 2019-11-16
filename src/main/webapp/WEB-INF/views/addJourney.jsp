@@ -30,12 +30,12 @@
             <td><form:input type="datetime-local" path="endDate"/></td>
         </tr>
         <tr>
-            <td><form:label path="route">Route</form:label></td>
-            <td><form:input  path="route"/></td>
+            <td><form:label path="startPlace">Route</form:label></td>
+            <td><form:input  path="startPlace"/></td>
         </tr>
         <tr>
-            <td><form:label path="routeDestination">Route destination</form:label></td>
-            <td><form:input path="routeDestination"/></td>
+            <td><form:label path="endPlace">Route destination</form:label></td>
+            <td><form:input path="endPlace"/></td>
         </tr>
         <tr>
             <td><form:label path="meterReadingDeparture">Meter reading - departure</form:label></td>
@@ -46,8 +46,8 @@
             <td><form:input path="meterReadingArrival"/></td>
         </tr>
         <tr>
-            <td><form:label path="mileage">Mileage</form:label></td>
-            <td><form:input path="mileage"/></td>
+            <td><form:label path="kilometerReading">Mileage</form:label></td>
+            <td><form:input path="kilometerReading"/></td>
         </tr>
         <tr>
             <td><form:label path="comments">Comments</form:label></td>

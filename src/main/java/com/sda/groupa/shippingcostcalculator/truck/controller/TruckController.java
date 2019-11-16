@@ -24,25 +24,22 @@ public class TruckController {
     public String getTrucks(Model model){
         List<Truck> trucks = truckService.getTrucks();
         model.addAttribute("trucks",trucks);
-        return "truck-list";
+        return "truck/truck-list";
     }
 
     @GetMapping("/truck/add")
         public String addTruck(Model model){
         Truck truck = new Truck();
         model.addAttribute("truck",truck);
-        return "truck-add";
+        return "truck/truck-add";
     }
-
 
     @GetMapping("/truck/add/{id}")
     public String addTruck(Model model,@PathVariable Long id){
         Truck truck = truckService.getTruckById(id).orElseThrow(() -> new RuntimeException("Unavailable"));
         model.addAttribute("truck",truck);
-        return "truck-add";
+        return "truck/truck-add";
     }
-
-
 
     @PostMapping("/truck/add")
     public String addTruck(@ModelAttribute Truck truck){

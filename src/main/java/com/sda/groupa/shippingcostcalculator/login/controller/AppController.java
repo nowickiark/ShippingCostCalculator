@@ -52,7 +52,7 @@ public class AppController {
 
     @GetMapping("/spedytorHome")
     public String getSpedytorHomePage(Model model) {
-        model.addAttribute("expeditions",expeditionService.getExpeditions());
+        model.addAttribute("expeditions",expeditionService.findOpenExpeditions());
         model.addAttribute("drivers",driverService.findAll());
         model.addAttribute("driver",new Driver());
         return "index";

@@ -36,7 +36,7 @@ public class TruckPartsService implements CostCalculator {
         return truckPartsRepository.findAll();
     }
 
-    public List<TruckParts> getTruckPartsByExpeditionId(Expedition expedition){
+    public List<TruckParts> getTruckPartsByExpedition(Expedition expedition){
         return truckPartsRepository.findTruckPartsByExpedition(expedition);
     }
     //======================CALCULATIONS FOR COSTS OF TRUCK PARTS================================

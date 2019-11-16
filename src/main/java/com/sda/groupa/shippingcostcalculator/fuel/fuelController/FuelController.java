@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.thymeleaf.Thymeleaf;
 
 import java.io.IOException;
 import java.util.List;
@@ -90,7 +91,7 @@ public class FuelController {
         model.addAttribute("fuelList",fuelList);
         model.addAttribute("newFuel",fuel);
         model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
-        return "fuel-list-add";
+        return "expeditionExtras/fuel-list-add";
     }
 
     //Thymeleaf - Arek
@@ -103,7 +104,59 @@ public class FuelController {
         fuel.setExpedition(expedition);
         model.addAttribute("newFuel",fuel);
         model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
-        return "fuel-list-add";
+        return "expeditionExtras/fuel-list-add";
     }
+
+    /*   @GetMapping(value = "/fuelings")
+    public ModelAndView getFuelPageWithListOfFuelings(){
+        List<Fuel> listOfFuelings = fuelService.findAll();
+        ModelAndView modelAndView = new ModelAndView("fuel");
+        modelAndView.addObject("listOfFuelings", listOfFuelings);
+        return modelAndView;
+    }
+
+    @GetMapping(value = "/expedition/listOfFuels")
+    public ModelAndView getFuelsByExpeditions(){
+        ModelAndView modelAndView = new ModelAndView("fuel");
+        Driver driver = driverStrategy.getDriver();
+        List<Fuel> listOfFuelings = fuelService.findFuelsByExpedition(driver.getExpedition());
+        modelAndView.addObject("listOfFuelings", listOfFuelings);
+        return modelAndView;
+    }
+
+    @PostMapping(value = "/addfuel")    //fuel
+    public String addFueling(@ModelAttribute Fuel fuel) throws IOException {
+        Driver driver = driverStrategy.getDriver();
+        fuel.setExpedition(driver.getExpedition());
+        fuelService.addFueling(fuel);
+        //=====check if currency rate for given code and date is already present in repository, if not then take it from API and add to repository=======
+        currencyRateService.checkLatestCurrencyExchangeRate(fuel.getCurrencyCode(),fuel.getDateOfFueling());
+        return "redirect:/fuelings";
+    }
+
+    @GetMapping(value = "/addfuel")   //fuel/add
+    public ModelAndView addFuelingPage (){
+        ModelAndView modelAndView = new ModelAndView("addFuel");
+        modelAndView.addObject("fuel", new Fuel());
+        modelAndView.addObject("currencyCodeType", CurrencyCode.values()); //for drop-down list in the view
+        return modelAndView;
+    }
+
+    @PostMapping(value = "/updatefuel")
+    public String updateFueling(@ModelAttribute Fuel fuel){
+        Driver driver = driverStrategy.getDriver();
+        fuel.setExpedition(driver.getExpedition());
+        fuelService.updateFueling(fuel);
+        return "redirect:/fuelings";
+    }
+
+    @GetMapping(value = "/updatefuel/{id}")
+    public ModelAndView updateFuelingPage (@PathVariable Long id){
+        ModelAndView modelAndView = new ModelAndView("addFuel");
+        modelAndView.addObject("fuel", fuelService.findById(id));
+        modelAndView.addObject("update", true);
+        return modelAndView;
+    }*/
+
 
 }

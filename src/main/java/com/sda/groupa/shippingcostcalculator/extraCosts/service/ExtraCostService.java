@@ -38,7 +38,7 @@ public class ExtraCostService implements CostCalculator {
         return extraCostRepository.findAll();
     }
 
-    public List<ExtraCost> getExtraCostsByExpetionId(Expedition expedition){
+    public List<ExtraCost> getExtraCostsByExpetion(Expedition expedition){
         return extraCostRepository.findExtraCostByExpedition(expedition);
     }
     //======================CALCULATIONS FOR COSTS OF EXTRA COSTS================================
