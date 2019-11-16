@@ -6,7 +6,6 @@ import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.Curren
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.service.CurrencyRateService;
 import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
 import com.sda.groupa.shippingcostcalculator.expedition.service.ExpeditionService;
-import com.sda.groupa.shippingcostcalculator.extraCosts.model.ExtraCost;
 import com.sda.groupa.shippingcostcalculator.login.strategy.DriverStrategy;
 import com.sda.groupa.shippingcostcalculator.truckParts.model.TruckParts;
 import com.sda.groupa.shippingcostcalculator.truckParts.service.TruckPartsService;
@@ -36,11 +35,41 @@ public class TruckPartsController {
         this.expeditionService = expeditionService;
     }
 
-    @GetMapping("/truckparts/add")
+    //Thymeleaf
+    @GetMapping(value = "/expedition/{id}/addTruckPart")
+    public String showAddPageOfTruckPartsByExpedition (Model model, @PathVariable("id") Long id ){
+        Expedition expedition = expeditionService.getExpeditionById(id).orElseThrow(() -> new RuntimeException("Unavailable"));
+        List<TruckParts> truckPartsList = Lists.reverse(truckPartsService.getTruckPartsByExpedition(expedition));
+        TruckParts truckPart = new TruckParts();
+        truckPart.setExpedition(expedition);
+        model.addAttribute("truckPartsList",truckPartsList);
+        model.addAttribute("newTruckPart",truckPart);
+        model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
+        return "expeditionExtras/truckPart-list-add";
+    }
+
+    //Thymeleaf
+    @GetMapping(value = "/expedition/addTruckPart/{id}")
+    public String showEditPageOfTruckPartsByExpedition (Model model, @PathVariable("id") Long id ){
+        TruckParts truckPart = truckPartsService.getById(id).orElseThrow(() -> new RuntimeException("Unavailable"));
+        Expedition expedition = truckPart.getExpedition();
+        List<TruckParts> truckPartsList = Lists.reverse(truckPartsService.getTruckPartsByExpedition(expedition));
+        model.addAttribute("truckPartsList",truckPartsList);
+        model.addAttribute("newTruckPart",truckPart);
+        model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
+        return "expeditionExtras/truckPart-list-add";
+    }
+
+    //Thymeleaf
+    @PostMapping(value = "/expedition/addTruckPart")
+    public String addExtraCostToExpedition(@ModelAttribute TruckParts truckPart){
+        truckPartsService.addTruckParts(truckPart);
+        return "redirect:/expedition/" + truckPart.getExpedition().getId() + "/addTruckPart";
+    }
+
+/*    @GetMapping("/truckparts/add")
     public ModelAndView getFormPage() {
-
         TruckParts truckParts = new TruckParts();
-
         ModelAndView modelAndView = new ModelAndView("truckparts");
         modelAndView.addObject("truckparts", truckParts);
         modelAndView.addObject("currencyCodeType", CurrencyCode.values());
@@ -49,19 +78,15 @@ public class TruckPartsController {
 
     @GetMapping("/truckparts/list")
     public ModelAndView getTruckParts(){
-
         ModelAndView modelAndView = new ModelAndView("truckpartslist");
         List<TruckParts> truckParts = truckPartsService.getTruckParts();
         modelAndView.addObject("truckparts", truckParts);
         return modelAndView;
-
     }
 
     @GetMapping("/expedition/listOfTruckParts")
     public ModelAndView getTruckPartsByExpedition(){
-
         Driver driver = driverStrategy.getDriver();
-
         ModelAndView modelAndView = new ModelAndView("truckpartslist");
         List<TruckParts> truckParts = truckPartsService.getTruckPartsByExpedition(driver.getExpedition());
         modelAndView.addObject("truckparts",truckParts);
@@ -71,7 +96,6 @@ public class TruckPartsController {
 
     @GetMapping("/truckparts/add/{id}")
     public ModelAndView getTruckPartsForm(@PathVariable Long id) {
-
         Optional<TruckParts> truckParts = truckPartsService.getById(id);
         ModelAndView modelAndView = new ModelAndView("truckparts");
         modelAndView.addObject("truckparts", truckParts);
@@ -86,39 +110,7 @@ public class TruckPartsController {
         //==check if currency rate for given code and date is already present in repository, if not then take it from API and add to repository=======
         currencyRateService.checkLatestCurrencyExchangeRate(truckParts.getCurrencyCode(),truckParts.getDateOfPurchase());
         return "redirect:/expedition/listOfTruckParts";
-    }
-
-    //Thymeleaf
-    @GetMapping(value = "/expedition/{id}/addTruckPart")
-    public String showAddPageOfTruckPartsByExpedition (Model model, @PathVariable("id") Long id ){
-        Expedition expedition = expeditionService.getExpeditionById(id).orElseThrow(() -> new RuntimeException("Unavailable"));
-        List<TruckParts> truckPartsList = Lists.reverse(truckPartsService.getTruckPartsByExpedition(expedition));
-        TruckParts truckPart = new TruckParts();
-        truckPart.setExpedition(expedition);
-        model.addAttribute("truckPartsList",truckPartsList);
-        model.addAttribute("newTruckPart",truckPart);
-        model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
-        return "truckPart-list-add";
-    }
-
-    //Thymeleaf
-    @GetMapping(value = "/expedition/addTruckPart/{id}")
-    public String showEditPageOfTruckPartsByExpedition (Model model, @PathVariable("id") Long id ){
-        TruckParts truckPart = truckPartsService.getById(id).orElseThrow(() -> new RuntimeException("Unavailable"));
-        Expedition expedition = truckPart.getExpedition();
-        List<TruckParts> truckPartsList = Lists.reverse(truckPartsService.getTruckPartsByExpedition(expedition));
-        model.addAttribute("truckPartsList",truckPartsList);
-        model.addAttribute("newTruckPart",truckPart);
-        model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
-        return "truckPart-list-add";
-    }
-
-    //Thymeleaf
-    @PostMapping(value = "/expedition/addTruckPart")
-    public String addExtraCostToExpedition(@ModelAttribute TruckParts truckPart){
-        truckPartsService.addTruckParts(truckPart);
-        return "redirect:/expedition/" + truckPart.getExpedition().getId() + "/addTruckPart";
-    }
+    }*/
 
 
 }

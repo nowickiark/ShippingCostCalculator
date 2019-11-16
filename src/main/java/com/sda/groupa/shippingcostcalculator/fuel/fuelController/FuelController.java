@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.thymeleaf.Thymeleaf;
 
 import java.io.IOException;
 import java.util.List;
@@ -37,7 +36,39 @@ public class FuelController {
         this.expeditionService = expeditionService;
     }
 
-    @GetMapping(value = "/fuelings")
+    //Thymeleaf
+    @PostMapping(value = "/expedition/addFuel")
+    public String addFuelToTheExpedition(@ModelAttribute Fuel fuel){
+        fuelService.addFueling(fuel);
+        return "redirect:/expedition/" + fuel.getExpedition().getId() + "/addFuel";
+    }
+
+    //Thymeleaf
+    @GetMapping(value = "/expedition/addFuel/{fuelId}")
+    public String showPageToEditExistingFuel(Model model,@PathVariable("fuelId") Long fuelId){
+        Fuel fuel = fuelService.findById(fuelId).orElseThrow(()-> new RuntimeException("Unavailable"));
+        Expedition expedition = fuel.getExpedition();
+        List<Fuel> fuelList = Lists.reverse(fuelService.findFuelsByExpedition(expedition));
+        model.addAttribute("fuelList",fuelList);
+        model.addAttribute("newFuel",fuel);
+        model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
+        return "expeditionExtras/fuel-list-add";
+    }
+
+    //Thymeleaf
+    @GetMapping(value = "/expedition/{id}/addFuel")
+    public String showPageOfFuelingsByExpedition (Model model,@PathVariable("id") Long id ){
+        Expedition expedition = expeditionService.getExpeditionById(id).orElseThrow(() -> new RuntimeException("Unavailable"));
+        List<Fuel> fuelList = Lists.reverse(fuelService.findFuelsByExpedition(expedition));
+        model.addAttribute("fuelList",fuelList);
+        Fuel fuel = new Fuel();
+        fuel.setExpedition(expedition);
+        model.addAttribute("newFuel",fuel);
+        model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
+        return "expeditionExtras/fuel-list-add";
+    }
+
+ /*   @GetMapping(value = "/fuelings")
     public ModelAndView getFuelPageWithListOfFuelings(){
         List<Fuel> listOfFuelings = fuelService.findAll();
         ModelAndView modelAndView = new ModelAndView("fuel");
@@ -86,39 +117,8 @@ public class FuelController {
         modelAndView.addObject("fuel", fuelService.findById(id));
         modelAndView.addObject("update", true);
         return modelAndView;
-    }
+    }*/
 
-    //Thymeleaf
-    @PostMapping(value = "/expedition/addFuel")
-    public String addFuelToTheExpedition(@ModelAttribute Fuel fuel){
-        fuelService.addFueling(fuel);
-        return "redirect:/expedition/" + fuel.getExpedition().getId() + "/addFuel";
-    }
-
-    //Thymeleaf
-    @GetMapping(value = "/expedition/addFuel/{fuelId}")
-    public String showPageToEditExistingFuel(Model model,@PathVariable("fuelId") Long fuelId){
-        Fuel fuel = fuelService.findById(fuelId).orElseThrow(()-> new RuntimeException("Unavailable"));
-        Expedition expedition = fuel.getExpedition();
-        List<Fuel> fuelList = Lists.reverse(fuelService.findFuelsByExpedition(expedition));
-        model.addAttribute("fuelList",fuelList);
-        model.addAttribute("newFuel",fuel);
-        model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
-        return "fuel-list-add";
-    }
-
-    //Thymeleaf
-    @GetMapping(value = "/expedition/{id}/addFuel")
-    public String showPageOfFuelingsByExpedition (Model model,@PathVariable("id") Long id ){
-        Expedition expedition = expeditionService.getExpeditionById(id).orElseThrow(() -> new RuntimeException("Unavailable"));
-        List<Fuel> fuelList = Lists.reverse(fuelService.findFuelsByExpedition(expedition));
-        model.addAttribute("fuelList",fuelList);
-        Fuel fuel = new Fuel();
-        fuel.setExpedition(expedition);
-        model.addAttribute("newFuel",fuel);
-        model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
-        return "fuel-list-add";
-    }
 
 
 }

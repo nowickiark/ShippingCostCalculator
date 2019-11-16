@@ -36,91 +36,40 @@
 <body>
 <!-- Left Panel -->
 
+<!-- /#left-panel -->
 <aside id="left-panel" class="left-panel">
     <nav class="navbar navbar-expand-sm navbar-default">
-
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li>
                     <a href="/spedytorHome"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                 </li>
                 <li class="menu-title">Details</li><!-- /.menu-title -->
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Drivers</a>
+                <li class="menu-item-has-children dropdown ">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Drivers</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-puzzle-piece"></i><a href="ui-buttons.html">All Drivers</a></li>
-                        <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">On road</a></li>
-                        <li><i class="fa fa-bars"></i><a href="ui-tabs.html">At home</a></li>
-                        <li><i class="fa fa-id-card-o"></i><a href="ui-cards.html">Old drivers</a></li>
+                        <li><i class="fa fa-bars"></i><a href="/driver/all">All Drivers</a></li>
+                        <li><i class="fa fa-puzzle-piece"></i><a href="/driver/add">New Driver</a></li>
                     </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false"> <i class="menu-icon fa fa-truck"></i>Trucks</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-truck"></i>Trucks</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-puzzle-piece"></i><a href="/truckList">List of trucks</a></li>
-                        <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">Add truck</a></li>
-                        <li><i class="fa fa-bars"></i><a href="ui-tabs.html">Statistics</a></li>
+                        <li><i class="fa fa-puzzle-piece"></i><a href="/truckList">All Trucks</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="/truck/add">New truck</a></li>
                     </ul>
                 </li>
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false"> <i class="menu-icon fa fa-road"></i>Expeditions</a>
+                <li class="menu-item-has-children dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-road"></i>Expeditions</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-puzzle-piece"></i><a href="ui-buttons.html">List of Expeditions</a></li>
-                        <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">New Expedition</a></li>
-                        <li><i class="fa fa-bars"></i><a href="ui-tabs.html">Statistics</a></li>
-                    </ul>
-                </li>
-
-                <li class="menu-title">Icons</li><!-- /.menu-title -->
-
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Icons</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-fort-awesome"></i><a href="font-fontawesome.html">Font Awesome</a>
-                        </li>
-                        <li><i class="menu-icon ti-themify-logo"></i><a href="font-themify.html">Themefy Icons</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="widgets.html"> <i class="menu-icon ti-email"></i>Widgets </a>
-                </li>
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false"> <i class="menu-icon fa fa-bar-chart"></i>Charts</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-line-chart"></i><a href="charts-chartjs.html">Chart JS</a></li>
-                        <li><i class="menu-icon fa fa-area-chart"></i><a href="charts-flot.html">Flot Chart</a></li>
-                        <li><i class="menu-icon fa fa-pie-chart"></i><a href="charts-peity.html">Peity Chart</a></li>
-                    </ul>
-                </li>
-
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false"> <i class="menu-icon fa fa-area-chart"></i>Maps</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-map-o"></i><a href="maps-gmap.html">Google Maps</a></li>
-                        <li><i class="menu-icon fa fa-street-view"></i><a href="maps-vector.html">Vector Maps</a></li>
-                    </ul>
-                </li>
-                <li class="menu-title">Extras</li><!-- /.menu-title -->
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Pages</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-sign-in"></i><a href="page-login.html">Login</a></li>
-                        <li><i class="menu-icon fa fa-sign-in"></i><a href="page-register.html">Register</a></li>
-                        <li><i class="menu-icon fa fa-paper-plane"></i><a href="pages-forget.html">Forget Pass</a></li>
+                        <li><i class="fa fa-puzzle-piece"></i><a href="/expedition/all">All Expeditions</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="/expedition/add">New Expedition</a></li>
                     </ul>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </nav>
-</aside><!-- /#left-panel -->
-
+</aside>
 <!-- Left Panel -->
 
 <!-- Right Panel -->
@@ -131,8 +80,8 @@
     <header id="header" class="header">
         <div class="top-left">
             <div class="navbar-header">
-                <a class="navbar-brand" href=".github"><img src="../static/images/logo.png" alt="Logo"></a>
-                <a class="navbar-brand hidden" href=".github"><img src="../static/images/logo2.png" alt="Logo"></a>
+                <a class="navbar-brand" href="../.github"><img src="../../static/images/logo.png" alt="Logo"></a>
+                <a class="navbar-brand hidden" href="../.github"><img src="../../static/images/logo2.png" alt="Logo"></a>
                 <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
             </div>
         </div>
@@ -181,7 +130,7 @@
                             <p class="red">You have 4 Mails</p>
                             <a class="dropdown-item media" href="#">
                                 <span class="photo media-left"><img alt="avatar"
-                                                                    src="../static/images/avatar/1.jpg"></span>
+                                                                    src="../../static/images/avatar/1.jpg"></span>
                                 <div class="message media-body">
                                     <span class="name float-left">Jonathan Smith</span>
                                     <span class="time float-right">Just now</span>
@@ -190,7 +139,7 @@
                             </a>
                             <a class="dropdown-item media" href="#">
                                 <span class="photo media-left"><img alt="avatar"
-                                                                    src="../static/images/avatar/2.jpg"></span>
+                                                                    src="../../static/images/avatar/2.jpg"></span>
                                 <div class="message media-body">
                                     <span class="name float-left">Jack Sanders</span>
                                     <span class="time float-right">5 minutes ago</span>
@@ -199,7 +148,7 @@
                             </a>
                             <a class="dropdown-item media" href="#">
                                 <span class="photo media-left"><img alt="avatar"
-                                                                    src="../static/images/avatar/3.jpg"></span>
+                                                                    src="../../static/images/avatar/3.jpg"></span>
                                 <div class="message media-body">
                                     <span class="name float-left">Cheryl Wheeler</span>
                                     <span class="time float-right">10 minutes ago</span>
@@ -208,7 +157,7 @@
                             </a>
                             <a class="dropdown-item media" href="#">
                                 <span class="photo media-left"><img alt="avatar"
-                                                                    src="../static/images/avatar/4.jpg"></span>
+                                                                    src="../../static/images/avatar/4.jpg"></span>
                                 <div class="message media-body">
                                     <span class="name float-left">Rachel Santos</span>
                                     <span class="time float-right">15 minutes ago</span>
@@ -222,7 +171,7 @@
                 <div class="user-area dropdown float-right">
                     <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false">
-                        <img class="user-avatar rounded-circle" src="../static/images/admin.jpg" alt="User Avatar">
+                        <img class="user-avatar rounded-circle" src="../../static/images/admin.jpg" alt="User Avatar">
                     </a>
 
                     <div class="user-menu dropdown-menu">
@@ -277,7 +226,7 @@
                             <strong>Add Freight Rate</strong>
                         </div>
                         <div class="card-body card-block">
-                            <form th:action="@{/expedition/addBorderCross}" th:object="${newBorderCross}" method="post"
+                            <form th:action="@{/expedition/addTruckPart}" th:object="${newTruckPart}" method="post"
                                   enctype="multipart/form-data" class="form-horizontal">
 
                                 <div class="row">
@@ -291,26 +240,44 @@
                                                                                 placeholder=""
                                                                                 class="form-control"
                                                                                 readonly>
-                                                <small class="form-text text-muted">Id of the border cross</small>
+                                                <small class="form-text text-muted">Id of the freight rate</small>
                                             </div>
                                         </div>
-
                                         <div class="row form-group">
-                                            <div class="col col-md-3"><label for="border-input"
-                                                                             class=" form-control-label">
-                                                                                Border</label>
+                                            <div class="col col-md-3"><label for="description-input"
+                                                                             class=" form-control-label">Description</label>
                                             </div>
-                                            <div class="col-12 col-md-9">
-                                                <select th:field="*{borders.id}" data-placeholder="Choose a Currency..." class="standardSelect form-control" id="border-input">
-                                                    <option value="" label="default"></option>
-                                                    <option th:each="singleBorders:${bordersList}" th:value="${singleBorders.id}" th:text="${singleBorders.getCountryFrom() + ' ' + singleBorders.getCityFrom() + ' to ' + singleBorders.getCountryTo() + ' ' + singleBorders.getCityTo()} " ></option>
-                                                </select>
-                                                <small class="form-text text-muted">Choose a border, if border is not ont the please add <a class="px-1 fa fa-plus-square" th:href="@{/border/add}"  title="add new border"></a></small>
+                                            <div class="col-12 col-md-9"><input th:field="*{description}"
+                                                                                type="text"
+                                                                                id="description-input"
+                                                                                placeholder="eg Higway Toll"
+                                                                                class="form-control">
+                                                <small class="form-text text-muted">Description of the cost</small>
                                             </div>
-
                                         </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="amount-input"
+                                                                             class=" form-control-label">Cost</label>
+                                            </div>
 
+                                            <div class="col-12 col-md-9">
+                                                <div class="row">
+                                                    <div class="col-12 col-md-9">
+                                                        <input th:field="*{cost}" type="text"
+                                                               id="amount-input" placeholder="eg 1457.45"
+                                                               class="form-control">
+                                                        <small class="form-text text-muted">Amount of money payed.</small>
+                                                    </div>
 
+                                                    <div class="col col-md-3 ">
+                                                        <select th:field="*{currencyCode}" data-placeholder="Choose a Currency..." class="standardSelect form-control" id="payment-currency-input">
+                                                            <option value="" label="default"></option>
+                                                            <option th:each="currencyCodeType:${currencyCodeTypeList}" th:value="${currencyCodeType}" th:text="${currencyCodeType}" ></option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="row form-group">
@@ -329,10 +296,10 @@
                                             <div class="col col-md-3"><label for="date-input"
                                                                              class=" form-control-label">Date</label>
                                             </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{dateOfBorderCrossing}" type="date"
+                                            <div class="col-12 col-md-9"><input th:field="*{dateOfPurchase}" type="date"
                                                                                 id="date-input" placeholder=""
                                                                                 class="form-control">
-                                                <small class="form-text text-muted">Dote of crossing the border</small>
+                                                <small class="form-text text-muted">Dote of starting freight</small>
                                             </div>
                                         </div>
                                     </div>
@@ -357,7 +324,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Freight rates for expedition </strong>
+                            <strong class="card-title">Truck parts for expedition </strong>
                         </div>
                         <div class="table-stats order-table ov-h">
                             <table class="table ">
@@ -365,27 +332,23 @@
                                 <tr>
                                     <th>Fueling id</th>
                                     <th>Expedition</th>
+                                    <th>Description</th>
+                                    <th>Cost</th>
+                                    <th>Currency</th>
                                     <th>Date</th>
-                                    <th>Country from</th>
-                                    <th>City from</th>
-                                    <th>Country to</th>
-                                    <th>City to</th>
-                                    <th>Distance</th>
                                     <th>Edit</th>
                                 </tr>
                                 </thead>
                                 <tbody>
 
-                                <tr th:each="bC : ${borderCrossList}">
-                                    <td><span class="serial" th:text="${bC.id}">Id</span></td>
-                                    <td><span class="serial" th:text="${bC.expedition.getId()}">Id</span></td>
-                                    <td><span class="product" th:text="${bC.getDateOfBorderCrossing()}">Date</span></td>
-                                    <td><span class="product" th:text="${bC.borders.getCountryFrom()}">Company</span></td>
-                                    <td><span class="product" th:text="${bC.borders.getCityFrom()}">Departure</span></td>
-                                    <td><span class="product" th:text="${bC.borders.getCountryTo()}">Arrival</span></td>
-                                    <td><span class="product" th:text="${bC.borders.getCityTo()}">Amount</span></td>
-                                    <td><a class="px-1 fa fa-gear" th:href="@{/expedition/addBorderCross/{id} (id=${bC.id})}"  title="Edit"></a></td>
-                                    <!--<td><a class="btn btn-secondary active" role="button" aria-pressed="true" th:href="@{/fuel/add/{id}(id=${fuel.id})}">Fuel details</a></td>-->
+                                <tr th:each="tP : ${truckPartsList}">
+                                    <td><span class="serial" th:text="${tP.id}">Id</span></td>
+                                    <td><span class="serial" th:text="${tP.expedition.getId()}">Id</span></td>
+                                    <td><span class="product" th:text="${tP.description}">Description</span></td>
+                                    <td><span class="product" th:text="${tP.cost}">Cost</span></td>
+                                    <td><span class="product" th:text="${tP.currencyCode}">Currency</span></td>
+                                    <td><span class="product" th:text="${tP.dateOfPurchase}">Date</span></td>
+                                    <td><a class="px-1 fa fa-gear" th:href="@{/expedition/addTruckPart/{id} (id=${tP.id})}"  title="Edit"></a></td>
                                 </tr>
 
                                 </tbody>

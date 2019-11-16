@@ -31,83 +31,40 @@
 <body>
     <!-- Left Panel -->
 
+    <!-- /#left-panel -->
     <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
-
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li>
                         <a href="/spedytorHome"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
                     <li class="menu-title">Details</li><!-- /.menu-title -->
-                    <li class="menu-item-has-children dropdown">
+                    <li class="menu-item-has-children dropdown ">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Drivers</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-puzzle-piece"></i><a href="ui-buttons.html">All Drivers</a></li>
-                            <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">On road</a></li>
-                            <li><i class="fa fa-bars"></i><a href="ui-tabs.html">At home</a></li>
-                            <li><i class="fa fa-id-card-o"></i><a href="ui-cards.html">Old drivers</a></li>
+                            <li><i class="fa fa-bars"></i><a href="/driver/all">All Drivers</a></li>
+                            <li><i class="fa fa-puzzle-piece"></i><a href="/driver/add">New Driver</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-truck"></i>Trucks</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-truck"></i>Trucks</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-puzzle-piece"></i><a href="/truckList">List of trucks</a></li>
-                            <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">Add truck</a></li>
-                            <li><i class="fa fa-bars"></i><a href="ui-tabs.html">Statistics</a></li>
+                            <li><i class="fa fa-puzzle-piece"></i><a href="/truckList">All Trucks</a></li>
+                            <li><i class="fa fa-id-badge"></i><a href="/truck/add">New truck</a></li>
                         </ul>
                     </li>
-                    <li class="menu-item-has-children dropdown">
+                    <li class="menu-item-has-children dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-road"></i>Expeditions</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-puzzle-piece"></i><a href="ui-buttons.html">List of Expeditions</a></li>
-                            <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">New Expedition</a></li>
-                            <li><i class="fa fa-bars"></i><a href="ui-tabs.html">Statistics</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="menu-title">Icons</li><!-- /.menu-title -->
-
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Icons</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="font-fontawesome.html">Font Awesome</a></li>
-                            <li><i class="menu-icon ti-themify-logo"></i><a href="font-themify.html">Themefy Icons</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="widgets.html"> <i class="menu-icon ti-email"></i>Widgets </a>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart"></i>Charts</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-line-chart"></i><a href="charts-chartjs.html">Chart JS</a></li>
-                            <li><i class="menu-icon fa fa-area-chart"></i><a href="charts-flot.html">Flot Chart</a></li>
-                            <li><i class="menu-icon fa fa-pie-chart"></i><a href="charts-peity.html">Peity Chart</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-area-chart"></i>Maps</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-map-o"></i><a href="maps-gmap.html">Google Maps</a></li>
-                            <li><i class="menu-icon fa fa-street-view"></i><a href="maps-vector.html">Vector Maps</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-title">Extras</li><!-- /.menu-title -->
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Pages</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="page-login.html">Login</a></li>
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="page-register.html">Register</a></li>
-                            <li><i class="menu-icon fa fa-paper-plane"></i><a href="pages-forget.html">Forget Pass</a></li>
+                            <li><i class="fa fa-puzzle-piece"></i><a href="/expedition/all">All Expeditions</a></li>
+                            <li><i class="fa fa-id-badge"></i><a href="/expedition/add">New Expedition</a></li>
                         </ul>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
-    </aside><!-- /#left-panel -->
-
+    </aside>
     <!-- Left Panel -->
 
     <!-- Right Panel -->
@@ -118,8 +75,8 @@
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href=".github"><img src="../static/images/logo.png" alt="Logo"></a>
-                    <a class="navbar-brand hidden" href=".github"><img src="../static/images/logo2.png" alt="Logo"></a>
+                    <a class="navbar-brand" href="../.github"><img src="../../static/images/logo.png" alt="Logo"></a>
+                    <a class="navbar-brand hidden" href="../.github"><img src="../../static/images/logo2.png" alt="Logo"></a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
@@ -164,7 +121,7 @@
                             <div class="dropdown-menu" aria-labelledby="message">
                                 <p class="red">You have 4 Mails</p>
                                 <a class="dropdown-item media" href="#">
-                                    <span class="photo media-left"><img alt="avatar" src="../static/images/avatar/1.jpg"></span>
+                                    <span class="photo media-left"><img alt="avatar" src="../../static/images/avatar/1.jpg"></span>
                                     <div class="message media-body">
                                         <span class="name float-left">Jonathan Smith</span>
                                         <span class="time float-right">Just now</span>
@@ -172,7 +129,7 @@
                                     </div>
                                 </a>
                                 <a class="dropdown-item media" href="#">
-                                    <span class="photo media-left"><img alt="avatar" src="../static/images/avatar/2.jpg"></span>
+                                    <span class="photo media-left"><img alt="avatar" src="../../static/images/avatar/2.jpg"></span>
                                     <div class="message media-body">
                                         <span class="name float-left">Jack Sanders</span>
                                         <span class="time float-right">5 minutes ago</span>
@@ -180,7 +137,7 @@
                                     </div>
                                 </a>
                                 <a class="dropdown-item media" href="#">
-                                    <span class="photo media-left"><img alt="avatar" src="../static/images/avatar/3.jpg"></span>
+                                    <span class="photo media-left"><img alt="avatar" src="../../static/images/avatar/3.jpg"></span>
                                     <div class="message media-body">
                                         <span class="name float-left">Cheryl Wheeler</span>
                                         <span class="time float-right">10 minutes ago</span>
@@ -188,7 +145,7 @@
                                     </div>
                                 </a>
                                 <a class="dropdown-item media" href="#">
-                                    <span class="photo media-left"><img alt="avatar" src="../static/images/avatar/4.jpg"></span>
+                                    <span class="photo media-left"><img alt="avatar" src="../../static/images/avatar/4.jpg"></span>
                                     <div class="message media-body">
                                         <span class="name float-left">Rachel Santos</span>
                                         <span class="time float-right">15 minutes ago</span>
@@ -201,7 +158,7 @@
 
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="../static/images/admin.jpg" alt="User Avatar">
+                            <img class="user-avatar rounded-circle" src="../../static/images/admin.jpg" alt="User Avatar">
                         </a>
 
                         <div class="user-menu dropdown-menu">
@@ -253,32 +210,51 @@
                             <strong>Add Truck</strong>
                         </div>
                         <div class="card-body card-block">
-                            <form th:action="@{/truck/add}" th:object="${truck}" method="post" enctype="multipart/form-data" class="form-horizontal" >
-                                <!--<div class="row form-group">
-                                    <div class="col col-md-3"><label class=" form-control-label">Idc</label></div>
-                                    <div class="col-12 col-md-9">
-                                        <p class="form-control-static" th:field="*{id}">Id</p>
-                                    </div>
-                                </div>-->
+                            <form th:action="@{/expedition/add}" th:object="${expedition}" method="post" enctype="multipart/form-data" class="form-horizontal" >
+
                                 <div class="row form-group">
                                     <div class="col col-md-3"><label for="id-input" class=" form-control-label">Id</label></div>
                                     <div class="col-12 col-md-9"><input th:field="*{id}" type="text" id="id-input" placeholder="" class="form-control" readonly><small class="form-text text-muted">Id of the truck</small></div>
                                 </div>
+
                                 <div class="row form-group">
-                                    <div class="col col-md-3"><label for="plate-input" class=" form-control-label">Truck Plate Number</label></div>
-                                    <div class="col-12 col-md-9"><input th:field="*{plateNumber}" type="text" id="plate-input" placeholder="Number" class="form-control"><small class="form-text text-muted">Truck and Trailer plate numbers</small></div>
+                                    <div class="col col-md-3"><label for="start-place-input" class=" form-control-label">Starting place</label></div>
+                                    <div class="col-12 col-md-9"><input th:field="*{startingPlace}" type="text" id="start-place-input" placeholder="Eg Poznań" class="form-control"><small class="form-text text-muted">Name of the city for starting expedition</small></div>
                                 </div>
+
                                 <div class="row form-group">
-                                    <div class="col col-md-3"><label for="brand-input" class=" form-control-label">Brand</label></div>
-                                    <div class="col-12 col-md-9"><input th:field="*{brand}" type="text" id="brand-input" placeholder="eg TGX 18.440 " class="form-control"><small class="form-text text-muted">Brand name</small></div>
+                                    <div class="col col-md-3">
+                                        <label for="truck-input" class=" form-control-label">Truck</label></div>
+                                    <div class="col-12 col-md-9">
+                                            <select th:field="*{truck.id}" data-placeholder="Choose a Truck..." class="standardSelect form-control" tabindex="1" id="truck-input">
+                                                <option value="" label="default"></option>
+                                                <option th:each="singleTruck:${trucks}" th:value="${singleTruck.id}" th:text="${singleTruck.getPlateNumber()}" ></option>
+                                            </select>
+                                        <small class="form-text text-muted">Choose a truck, if he's is not ont the please add <a class="px-1 fa fa-plus-square" th:href="@{/truck/add}"  title="add new truck"></a></small>
+                                    </div>
                                 </div>
+
                                 <div class="row form-group">
-                                    <div class="col col-md-3"><label for="model-input" class=" form-control-label">Model</label></div>
-                                    <div class="col-12 col-md-9"><input th:field="*{model}" type="text" id="model-input" placeholder="eg Man" class="form-control"><small class="form-text text-muted">Model name</small></div>
+                                    <div class="col col-md-3">
+                                        <label for="driver-input" class=" form-control-label">Driver</label></div>
+                                    <div class="col-12 col-md-9">
+
+                                            <select th:field="*{driver.id}" data-placeholder="Choose a Driver..." class="standardSelect form-control" tabindex="1" id="driver-input">
+                                                <option value="" label="default"></option>
+                                                <option th:each="driver:${drivers}" th:value="${driver.id}" th:text="${driver.getFirstName() + ' ' + driver.getSurname()}"></option>
+                                            </select>
+                                        <small class="form-text text-muted">Choose a driver, if he's is not ont the please add <a class="px-1 fa fa-plus-square" th:href="@{/driver/add}"  title="add new driver"></a></small>
+                                    </div>
                                 </div>
+
                                 <div class="row form-group">
-                                    <div class="col col-md-3"><label for="power-input" class=" form-control-label">Horse Power</label></div>
-                                    <div class="col-12 col-md-9"><input th:field="*{horsePower}" type="text" id="power-input" placeholder="eg 440 " class="form-control"><small class="form-text text-muted">Horse power number</small></div>
+                                    <div class="col col-md-3"><label for="start-odometer-input" class=" form-control-label">Odometer reading</label></div>
+                                    <div class="col-12 col-md-9"><input th:field="*{startOdometerReading}" type="number" id="start-odometer-input" placeholder="" class="form-control"><small class="form-text text-muted">Odometer reading when starting expedition</small></div>
+                                </div>
+
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label for="start-day-input" class=" form-control-label">Date</label></div>
+                                    <div class="col-12 col-md-9"><input th:field="*{startDay}" type="date" id="start-day-input" placeholder="" class="form-control"><small class="form-text text-muted">Starting day of an expedition</small></div>
                                 </div>
 
                                 <div class="card-footer">
@@ -326,8 +302,18 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-<script src="../static/js/main.js"></script>
+<script src="../../static/js/main.js"></script>
 
+
+    <script>
+        jQuery(document).ready(function() {
+            jQuery(".standardSelect").chosen({
+                disable_search_threshold: 10,
+                no_results_text: "Oops, nothing found!",
+                width: "100%"
+            });
+        });
+    </script>
 
 </body>
 </html>

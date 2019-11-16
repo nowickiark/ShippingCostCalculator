@@ -36,91 +36,40 @@
 <body>
 <!-- Left Panel -->
 
+<!-- /#left-panel -->
 <aside id="left-panel" class="left-panel">
     <nav class="navbar navbar-expand-sm navbar-default">
-
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li>
                     <a href="/spedytorHome"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                 </li>
                 <li class="menu-title">Details</li><!-- /.menu-title -->
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Drivers</a>
+                <li class="menu-item-has-children dropdown ">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Drivers</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-puzzle-piece"></i><a href="ui-buttons.html">All Drivers</a></li>
-                        <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">On road</a></li>
-                        <li><i class="fa fa-bars"></i><a href="ui-tabs.html">At home</a></li>
-                        <li><i class="fa fa-id-card-o"></i><a href="ui-cards.html">Old drivers</a></li>
+                        <li><i class="fa fa-bars"></i><a href="/driver/all">All Drivers</a></li>
+                        <li><i class="fa fa-puzzle-piece"></i><a href="/driver/add">New Driver</a></li>
                     </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false"> <i class="menu-icon fa fa-truck"></i>Trucks</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-truck"></i>Trucks</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-puzzle-piece"></i><a href="/truckList">List of trucks</a></li>
-                        <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">Add truck</a></li>
-                        <li><i class="fa fa-bars"></i><a href="ui-tabs.html">Statistics</a></li>
+                        <li><i class="fa fa-puzzle-piece"></i><a href="/truckList">All Trucks</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="/truck/add">New truck</a></li>
                     </ul>
                 </li>
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false"> <i class="menu-icon fa fa-road"></i>Expeditions</a>
+                <li class="menu-item-has-children dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-road"></i>Expeditions</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-puzzle-piece"></i><a href="ui-buttons.html">List of Expeditions</a></li>
-                        <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">New Expedition</a></li>
-                        <li><i class="fa fa-bars"></i><a href="ui-tabs.html">Statistics</a></li>
-                    </ul>
-                </li>
-
-                <li class="menu-title">Icons</li><!-- /.menu-title -->
-
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Icons</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-fort-awesome"></i><a href="font-fontawesome.html">Font Awesome</a>
-                        </li>
-                        <li><i class="menu-icon ti-themify-logo"></i><a href="font-themify.html">Themefy Icons</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="widgets.html"> <i class="menu-icon ti-email"></i>Widgets </a>
-                </li>
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false"> <i class="menu-icon fa fa-bar-chart"></i>Charts</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-line-chart"></i><a href="charts-chartjs.html">Chart JS</a></li>
-                        <li><i class="menu-icon fa fa-area-chart"></i><a href="charts-flot.html">Flot Chart</a></li>
-                        <li><i class="menu-icon fa fa-pie-chart"></i><a href="charts-peity.html">Peity Chart</a></li>
-                    </ul>
-                </li>
-
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false"> <i class="menu-icon fa fa-area-chart"></i>Maps</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-map-o"></i><a href="maps-gmap.html">Google Maps</a></li>
-                        <li><i class="menu-icon fa fa-street-view"></i><a href="maps-vector.html">Vector Maps</a></li>
-                    </ul>
-                </li>
-                <li class="menu-title">Extras</li><!-- /.menu-title -->
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Pages</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-sign-in"></i><a href="page-login.html">Login</a></li>
-                        <li><i class="menu-icon fa fa-sign-in"></i><a href="page-register.html">Register</a></li>
-                        <li><i class="menu-icon fa fa-paper-plane"></i><a href="pages-forget.html">Forget Pass</a></li>
+                        <li><i class="fa fa-puzzle-piece"></i><a href="/expedition/all">All Expeditions</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="/expedition/add">New Expedition</a></li>
                     </ul>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </nav>
-</aside><!-- /#left-panel -->
-
+</aside>
 <!-- Left Panel -->
 
 <!-- Right Panel -->
@@ -131,8 +80,8 @@
     <header id="header" class="header">
         <div class="top-left">
             <div class="navbar-header">
-                <a class="navbar-brand" href=".github"><img src="../static/images/logo.png" alt="Logo"></a>
-                <a class="navbar-brand hidden" href=".github"><img src="../static/images/logo2.png" alt="Logo"></a>
+                <a class="navbar-brand" href="../.github"><img src="../../static/images/logo.png" alt="Logo"></a>
+                <a class="navbar-brand hidden" href="../.github"><img src="../../static/images/logo2.png" alt="Logo"></a>
                 <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
             </div>
         </div>
@@ -181,7 +130,7 @@
                             <p class="red">You have 4 Mails</p>
                             <a class="dropdown-item media" href="#">
                                 <span class="photo media-left"><img alt="avatar"
-                                                                    src="../static/images/avatar/1.jpg"></span>
+                                                                    src="../../static/images/avatar/1.jpg"></span>
                                 <div class="message media-body">
                                     <span class="name float-left">Jonathan Smith</span>
                                     <span class="time float-right">Just now</span>
@@ -190,7 +139,7 @@
                             </a>
                             <a class="dropdown-item media" href="#">
                                 <span class="photo media-left"><img alt="avatar"
-                                                                    src="../static/images/avatar/2.jpg"></span>
+                                                                    src="../../static/images/avatar/2.jpg"></span>
                                 <div class="message media-body">
                                     <span class="name float-left">Jack Sanders</span>
                                     <span class="time float-right">5 minutes ago</span>
@@ -199,7 +148,7 @@
                             </a>
                             <a class="dropdown-item media" href="#">
                                 <span class="photo media-left"><img alt="avatar"
-                                                                    src="../static/images/avatar/3.jpg"></span>
+                                                                    src="../../static/images/avatar/3.jpg"></span>
                                 <div class="message media-body">
                                     <span class="name float-left">Cheryl Wheeler</span>
                                     <span class="time float-right">10 minutes ago</span>
@@ -208,7 +157,7 @@
                             </a>
                             <a class="dropdown-item media" href="#">
                                 <span class="photo media-left"><img alt="avatar"
-                                                                    src="../static/images/avatar/4.jpg"></span>
+                                                                    src="../../static/images/avatar/4.jpg"></span>
                                 <div class="message media-body">
                                     <span class="name float-left">Rachel Santos</span>
                                     <span class="time float-right">15 minutes ago</span>
@@ -222,7 +171,7 @@
                 <div class="user-area dropdown float-right">
                     <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false">
-                        <img class="user-avatar rounded-circle" src="../static/images/admin.jpg" alt="User Avatar">
+                        <img class="user-avatar rounded-circle" src="../../static/images/admin.jpg" alt="User Avatar">
                     </a>
 
                     <div class="user-menu dropdown-menu">
@@ -274,15 +223,15 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong>Add Freight Rate</strong>
+                            <strong>Add Truck</strong>
                         </div>
                         <div class="card-body card-block">
-                            <form th:action="@{/border/add}" th:object="${newBorder}" method="post"
+                            <form th:action="@{/expedition/addFuel}" th:object="${newFuel}" method="post"
                                   enctype="multipart/form-data" class="form-horizontal">
 
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <div class="row form-group d-none">
+                                        <div class="row form-group">
                                             <div class="col col-md-3"><label for="id-input"
                                                                              class=" form-control-label">Id</label>
                                             </div>
@@ -291,64 +240,113 @@
                                                                                 placeholder=""
                                                                                 class="form-control"
                                                                                 readonly>
-                                                <small class="form-text text-muted">Id of the border cross</small>
-                                            </div>
-                                        </div>
-
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="cFrom-input"
-                                                                             class=" form-control-label">Country from</label>
-                                            </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{countryFrom}"
-                                                                                type="text"
-                                                                                id="cFrom-input"
-                                                                                placeholder="eg Poland"
-                                                                                class="form-control"
-                                                                                autofocus>
-                                                <small class="form-text text-muted">Country of departure</small>
+                                                <small class="form-text text-muted">Id of the fuel</small>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3"><label for="ciFrom-input"
-                                                                             class=" form-control-label">City from</label>
+                                            <div class="col col-md-3"><label for="place-input"
+                                                                             class=" form-control-label">Place</label>
                                             </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{cityFrom}"
+                                            <div class="col-12 col-md-9"><input th:field="*{placeOfRefueling}"
                                                                                 type="text"
-                                                                                id="ciFrom-input"
+                                                                                id="place-input"
                                                                                 placeholder="eg Poznań"
                                                                                 class="form-control"
                                                                                 autofocus>
-                                                <small class="form-text text-muted">City of departure</small>
+                                                <small class="form-text text-muted">City of fueling</small>
                                             </div>
                                         </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="liters-input"
+                                                                             class=" form-control-label">Liters</label>
+                                            </div>
+                                            <div class="col-12 col-md-9"><input th:field="*{liters}"
+                                                                                type="number"
+                                                                                id="liters-input" placeholder="eg 124"
+                                                                                class="form-control">
+                                                <small class="form-text text-muted">Number of liters fueld</small>
+                                            </div>
+                                        </div>
+                                         <div class="row form-group">
+                                                <div class="col col-md-3"><label for="cost-input"
+                                                                                 class=" form-control-label">Cost</label>
+                                                </div>
 
+                                             <div class="col-12 col-md-9">
+                                                <div class="row">
+                                                    <div class="col-12 col-md-9">
+                                                                <input th:field="*{cost}" type="number"
+                                                                                                id="cost-input" placeholder="eg 1457.45"
+                                                                                                class="form-control">
+                                                        <small class="form-text text-muted">Total cost for fuel</small>
+                                                    </div>
 
+                                                    <div class="col col-md-3 ">
+                                                        <select th:field="*{currencyCode}" data-placeholder="Choose a Currency..." class="standardSelect form-control" id="payment-currency-input">
+                                                            <option value="" label="default"></option>
+                                                            <option th:each="currencyCodeType:${currencyCodeTypeList}" th:value="${currencyCodeType}" th:text="${currencyCodeType}" ></option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                             </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="payment-input"
+                                                                             class=" form-control-label">Payment</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <input th:field="*{paymentMethod}" type="text"
+                                                       id="payment-input"
+                                                       placeholder="eg cash"
+                                                       class="form-control">
+                                                <small class="form-text text-muted">Payment method</small>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="row form-group">
-                                            <div class="col col-md-3"><label for="cTo-input"
-                                                                             class=" form-control-label">Country to</label>
+                                            <div class="col col-md-3"><label for="expedition-input"
+                                                                             class=" form-control-label">Expedition</label>
                                             </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{countryTo}"
-                                                                                type="text"
-                                                                                id="cTo-input"
-                                                                                placeholder="eg Poland"
+                                            <div class="col-12 col-md-9"><input th:field="*{expedition}" type="text"
+                                                                                id="expedition-input"
+                                                                                placeholder="Number"
                                                                                 class="form-control"
-                                                                                autofocus>
-                                                <small class="form-text text-muted">Country of border</small>
+                                                                                readonly tabindex="-1">
+                                                <small class="form-text text-muted">Expedition id</small>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3"><label for="ciTo-input"
-                                                                             class=" form-control-label">City to</label>
+                                            <div class="col col-md-3"><label for="kilometers-input"
+                                                                             class=" form-control-label">Kilometers</label>
                                             </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{cityTo}"
+                                            <div class="col-12 col-md-9"><input th:field="*{kilometers}" type="number"
+                                                                                id="kilometers-input"
+                                                                                placeholder="eg 440"
+                                                                                class="form-control">
+                                                <small class="form-text text-muted">Number of kilometers while loading</small>
+                                            </div>
+                                        </div>
+
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="date-input"
+                                                                             class=" form-control-label">Date</label>
+                                            </div>
+                                            <div class="col-12 col-md-9"><input th:field="*{dateOfFueling}" type="date"
+                                                                                id="date-input" placeholder=""
+                                                                                class="form-control">
+                                                <small class="form-text text-muted">Dote of fueling</small>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="full-input"
+                                                                             class=" form-control-label">Full</label>
+                                            </div>
+                                            <div class="col-12 col-md-9"><input th:field="*{refuelingToFull}"
                                                                                 type="text"
-                                                                                id="ciTo-input"
-                                                                                placeholder="eg Poznań"
-                                                                                class="form-control"
-                                                                                autofocus>
-                                                <small class="form-text text-muted">City of border</small>
+                                                                                id="full-input" placeholder="eg true or false"
+                                                                                class="form-control">
+                                                <small class="form-text text-muted">Fueling tank to full?</small>
                                             </div>
                                         </div>
                                     </div>
@@ -373,29 +371,41 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">List of borders</strong>
+                            <strong class="card-title">Fuelings of expedition </strong>
                         </div>
                         <div class="table-stats order-table ov-h">
                             <table class="table ">
                                 <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Country from</th>
-                                    <th>City from</th>
-                                    <th>Country to</th>
-                                    <th>City to</th>
+                                    <th>Fueling id</th>
+                                    <th>Expedition</th>
+                                    <th>Place</th>
+                                    <th>Liters</th>
+                                    <th>Cost</th>
+                                    <th>Currency</th>
+                                    <th>Kilometers</th>
+                                    <th>Payment</th>
+                                    <th>Date</th>
+                                    <th>Full</th>
                                     <th>Edit</th>
                                 </tr>
                                 </thead>
                                 <tbody>
 
-                                <tr th:each="bo : ${bordersList}">
-                                    <td><span class="serial" th:text="${bo.id}">Id</span></td>
-                                    <td><span class="product" th:text="${bo.countryFrom}">Company</span></td>
-                                    <td><span class="product" th:text="${bo.cityFrom}">Departure</span></td>
-                                    <td><span class="product" th:text="${bo.countryTo}">Company</span></td>
-                                    <td><span class="product" th:text="${bo.cityTo}">Departure</span></td>
-                                    <td><a class="px-1 fa fa-gear" th:href="@{/border/add/{id} (id=${bo.id})}"  title="Edit"></a></td>
+                                <tr th:each="fuel : ${fuelList}">
+                                    <td><span class="serial" th:text="${fuel.id}">Id</span></td>
+                                    <td><span class="serial" th:text="${fuel.expedition.getId()}">Id</span></td>
+                                    <td><span class="product"
+                                              th:text="${fuel.placeOfRefueling}">Place of Refueling</span>
+                                    </td>
+                                    <td><span class="product" th:text="${fuel.liters}">Number of Liter</span></td>
+                                    <td><span class="product" th:text="${fuel.cost}">Total cost</span></td>
+                                    <td><span class="product" th:text="${fuel.currencyCode}">Currency</span></td>
+                                    <td><span class="product" th:text="${fuel.kilometers}">Kilometers on gauge</span></td>
+                                    <td><span class="product" th:text="${fuel.paymentMethod}">Payment Method</span></td>
+                                    <td><span class="productt" th:text="${fuel.dateOfFueling}">Date</span></td>
+                                    <td><span class="product" th:text="${fuel.refuelingToFull}">Was is fueled to full</span></td>
+                                    <td><a class="px-1 fa fa-gear" th:href="@{/expedition/addFuel/{fuelId} (fuelId=${fuel.id})}"  title="fuel"></a></td>
                                     <!--<td><a class="btn btn-secondary active" role="button" aria-pressed="true" th:href="@{/fuel/add/{id}(id=${fuel.id})}">Fuel details</a></td>-->
                                 </tr>
 

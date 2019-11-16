@@ -5,7 +5,6 @@ import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.Curren
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.service.CurrencyRateService;
 import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
 import com.sda.groupa.shippingcostcalculator.expedition.service.ExpeditionService;
-import com.sda.groupa.shippingcostcalculator.extraCosts.model.ExtraCost;
 import com.sda.groupa.shippingcostcalculator.freightRate.exception.FreightNotFoundException;
 import com.sda.groupa.shippingcostcalculator.freightRate.model.FreightRate;
 import com.sda.groupa.shippingcostcalculator.freightRate.service.FreightRateService;
@@ -35,7 +34,40 @@ public class FreightRateController {
         this.currencyRateService = currencyRateService;
     }
 
-    @GetMapping("/freightRateList")
+    //Thymeleaf
+    @GetMapping(value = "/expedition/{id}/addFreightRate")
+    public String showPageOfFreightRatesByExpedition (Model model, @PathVariable("id") Long id ){
+        Expedition expedition = expeditionService.getExpeditionById(id).orElseThrow(() -> new RuntimeException("Unavailable"));
+        List<FreightRate> freightRatesList = Lists.reverse(freightRateService.findFreightRatesByExpedition(expedition));
+        model.addAttribute("freightRatesList",freightRatesList);
+        Fuel fuel = new Fuel();
+        FreightRate freightRate = new FreightRate();
+        freightRate.setExpedition(expedition);
+        model.addAttribute("newFreightRate",freightRate);
+        model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
+        return "expeditionExtras/freightRate-list-add";
+    }
+
+    //Thymeleaf
+    @GetMapping(value = "/expedition/addFreightRate/{freightRateId}")
+    public String showPageToEditExistingFreightRate(Model model,@PathVariable("freightRateId") Long freightRateId){
+        FreightRate freightRate = freightRateService.getFreightrateById(freightRateId).orElseThrow(()-> new RuntimeException("Unavailable"));
+        Expedition expedition = freightRate.getExpedition();
+        List<FreightRate> freightRatesList = Lists.reverse(freightRateService.findFreightRatesByExpedition(expedition));
+        model.addAttribute("freightRatesList",freightRatesList);
+        model.addAttribute("newFreightRate",freightRate);
+        model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
+        return "expeditionExtras/freightRate-list-add";
+    }
+
+    //Thymeleaf
+    @PostMapping(value = "/expedition/addFreightRate")
+    public String addFuelToTheExpedition(@ModelAttribute FreightRate freightRate){
+        freightRateService.saveFreightRate(freightRate);
+        return "redirect:/expedition/" + freightRate.getExpedition().getId() + "/addFreightRate";
+    }
+
+ /*   @GetMapping("/freightRateList")
     public ModelAndView getFrightRateList(){
         ModelAndView modelAndView = new ModelAndView("freightRateList");
         modelAndView.addObject("freightRates",freightRateService.getAllFreightRates());
@@ -96,40 +128,7 @@ public class FreightRateController {
         System.out.println("############################# sum of all freight rates " + sum + "################################################################################");
 
         return "redirect:/spedytorHome";
-    }
-
-    //Thymeleaf
-    @GetMapping(value = "/expedition/{id}/addFreightRate")
-    public String showPageOfFreightRatesByExpedition (Model model, @PathVariable("id") Long id ){
-        Expedition expedition = expeditionService.getExpeditionById(id).orElseThrow(() -> new RuntimeException("Unavailable"));
-        List<FreightRate> freightRatesList = Lists.reverse(freightRateService.findFreightRatesByExpedition(expedition));
-        model.addAttribute("freightRatesList",freightRatesList);
-        Fuel fuel = new Fuel();
-        FreightRate freightRate = new FreightRate();
-        freightRate.setExpedition(expedition);
-        model.addAttribute("newFreightRate",freightRate);
-        model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
-        return "freightRate-list-add";
-    }
-
-    //Thymeleaf
-    @GetMapping(value = "/expedition/addFreightRate/{freightRateId}")
-    public String showPageToEditExistingFreightRate(Model model,@PathVariable("freightRateId") Long freightRateId){
-        FreightRate freightRate = freightRateService.getFreightrateById(freightRateId).orElseThrow(()-> new RuntimeException("Unavailable"));
-        Expedition expedition = freightRate.getExpedition();
-        List<FreightRate> freightRatesList = Lists.reverse(freightRateService.findFreightRatesByExpedition(expedition));
-        model.addAttribute("freightRatesList",freightRatesList);
-        model.addAttribute("newFreightRate",freightRate);
-        model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
-        return "freightRate-list-add";
-    }
-
-    //Thymeleaf
-    @PostMapping(value = "/expedition/addFreightRate")
-    public String addFuelToTheExpedition(@ModelAttribute FreightRate freightRate){
-        freightRateService.saveFreightRate(freightRate);
-        return "redirect:/expedition/" + freightRate.getExpedition().getId() + "/addFreightRate";
-    }
+    }*/
 
 
 

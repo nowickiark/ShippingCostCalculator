@@ -36,91 +36,40 @@
 <body>
 <!-- Left Panel -->
 
+<!-- /#left-panel -->
 <aside id="left-panel" class="left-panel">
     <nav class="navbar navbar-expand-sm navbar-default">
-
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li>
                     <a href="/spedytorHome"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                 </li>
                 <li class="menu-title">Details</li><!-- /.menu-title -->
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Drivers</a>
+                <li class="menu-item-has-children dropdown ">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Drivers</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-puzzle-piece"></i><a href="ui-buttons.html">All Drivers</a></li>
-                        <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">On road</a></li>
-                        <li><i class="fa fa-bars"></i><a href="ui-tabs.html">At home</a></li>
-                        <li><i class="fa fa-id-card-o"></i><a href="ui-cards.html">Old drivers</a></li>
+                        <li><i class="fa fa-bars"></i><a href="/driver/all">All Drivers</a></li>
+                        <li><i class="fa fa-puzzle-piece"></i><a href="/driver/add">New Driver</a></li>
                     </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false"> <i class="menu-icon fa fa-truck"></i>Trucks</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-truck"></i>Trucks</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-puzzle-piece"></i><a href="/truckList">List of trucks</a></li>
-                        <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">Add truck</a></li>
-                        <li><i class="fa fa-bars"></i><a href="ui-tabs.html">Statistics</a></li>
+                        <li><i class="fa fa-puzzle-piece"></i><a href="/truckList">All Trucks</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="/truck/add">New truck</a></li>
                     </ul>
                 </li>
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false"> <i class="menu-icon fa fa-road"></i>Expeditions</a>
+                <li class="menu-item-has-children dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-road"></i>Expeditions</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-puzzle-piece"></i><a href="ui-buttons.html">List of Expeditions</a></li>
-                        <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">New Expedition</a></li>
-                        <li><i class="fa fa-bars"></i><a href="ui-tabs.html">Statistics</a></li>
-                    </ul>
-                </li>
-
-                <li class="menu-title">Icons</li><!-- /.menu-title -->
-
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Icons</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-fort-awesome"></i><a href="font-fontawesome.html">Font Awesome</a>
-                        </li>
-                        <li><i class="menu-icon ti-themify-logo"></i><a href="font-themify.html">Themefy Icons</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="widgets.html"> <i class="menu-icon ti-email"></i>Widgets </a>
-                </li>
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false"> <i class="menu-icon fa fa-bar-chart"></i>Charts</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-line-chart"></i><a href="charts-chartjs.html">Chart JS</a></li>
-                        <li><i class="menu-icon fa fa-area-chart"></i><a href="charts-flot.html">Flot Chart</a></li>
-                        <li><i class="menu-icon fa fa-pie-chart"></i><a href="charts-peity.html">Peity Chart</a></li>
-                    </ul>
-                </li>
-
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false"> <i class="menu-icon fa fa-area-chart"></i>Maps</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-map-o"></i><a href="maps-gmap.html">Google Maps</a></li>
-                        <li><i class="menu-icon fa fa-street-view"></i><a href="maps-vector.html">Vector Maps</a></li>
-                    </ul>
-                </li>
-                <li class="menu-title">Extras</li><!-- /.menu-title -->
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Pages</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-sign-in"></i><a href="page-login.html">Login</a></li>
-                        <li><i class="menu-icon fa fa-sign-in"></i><a href="page-register.html">Register</a></li>
-                        <li><i class="menu-icon fa fa-paper-plane"></i><a href="pages-forget.html">Forget Pass</a></li>
+                        <li><i class="fa fa-puzzle-piece"></i><a href="/expedition/all">All Expeditions</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="/expedition/add">New Expedition</a></li>
                     </ul>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </nav>
-</aside><!-- /#left-panel -->
-
+</aside>
 <!-- Left Panel -->
 
 <!-- Right Panel -->
@@ -131,8 +80,8 @@
     <header id="header" class="header">
         <div class="top-left">
             <div class="navbar-header">
-                <a class="navbar-brand" href=".github"><img src="../static/images/logo.png" alt="Logo"></a>
-                <a class="navbar-brand hidden" href=".github"><img src="../static/images/logo2.png" alt="Logo"></a>
+                <a class="navbar-brand" href="../.github"><img src="../../static/images/logo.png" alt="Logo"></a>
+                <a class="navbar-brand hidden" href="../.github"><img src="../../static/images/logo2.png" alt="Logo"></a>
                 <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
             </div>
         </div>
@@ -181,7 +130,7 @@
                             <p class="red">You have 4 Mails</p>
                             <a class="dropdown-item media" href="#">
                                 <span class="photo media-left"><img alt="avatar"
-                                                                    src="../static/images/avatar/1.jpg"></span>
+                                                                    src="../../static/images/avatar/1.jpg"></span>
                                 <div class="message media-body">
                                     <span class="name float-left">Jonathan Smith</span>
                                     <span class="time float-right">Just now</span>
@@ -190,7 +139,7 @@
                             </a>
                             <a class="dropdown-item media" href="#">
                                 <span class="photo media-left"><img alt="avatar"
-                                                                    src="../static/images/avatar/2.jpg"></span>
+                                                                    src="../../static/images/avatar/2.jpg"></span>
                                 <div class="message media-body">
                                     <span class="name float-left">Jack Sanders</span>
                                     <span class="time float-right">5 minutes ago</span>
@@ -199,7 +148,7 @@
                             </a>
                             <a class="dropdown-item media" href="#">
                                 <span class="photo media-left"><img alt="avatar"
-                                                                    src="../static/images/avatar/3.jpg"></span>
+                                                                    src="../../static/images/avatar/3.jpg"></span>
                                 <div class="message media-body">
                                     <span class="name float-left">Cheryl Wheeler</span>
                                     <span class="time float-right">10 minutes ago</span>
@@ -208,7 +157,7 @@
                             </a>
                             <a class="dropdown-item media" href="#">
                                 <span class="photo media-left"><img alt="avatar"
-                                                                    src="../static/images/avatar/4.jpg"></span>
+                                                                    src="../../static/images/avatar/4.jpg"></span>
                                 <div class="message media-body">
                                     <span class="name float-left">Rachel Santos</span>
                                     <span class="time float-right">15 minutes ago</span>
@@ -222,7 +171,7 @@
                 <div class="user-area dropdown float-right">
                     <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false">
-                        <img class="user-avatar rounded-circle" src="../static/images/admin.jpg" alt="User Avatar">
+                        <img class="user-avatar rounded-circle" src="../../static/images/admin.jpg" alt="User Avatar">
                     </a>
 
                     <div class="user-menu dropdown-menu">
@@ -274,15 +223,15 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong>Add Journey</strong>
+                            <strong>Add Freight Rate</strong>
                         </div>
                         <div class="card-body card-block">
-                            <form th:action="@{/expedition/addJourney}" th:object="${newJourney}" method="post"
+                            <form th:action="@{/border/add}" th:object="${newBorder}" method="post"
                                   enctype="multipart/form-data" class="form-horizontal">
 
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <div class="row form-group">
+                                        <div class="row form-group d-none">
                                             <div class="col col-md-3"><label for="id-input"
                                                                              class=" form-control-label">Id</label>
                                             </div>
@@ -291,106 +240,66 @@
                                                                                 placeholder=""
                                                                                 class="form-control"
                                                                                 readonly>
-                                                <small class="form-text text-muted">Id of the freight rate</small>
+                                                <small class="form-text text-muted">Id of the border cross</small>
                                             </div>
                                         </div>
+
                                         <div class="row form-group">
-                                            <div class="col col-md-3"><label for="sdate-input"
-                                                                             class=" form-control-label">Start date </label>
+                                            <div class="col col-md-3"><label for="cFrom-input"
+                                                                             class=" form-control-label">Country from</label>
                                             </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{startDate}" type="date"
-                                                                                id="sdate-input" placeholder=""
-                                                                                class="form-control">
-                                                <small class="form-text text-muted">Date of starting</small>
-                                            </div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="splace-input"
-                                                                             class=" form-control-label">Start place</label>
-                                            </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{startPlace}"
+                                            <div class="col-12 col-md-9"><input th:field="*{countryFrom}"
                                                                                 type="text"
-                                                                                id="splace-input"
+                                                                                id="cFrom-input"
+                                                                                placeholder="eg Poland"
+                                                                                class="form-control"
+                                                                                autofocus>
+                                                <small class="form-text text-muted">Country of departure</small>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="ciFrom-input"
+                                                                             class=" form-control-label">City from</label>
+                                            </div>
+                                            <div class="col-12 col-md-9"><input th:field="*{cityFrom}"
+                                                                                type="text"
+                                                                                id="ciFrom-input"
                                                                                 placeholder="eg Poznań"
-                                                                                class="form-control">
+                                                                                class="form-control"
+                                                                                autofocus>
                                                 <small class="form-text text-muted">City of departure</small>
                                             </div>
                                         </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="skm-input"
-                                                                             class=" form-control-label">Start km</label>
-                                            </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{meterReadingDeparture}"
-                                                                                type="number"
-                                                                                id="skm-input"
-                                                                                placeholder="eg 123"
-                                                                                class="form-control">
-                                                <small class="form-text text-muted">Kilometer meter reading when starting</small>
-                                            </div>
-                                        </div>
+
 
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="row form-group">
-                                            <div class="col col-md-3"><label for="expedition-input"
-                                                                             class=" form-control-label">Expedition</label>
+                                            <div class="col col-md-3"><label for="cTo-input"
+                                                                             class=" form-control-label">Country to</label>
                                             </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{expedition}" type="text"
-                                                                                id="expedition-input"
-                                                                                placeholder="Number"
+                                            <div class="col-12 col-md-9"><input th:field="*{countryTo}"
+                                                                                type="text"
+                                                                                id="cTo-input"
+                                                                                placeholder="eg Poland"
                                                                                 class="form-control"
-                                                                                readonly tabindex="-1">
-                                                <small class="form-text text-muted">Expedition id</small>
+                                                                                autofocus>
+                                                <small class="form-text text-muted">Country of border</small>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3"><label for="edate-input"
-                                                                             class=" form-control-label">End date </label>
+                                            <div class="col col-md-3"><label for="ciTo-input"
+                                                                             class=" form-control-label">City to</label>
                                             </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{endDate}" type="date"
-                                                                                id="edate-input" placeholder=""
-                                                                                class="form-control">
-                                                <small class="form-text text-muted">Date of ending</small>
-                                            </div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="eplace-input"
-                                                                             class=" form-control-label">End place</label>
-                                            </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{endPlace}"
+                                            <div class="col-12 col-md-9"><input th:field="*{cityTo}"
                                                                                 type="text"
-                                                                                id="eplace-input"
-                                                                                placeholder="eg Wrocław"
-                                                                                class="form-control">
-                                                <small class="form-text text-muted">City of arrival</small>
+                                                                                id="ciTo-input"
+                                                                                placeholder="eg Poznań"
+                                                                                class="form-control"
+                                                                                autofocus>
+                                                <small class="form-text text-muted">City of border</small>
                                             </div>
                                         </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="ekm-input"
-                                                                             class=" form-control-label">End km</label>
-                                            </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{meterReadingArrival}"
-                                                                                type="number"
-                                                                                id="ekm-input"
-                                                                                placeholder="eg 321"
-                                                                                class="form-control">
-                                                <small class="form-text text-muted">Kilometer meter reading when ending</small>
-                                            </div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="comments-input"
-                                                                             class=" form-control-label">Comments</label>
-                                            </div>
-                                            <div class="col-12 col-md-9"><input th:field="*{comments}"
-                                                                                type="text"
-                                                                                id="comments-input"
-                                                                                placeholder="eg it was awesome"
-                                                                                class="form-control">
-                                                <small class="form-text text-muted">Possible notes regarding the journey</small>
-                                            </div>
-                                        </div>
-
-
                                     </div>
                                 </div>
 
@@ -413,37 +322,29 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Freight rates for expedition </strong>
+                            <strong class="card-title">List of borders</strong>
                         </div>
                         <div class="table-stats order-table ov-h">
                             <table class="table ">
                                 <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Expedition</th>
-                                    <th>Start date</th>
-                                    <th>Start place</th>
-                                    <th>Start km</th>
-                                    <th>End date</th>
-                                    <th>End place</th>
-                                    <th>End km</th>
-                                    <th>Comments</th>
+                                    <th>Country from</th>
+                                    <th>City from</th>
+                                    <th>Country to</th>
+                                    <th>City to</th>
                                     <th>Edit</th>
                                 </tr>
                                 </thead>
                                 <tbody>
 
-                                <tr th:each="journey : ${journeysList}">
-                                    <td><span class="serial" th:text="${journey.id}">Id</span></td>
-                                    <td><span class="serial" th:text="${journey.expedition.getId()}">Id</span></td>
-                                    <td><span class="product" th:text="${journey.startDate}">Start date</span></td>
-                                    <td><span class="product" th:text="${journey.startPlace}">Start place</span></td>
-                                    <td><span class="product" th:text="${journey.meterReadingDeparture}">Start km</span></td>
-                                    <td><span class="product" th:text="${journey.endDate}">End date</span></td>
-                                    <td><span class="product" th:text="${journey.endPlace}">End place</span></td>
-                                    <td><span class="product" th:text="${journey.meterReadingArrival}">End km</span></td>
-                                    <td><span class="product" th:text="${journey.comments}">comments</span></td>
-                                    <td><a class="px-1 fa fa-gear" th:href="@{/expedition/addJourney/{id} (id=${journey.id})}"  title="edit"></a></td>
+                                <tr th:each="bo : ${bordersList}">
+                                    <td><span class="serial" th:text="${bo.id}">Id</span></td>
+                                    <td><span class="product" th:text="${bo.countryFrom}">Company</span></td>
+                                    <td><span class="product" th:text="${bo.cityFrom}">Departure</span></td>
+                                    <td><span class="product" th:text="${bo.countryTo}">Company</span></td>
+                                    <td><span class="product" th:text="${bo.cityTo}">Departure</span></td>
+                                    <td><a class="px-1 fa fa-gear" th:href="@{/border/add/{id} (id=${bo.id})}"  title="Edit"></a></td>
                                     <!--<td><a class="btn btn-secondary active" role="button" aria-pressed="true" th:href="@{/fuel/add/{id}(id=${fuel.id})}">Fuel details</a></td>-->
                                 </tr>
 

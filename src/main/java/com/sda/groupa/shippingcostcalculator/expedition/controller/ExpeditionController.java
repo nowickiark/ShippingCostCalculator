@@ -5,7 +5,6 @@ import com.sda.groupa.shippingcostcalculator.driver.driverService.DriverService;
 import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
 import com.sda.groupa.shippingcostcalculator.expedition.service.ExpeditionService;
 import com.sda.groupa.shippingcostcalculator.login.strategy.DriverStrategy;
-import com.sda.groupa.shippingcostcalculator.truck.model.Truck;
 import com.sda.groupa.shippingcostcalculator.truck.service.TruckService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,7 +37,7 @@ public class ExpeditionController {
         model.addAttribute("expedition",expedition);
         model.addAttribute("trucks",truckService.getTrucks());
         model.addAttribute("drivers",driverService.findAll());
-        return "expedition-add";
+        return "expedition/expedition-add";
     }
 
     @GetMapping("/expedition/all")
@@ -53,7 +52,7 @@ public class ExpeditionController {
         model.addAttribute("expedition",expedition);
         model.addAttribute("trucks",truckService.getTrucks());
         model.addAttribute("drivers",driverService.findAll());
-        return "expedition-add";
+        return "expedition/expedition-add";
     }
 
     @GetMapping("/expeditions")
