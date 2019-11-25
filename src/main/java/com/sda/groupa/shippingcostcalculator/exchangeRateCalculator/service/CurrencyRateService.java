@@ -56,7 +56,7 @@ public class CurrencyRateService {
     public void checkLatestCurrencyExchangeRate(CurrencyCode currencyCode, LocalDate dateOfPayment) throws IOException {
         if(!currencyCode.equals(CurrencyCode.PLN)) {
             Optional<ExchangeRateAndCode> optionalExchangeRateAndCode = currencyExchangeRatesRepository
-                    .findByCurrencyCodeAndAndDateOfExchangeRate(currencyCode, dateOfPayment);
+                    .findByCurrencyCodeAndDateOfExchangeRate(currencyCode, dateOfPayment);
 
             if (!optionalExchangeRateAndCode.isPresent()) {
                 getLatestCurrencyExchangeRateAndCodeFromAPI(currencyCode).getCurrencyRate();
@@ -66,7 +66,7 @@ public class CurrencyRateService {
 
     public BigDecimal getLatestCurrencyExchangeRate (CurrencyCode currencyCode, LocalDate dateOfPayment) throws IOException {
         Optional<ExchangeRateAndCode> optionalExchangeRateAndCode = currencyExchangeRatesRepository
-                .findByCurrencyCodeAndAndDateOfExchangeRate(currencyCode, dateOfPayment);
+                .findByCurrencyCodeAndDateOfExchangeRate(currencyCode, dateOfPayment);
 
         if(optionalExchangeRateAndCode.isPresent()){
             ExchangeRateAndCode exchangeRateAndCode = optionalExchangeRateAndCode.get();

@@ -27,6 +27,9 @@ public class ExchangeRateAndCode {
         this.currencyRate = currencyRate;
     }
 
+    public ExchangeRateAndCode() {
+    }
+
     public Long getId() {
         return id;
     }

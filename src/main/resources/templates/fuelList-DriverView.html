@@ -72,8 +72,8 @@
                                     <td><span class="serial" th:text="${fuel.id}"></span></td>
                                     <td><span class="serial" th:text="${fuel.expedition.getId()}"></span></td>
                                     <td><span class="product" th:text="${fuel.placeOfRefueling}"></span></td>
-                                    <td><span class="count" th:text="${fuel.liters}"></span></td>
-                                    <td><span class="count" th:text="${fuel.cost}"></span></td>
+                                    <td><span class="product" th:text="${#numbers.formatDecimal(fuel.liters,1,2,'POINT')}"></span></td>
+                                    <td><span class="product" th:text="${#numbers.formatDecimal(fuel.cost,1,2,'POINT')}"></span></td>
                                     <td><span class="product" th:text="${fuel.currencyCode}"></span></td>
                                     <td><span class="count" th:text="${fuel.kilometers}"></span></td>
                                     <td><span class="product" th:text="${fuel.paymentMethod}"></span></td>

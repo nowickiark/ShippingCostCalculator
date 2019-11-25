@@ -1,0 +1,53 @@
+.login-form {
+    background: #ffffff;
+    padding: 30px 30px 20px;
+    margin-top: 50px;
+}
+
+
+element.style {
+}
+.btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+.login-form .btn {
+    width: 100%;
+    text-transform: uppercase;
+    font-size: 14px;
+    padding: 15px;
+    border: 0px;
+}
+.btn, .button {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
+    border-radius: 3;
+    cursor: pointer;
+}
+.btn {
+    border-radius: 3px;
+}
+.btn, button, input, textarea {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    outline: 0 !important;
+}
+.btn-success {
+    color: #fff;
+    background-color: #007bff;
+    /*background-color: #28A745 previous colour*/
+}
+.btn-success:hover {
+    color: #fff;
+    background-color: #0431ff;
+    border-color: #0431ff;
+}
+.btn-success:not(:disabled):not(.disabled):active, .show>.btn-success.dropdown-toggle {
+    color: #fff;
+    background-color: #0f00e6;
+    border-color: #0f00e6;
+}
