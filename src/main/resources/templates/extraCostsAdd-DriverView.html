@@ -8,9 +8,7 @@
 <html class="no-js lt-ie9" lang=""> <![endif]-->
 <!--[if gt IE 8]><!-->
 <html class="no-js" lang=""> <!--<![endif]-->
-<!--<%@page session="true"%>-->
-<!--<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>-->
-<!--<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>-->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,10 +35,6 @@
 
 </head>
 <body>
-<!--<spring:url value="/addfuel" var="addFuelingUrl" />-->
-
-<!--<spring:url value="/updatefuel" var="updateFuelingUrl" />-->
-<!-- Right Panel -->
 
 <div >
 
@@ -55,9 +49,10 @@
                             <strong>Add Extra Cost</strong>
                         </div>
                         <div class="card-body card-block">
-                            <form th:action="@{/driver/extracosts/add}" th:object="${newExtraCost}" method="post"
+                            <form th:object="${newExtraCost}"
+                                  th:action="${action}=='Update' ? @{/driver/updateExtraCost/{extraCostId} (extraCostId = ${newExtraCost.id})} : @{/driver/extracosts/add}"
+                                  method="post"
                                   enctype="multipart/form-data" class="form-horizontal">
-
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="row form-group">
@@ -113,11 +108,10 @@
                                                     <div class="col col-md-3 ">
                                                         <select th:field="*{currencyCode}" data-placeholder="Choose a Currency..." class="standardSelect form-control" id="payment-currency-input" th:required="required">
                                                             <option value="" label="Currency"></option>-->
-                                                            <option th:each="currencyCodeType : ${T(com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.CurrencyCode).values()}"
+<!--                                                            <option th:each="currencyCodeType : ${T(com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.CurrencyCode).values()}" // drugi sposób na dostanie się do enuma-->
+                                                            <option th:each="currencyCodeType : ${currencyCodeTypeList}"
                                                                     th:value="${currencyCodeType}"
-                                                                    th:text="${currencyCodeType}">
-<!--                                                                nie rozumiem dlaczego podkreśla values oraz currencyCodeType skoro kod wykonuje się poprawnie-->
-                                                            </option>
+                                                                    th:text="${currencyCodeType}"></option>
                                                         </select>
                                                     </div>
                                                 </div>

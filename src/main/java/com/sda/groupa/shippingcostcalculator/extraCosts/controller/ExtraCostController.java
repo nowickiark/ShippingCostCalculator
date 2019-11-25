@@ -15,13 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
-
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
+
 
 @Controller
 public class ExtraCostController {
@@ -55,7 +51,7 @@ public class ExtraCostController {
         extraCostService.addExtraCost(extraCost);
         //=====check if currency rate for given code and date is already present in repository, if not then take it from API and add to repository=======
         currencyRateService.checkLatestCurrencyExchangeRate(extraCost.getCurrencyCode(),extraCost.getDateOfPurchase());
-        return "extraCostsAdd-DriverView";
+        return "redirect:/driver/extracosts/add";
     }
     //Thymleaf - Asia
     @GetMapping(value = "/driver/updateExtraCost/{extraCostId}")
@@ -63,8 +59,22 @@ public class ExtraCostController {
         ExtraCost extraCost = extraCostService.getById(extraCostId).orElseThrow(()-> new RuntimeException("Unavailable"));
         model.addAttribute("extraCost", extraCostService.getById(extraCostId).orElseThrow(()-> new RuntimeException("Unavailable")));
         model.addAttribute("newExtraCost", extraCost);
-        //model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
+        model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
+        //aa
+        model.addAttribute("action", "Update");
         return "extraCostsAdd-DriverView";
+    }
+
+    //Thymleaf - Asiaaaa
+    @PostMapping(value = "/driver/updateExtraCost/{extraCostId}")
+    public String goBackToExtraCostPageAfterUpdate (Model model, @ModelAttribute ExtraCost extraCost) throws IOException {
+        Driver driver = driverStrategy.getDriver();
+        extraCost.setExpedition(driver.getExpedition());
+        model.addAttribute("newExtraCost", extraCost);
+        extraCostService.addExtraCost(extraCost);
+        //=====check if currency rate for given code and date is already present in repository, if not then take it from API and add to repository=======
+        currencyRateService.checkLatestCurrencyExchangeRate(extraCost.getCurrencyCode(),extraCost.getDateOfPurchase());
+        return "redirect:/driver/listOfExtraCosts";
     }
 
     //Thymeleaf - Asia

@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -46,6 +44,14 @@ public class FuelController {
     }
 
     //Thymeleaf - Asia
+    @GetMapping(value = "/driver/addFuel")
+    public String addFuelingPage (Model model){
+        model.addAttribute("newFuel", new Fuel());
+        model.addAttribute("currencyCodeTypeList", CurrencyCode.values()); //for drop-down list in the view
+        return "fuelAdd-DriverView";
+    }
+
+    //Thymeleaf - Asia
     @PostMapping(value = "/driver/addFuel")
     public String addFueling(@ModelAttribute Fuel fuel, Model model) throws IOException {
         Driver driver = driverStrategy.getDriver();
@@ -54,14 +60,7 @@ public class FuelController {
         fuelService.addFueling(fuel);
         //=====check if currency rate for given code and date is already present in repository, if not then take it from API and add to repository=======
         currencyRateService.checkLatestCurrencyExchangeRate(fuel.getCurrencyCode(),fuel.getDateOfFueling());
-        return "fuelAdd-DriverView";
-    }
-    //Thymeleaf - Asia
-    @GetMapping(value = "/driver/addFuel")
-    public String addFuelingPage (Model model){
-        model.addAttribute("newFuel", new Fuel());
-        model.addAttribute("currencyCodeTypeList", CurrencyCode.values()); //for drop-down list in the view
-        return "fuelAdd-DriverView";
+        return "redirect:/driver/addFuel";
     }
 
     //Thymleaf - Asia
@@ -71,7 +70,20 @@ public class FuelController {
         model.addAttribute("fuel", fuelService.findById(fuelId).orElseThrow(()-> new RuntimeException("Unavailable")));
         model.addAttribute("newFuel",fuel);
         model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
+        model.addAttribute("action", "Update");
         return "fuelAdd-DriverView";
+    }
+
+    //Thymeleaf - Asia
+    @PostMapping(value = "/driver/updatefuel/{fuelId}")
+    public String updateFueling(@ModelAttribute Fuel fuel, Model model) throws IOException {
+        Driver driver = driverStrategy.getDriver();
+        fuel.setExpedition(driver.getExpedition());
+        model.addAttribute("newFuel", new Fuel());
+        fuelService.addFueling(fuel);
+        //=====check if currency rate for given code and date is already present in repository, if not then take it from API and add to repository=======
+        currencyRateService.checkLatestCurrencyExchangeRate(fuel.getCurrencyCode(),fuel.getDateOfFueling());
+        return "redirect:/driver/listOfFuels";
     }
 
     //Thymeleaf - Arek

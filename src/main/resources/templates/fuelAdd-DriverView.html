@@ -55,7 +55,8 @@
                             <strong>Add Fueling</strong>
                         </div>
                         <div class="card-body card-block">
-                            <form th:action="@{/driver/addFuel}" th:object="${newFuel}" method="post"
+                            <form th:object="${newFuel}" method="post"
+                                  th:action="${action}=='Update' ? @{/driver/updatefuel/{fuelId} (fuelId = ${newFuel.id})} : @{/driver/addFuel}"
                                   enctype="multipart/form-data" class="form-horizontal">
 
                                 <div class="row">
@@ -101,8 +102,8 @@
                                                                              class=" form-control-label">Liters</label>
                                             </div>
                                             <div class="col-12 col-md-9"><input th:field="*{liters}"
-                                                                                type="number"
-                                                                                id="liters-input" placeholder="eg 124"
+                                                                                th:valuetype="${#numbers.formatDecimal(fuel,1,2,'POINT')}"
+                                                                                id="liters-input" placeholder="eg 124.6"
                                                                                 class="form-control">
                                                 <small class="form-text text-muted">Number of liters fueld</small>
                                             </div>
@@ -115,16 +116,18 @@
                                             <div class="col-12 col-md-9">
                                                 <div class="row">
                                                     <div class="col-12 col-md-9">
-                                                        <input th:field="*{cost}" type="number"
+                                                        <input th:field="*{cost}" th:valuetype="${#numbers.formatDecimal(fuel,1,2,'POINT')}"
                                                                id="cost-input" placeholder="eg 1457.45"
                                                                class="form-control">
                                                         <small class="form-text text-muted">Total cost for fuel</small>
                                                     </div>
 
                                                     <div class="col col-md-3 ">
-                                                        <select th:field="*{currencyCode}" data-placeholder="Choose a Currency..." class="standardSelect form-control" id="payment-currency-input">
-                                                            <option value="" label="default"></option>
-                                                            <option th:each="currencyCodeType:${currencyCodeTypeList}" th:value="${currencyCodeType}" th:text="${currencyCodeType}" ></option>
+                                                        <select th:field="*{currencyCode}" data-placeholder="Choose a Currency..." class="standardSelect form-control" id="payment-currency-input" th:required="required">
+                                                            <option value="" label="Currency"></option>
+                                                            <option th:each="currencyCodeType : ${currencyCodeTypeList}"
+                                                                    th:value="${currencyCodeType}"
+                                                                    th:text="${currencyCodeType}" ></option>
                                                         </select>
                                                     </div>
                                                 </div>
