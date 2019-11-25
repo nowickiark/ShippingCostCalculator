@@ -14,14 +14,11 @@ public class BorderCross {
     @GeneratedValue(generator = "crossSeq")
     @SequenceGenerator(name = "crossSeq", sequenceName = "cross_seq", allocationSize = 1)
     private Long id;
-
     @ManyToOne(targetEntity = Expedition.class)
     private Expedition expedition;
-
     @ManyToOne(targetEntity = Borders.class)
     private Borders borders;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dateOfBorderCrossing;
 
     public BorderCross(Expedition expedition, Borders borders, LocalDate dateOfBorderCrossing) {

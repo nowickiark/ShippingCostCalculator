@@ -155,6 +155,14 @@ public class Expedition {
         this.cashEndEur = cashEndEur;
     }
 
+    public LocalDate getClosingDate() {
+        return closingDate;
+    }
+
+    public void setClosingDate(LocalDate closingDate) {
+        this.closingDate = closingDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

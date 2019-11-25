@@ -1,5 +1,6 @@
 package com.sda.groupa.shippingcostcalculator.freightRate.controller;
 
+import com.google.common.collect.Lists;
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.CurrencyCode;
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.service.CurrencyRateService;
 import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
@@ -7,7 +8,9 @@ import com.sda.groupa.shippingcostcalculator.expedition.service.ExpeditionServic
 import com.sda.groupa.shippingcostcalculator.freightRate.exception.FreightNotFoundException;
 import com.sda.groupa.shippingcostcalculator.freightRate.model.FreightRate;
 import com.sda.groupa.shippingcostcalculator.freightRate.service.FreightRateService;
+import com.sda.groupa.shippingcostcalculator.fuel.fuelModel.Fuel;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,14 +34,45 @@ public class FreightRateController {
         this.currencyRateService = currencyRateService;
     }
 
-    @GetMapping("/freightRateList")
+    //Thymeleaf
+    @GetMapping(value = "/expedition/{id}/addFreightRate")
+    public String showPageOfFreightRatesByExpedition (Model model, @PathVariable("id") Long id ){
+        Expedition expedition = expeditionService.getExpeditionById(id).orElseThrow(() -> new RuntimeException("Unavailable"));
+        List<FreightRate> freightRatesList = Lists.reverse(freightRateService.findFreightRatesByExpedition(expedition));
+        model.addAttribute("freightRatesList",freightRatesList);
+        Fuel fuel = new Fuel();
+        FreightRate freightRate = new FreightRate();
+        freightRate.setExpedition(expedition);
+        model.addAttribute("newFreightRate",freightRate);
+        model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
+        return "expeditionExtras/freightRate-list-add";
+    }
+
+    //Thymeleaf
+    @GetMapping(value = "/expedition/addFreightRate/{freightRateId}")
+    public String showPageToEditExistingFreightRate(Model model,@PathVariable("freightRateId") Long freightRateId){
+        FreightRate freightRate = freightRateService.getFreightrateById(freightRateId).orElseThrow(()-> new RuntimeException("Unavailable"));
+        Expedition expedition = freightRate.getExpedition();
+        List<FreightRate> freightRatesList = Lists.reverse(freightRateService.findFreightRatesByExpedition(expedition));
+        model.addAttribute("freightRatesList",freightRatesList);
+        model.addAttribute("newFreightRate",freightRate);
+        model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
+        return "expeditionExtras/freightRate-list-add";
+    }
+
+    //Thymeleaf
+    @PostMapping(value = "/expedition/addFreightRate")
+    public String addFuelToTheExpedition(@ModelAttribute FreightRate freightRate){
+        freightRateService.saveFreightRate(freightRate);
+        return "redirect:/expedition/" + freightRate.getExpedition().getId() + "/addFreightRate";
+    }
+
+ /*   @GetMapping("/freightRateList")
     public ModelAndView getFrightRateList(){
         ModelAndView modelAndView = new ModelAndView("freightRateList");
         modelAndView.addObject("freightRates",freightRateService.getAllFreightRates());
         return modelAndView;
     }
-
-
 
     @GetMapping("/expedition/freightRateList/{expeditionId}")
     public ModelAndView getFreightRateListByExpedition(@PathVariable Long expeditionId){
@@ -94,7 +128,7 @@ public class FreightRateController {
         System.out.println("############################# sum of all freight rates " + sum + "################################################################################");
 
         return "redirect:/spedytorHome";
-    }
+    }*/
 
 
 

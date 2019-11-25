@@ -5,7 +5,6 @@ import com.sda.groupa.shippingcostcalculator.driver.driverService.DriverService;
 import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
 import com.sda.groupa.shippingcostcalculator.expedition.service.ExpeditionService;
 import com.sda.groupa.shippingcostcalculator.login.strategy.DriverStrategy;
-import com.sda.groupa.shippingcostcalculator.truck.model.Truck;
 import com.sda.groupa.shippingcostcalculator.truck.service.TruckService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,23 +33,26 @@ public class ExpeditionController {
 
     @GetMapping("/expedition/add")
     public String getExpeditionform(Model model){
-        ModelAndView modelAndView = new ModelAndView("expedition");
         Expedition expedition = new Expedition();
         model.addAttribute("expedition",expedition);
         model.addAttribute("trucks",truckService.getTrucks());
         model.addAttribute("drivers",driverService.findAll());
-        return "expedition-add";
+        return "expedition/expedition-add";
     }
 
+    @GetMapping("/expedition/all")
+    public  String showExpeditionList(Model model){
+        model.addAttribute("expeditionList",expeditionService.getExpeditions());
+        return "expedition/expedition-list";
+    }
 
     @GetMapping("/expedition/add/{id}")
-    public ModelAndView getExpeditionform(@PathVariable Long id){
-        ModelAndView modelAndView = new ModelAndView("expedition");
-        Expedition expedition = expeditionService.getExpeditionById(id).orElseThrow(() -> new RuntimeException("Unavailable"));
-        List<Truck> trucks = truckService.getTrucks();
-        modelAndView.addObject("expedition",expedition);
-        modelAndView.addObject("trucks",trucks);
-        return modelAndView;
+    public String getExpeditionFormEdit(@PathVariable long id, Model model){
+        Expedition expedition = expeditionService.getExpeditionById(id).orElseThrow(()-> new RuntimeException("Unavailable"));
+        model.addAttribute("expedition",expedition);
+        model.addAttribute("trucks",truckService.getTrucks());
+        model.addAttribute("drivers",driverService.findAll());
+        return "expedition/expedition-add";
     }
 
     @GetMapping("/expeditions")
@@ -83,7 +85,6 @@ public class ExpeditionController {
         modelAndView.addObject("expeditions",expeditionService.findCurrentExpeditions());
         return modelAndView;
     }
-
 
     @PostMapping("/expedition/add")
     public ModelAndView addExpedition(@ModelAttribute Expedition expedition){

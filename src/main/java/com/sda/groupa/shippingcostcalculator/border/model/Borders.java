@@ -10,15 +10,13 @@ public class Borders {
     @GeneratedValue(generator = "bordSeq")
     @SequenceGenerator(name = "bordSeq", sequenceName = "bord_seq", allocationSize = 1)
     private Long id;
-
     private String countryFrom;
     private String cityFrom;
     private String countryTo;
     private String cityTo;
 
-
     public Borders(Long id, String countryFrom, String cityFrom, String countryTo, String cityTo) {
-       this.id = id;
+        this.id = id;
         this.countryFrom = countryFrom;
         this.cityFrom = cityFrom;
         this.countryTo = countryTo;

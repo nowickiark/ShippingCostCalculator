@@ -56,20 +56,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutSuccessUrl("/login?logout");
-
-        /*          .antMatchers("/resources/**").permitAll().anyRequest().permitAll()*/
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder()); }
-
- /*   @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/resources/static/**").anyRequest();
-    }*/
-
-
 
     @Bean
     public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){

@@ -1,5 +1,6 @@
 package com.sda.groupa.shippingcostcalculator.extraCosts.controller;
 
+import com.google.common.collect.Lists;
 import com.sda.groupa.shippingcostcalculator.driver.driverModel.Driver;
 import com.sda.groupa.shippingcostcalculator.driver.driverService.DriverService;
 import com.sda.groupa.shippingcostcalculator.exchangeRateCalculator.model.CurrencyCode;
@@ -25,13 +26,48 @@ public class ExtraCostController {
     private final ExtraCostService extraCostService;
     private final DriverStrategy driverStrategy;
     private final CurrencyRateService currencyRateService;
-
+    private final ExpeditionService expeditionService;
 
 
     public ExtraCostController(ExtraCostService extraCostService, DriverStrategy driverStrategy, DriverService driverService, CurrencyRateService currencyRateService, ExpeditionService expeditionService) {
         this.extraCostService = extraCostService;
         this.driverStrategy = driverStrategy;
         this.currencyRateService = currencyRateService;
+        this.expeditionService = expeditionService;
+    }
+
+    //Thymeleaf
+    @GetMapping(value = "/expedition/{id}/addExtraCost")
+    public String showAddPageOfExtraCostsByExpedition (Model model, @PathVariable("id") Long id ){
+        Expedition expedition = expeditionService.getExpeditionById(id).orElseThrow(() -> new RuntimeException("Unavailable"));
+        List<ExtraCost> extraCostsList = Lists.reverse(extraCostService.getExtraCostsByExpetion(expedition));
+        ExtraCost extraCost = new ExtraCost();
+        extraCost.setExpedition(expedition);
+        model.addAttribute("extraCostsList",extraCostsList);
+        model.addAttribute("newextraCost",extraCost);
+        model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
+        return "expeditionExtras/extraCost-list-add";
+    }
+
+    //Thymeleaf
+    @GetMapping(value = "/expedition/addExtraCost/{id}")
+    public String showEditPageOfExtraCostsByExpedition (Model model, @PathVariable("id") Long id ){
+        ExtraCost extraCost = extraCostService.getById(id).orElseThrow(() -> new RuntimeException("Unavailable"));
+        Expedition expedition = extraCost.getExpedition();
+        List<ExtraCost> extraCostsList = Lists.reverse(extraCostService.getExtraCostsByExpetion(expedition));
+        model.addAttribute("extraCostsList",extraCostsList);
+        model.addAttribute("newextraCost",extraCost);
+        model.addAttribute("currencyCodeTypeList", CurrencyCode.values());
+        return "expeditionExtras/extraCost-list-add";
+    }
+
+    //Thymeleaf
+    @PostMapping(value = "/expedition/addExtraCost")
+    public String addExtraCostToExpedition(@ModelAttribute ExtraCost extraCost) throws IOException {
+        extraCostService.addExtraCost(extraCost);
+        //=====check if currency rate for given code and date is already present in repository, if not then take it from API and add to repository=======
+        currencyRateService.checkLatestCurrencyExchangeRate(extraCost.getCurrencyCode(),extraCost.getDateOfPurchase());
+        return "redirect:/expedition/" + extraCost.getExpedition().getId() + "/addExtraCost";
     }
 
     //Thymeleaf - Asia
