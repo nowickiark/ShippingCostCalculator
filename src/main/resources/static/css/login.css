@@ -41,3 +41,13 @@ element.style {
     background-color: #007bff;
     /*background-color: #28A745 previous colour*/
 }
+.btn-success:hover {
+    color: #fff;
+    background-color: #0431ff;
+    border-color: #0431ff;
+}
+.btn-success:not(:disabled):not(.disabled):active, .show>.btn-success.dropdown-toggle {
+    color: #fff;
+    background-color: #0f00e6;
+    border-color: #0f00e6;
+}
