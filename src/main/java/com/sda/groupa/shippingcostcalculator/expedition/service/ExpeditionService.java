@@ -3,6 +3,7 @@ package com.sda.groupa.shippingcostcalculator.expedition.service;
 import com.sda.groupa.shippingcostcalculator.driver.driverModel.Driver;
 import com.sda.groupa.shippingcostcalculator.expedition.model.Expedition;
 import com.sda.groupa.shippingcostcalculator.expedition.repository.ExpeditionRepository;
+import com.sda.groupa.shippingcostcalculator.freightRate.model.FreightRate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,4 +48,5 @@ public class ExpeditionService {
    public Long countDurationOfExpedition(Expedition expedition){
        return ChronoUnit.DAYS.between(expedition.getStartDay(), expedition.getEndDay());
    }
+
 }

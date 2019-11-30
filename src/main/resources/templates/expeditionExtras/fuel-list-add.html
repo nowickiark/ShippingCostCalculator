@@ -223,7 +223,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong>Add Truck</strong>
+                            <strong>Add Fuel</strong>
                         </div>
                         <div class="card-body card-block">
                             <form th:action="@{/expedition/addFuel}" th:object="${newFuel}" method="post"
@@ -261,8 +261,8 @@
                                                                              class=" form-control-label">Liters</label>
                                             </div>
                                             <div class="col-12 col-md-9"><input th:field="*{liters}"
-                                                                                type="number"
-                                                                                id="liters-input" placeholder="eg 124"
+                                                                                type="number" step="0.01"
+                                                                                id="liters-input" placeholder="eg 124,3"
                                                                                 class="form-control">
                                                 <small class="form-text text-muted">Number of liters fueld</small>
                                             </div>
@@ -275,8 +275,8 @@
                                              <div class="col-12 col-md-9">
                                                 <div class="row">
                                                     <div class="col-12 col-md-9">
-                                                                <input th:field="*{cost}" type="number"
-                                                                                                id="cost-input" placeholder="eg 1457.45"
+                                                                <input th:field="*{cost}" type="number" step="0.01"
+                                                                       id="cost-input" placeholder="eg 1457,45"
                                                                                                 class="form-control">
                                                         <small class="form-text text-muted">Total cost for fuel</small>
                                                     </div>

@@ -37,4 +37,15 @@ public class JourneyService {
         return journeyRepository.findAllByExpedition(expedition);
     }
 
+    public Journey getlastJourneyByExpedition(long expeditionId){
+        Journey journey = null;
+        List<Optional<Journey>> jouByExpeditionAndFarthestDate = journeyRepository.findJouByExpeditionAndFarthestDate(expeditionId);
+
+        if(jouByExpeditionAndFarthestDate.size() > 0){
+            journey = jouByExpeditionAndFarthestDate.get(0).get();
+        }
+
+        return journey;
+    }
+
 }
