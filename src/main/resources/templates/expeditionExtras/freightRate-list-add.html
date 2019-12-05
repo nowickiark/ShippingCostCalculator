@@ -88,6 +88,7 @@
         <div class="top-right">
             <div class="header-menu">
                 <div class="header-left">
+                    <a href="/logout">Logout</a>
                     <button class="search-trigger"><i class="fa fa-search"></i></button>
                     <div class="form-inline">
                         <form class="search-form">
@@ -313,8 +314,8 @@
                                             <div class="col-12 col-md-9">
                                                 <div class="row">
                                                     <div class="col-12 col-md-9">
-                                                        <input th:field="*{amount}" type="number"
-                                                               id="amount-input" placeholder="eg 1457.45"
+                                                        <input th:field="*{amount}" type="number" step="0.01"
+                                                               id="amount-input" placeholder="eg 1457,45"
                                                                class="form-control">
                                                         <small class="form-text text-muted">Amount of money getting for freight rate</small>
                                                     </div>

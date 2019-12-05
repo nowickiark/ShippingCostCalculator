@@ -50,5 +50,14 @@ public class FreightRateService {
         return sumOfCosts;
     }
 
+    public FreightRate getlastFreightRateByExpedition(Long expeditionId){
+        FreightRate freightRate = null;
+        List<Optional<FreightRate>> freightRateList = freightRateRepository.findFrightRateByExpeditionAndFarthestDate(expeditionId);
+        if(freightRateList.size() >0){
+            freightRate = freightRateList.get(0).get();
+        }
+        return freightRate;
+    }
+
 
 }
