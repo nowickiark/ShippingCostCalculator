@@ -121,6 +121,7 @@
             <div class="top-right">
                 <div class="header-menu">
                     <div class="header-left">
+                        <a href="/logout">Logout</a>
                         <button class="search-trigger"><i class="fa fa-search"></i></button>
                         <div class="form-inline">
                             <form class="search-form">
@@ -317,7 +318,7 @@
 
                                                 <td><span class="product" th:text="${ex.averageMilage}"> start day </span></td>
                                                 <td><span class="product" th:text="${ex.onRoad}"> On Road </span></td>
-                                                
+
                                                 <td>
                                                     <a class="px-1 fa fa-suitcase" th:href="@{/expedition/{id}/addFreightRate (id=${ex.expedition.id})}"  title="freight rate"></a>
                                                     <a class="px-1 fa fa-flask" th:href="@{/expedition/{id}/addFuel (id=${ex.expedition.id})}"  title="fuel"></a>
