@@ -42,7 +42,11 @@ public class ExpeditionService {
    public List<Expedition> findExpeditionsByDriverId(Long driverId){return expeditionRepository.findExpeditionsByDriverId(driverId);}
 
    public Long countKilometersTravelled(Expedition expedition){
-       return expedition.getEndOdometerReading()-expedition.getStartOdometerReading();
+
+       if(!(expedition.getEndOdometerReading() == null)){
+           return expedition.getEndOdometerReading()-expedition.getStartOdometerReading();
+       }
+           return 0L;
    }
 
    public Long countDurationOfExpedition(Expedition expedition){

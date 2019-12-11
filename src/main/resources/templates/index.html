@@ -327,7 +327,7 @@
                                                     <a class="px-1 fa fa-road" th:href="@{/expedition/{id}/addJourney (id=${ex.expedition.id})}"  title="journey"></a>
                                                     <a class="px-1 fa fa-plane" th:href="@{/expedition/{id}/addBorderCross (id=${ex.expedition.id})}"  title="border cross"></a>
                                                     <a class="px-1 fa fa-gear" th:href="@{/expedition/add/{id} (id=${ex.expedition.id})}" title="edit"></a>
-                                                    <a href="" class="px-1 fa fa-times-circle-o" title="close expedition"></a>
+                                                    <a class="px-1 fa fa-times-circle-o" th:href="@{/expedition/{id}/summary (id=${ex.expedition.id})}" title="close"></a>
                                                 </td>
                                             </tr>
 

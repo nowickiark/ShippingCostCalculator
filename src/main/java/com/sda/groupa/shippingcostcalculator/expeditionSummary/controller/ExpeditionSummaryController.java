@@ -16,12 +16,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Optional;
 @Controller
 public class ExpeditionSummaryController {
@@ -49,6 +51,23 @@ public class ExpeditionSummaryController {
         modelAndView.addObject("expeditionSummary", expeditionSummary.toString());
         return modelAndView;
     }
+
+    @GetMapping(value = "/expedition/{id}/summary")
+    public String getSummaryOfExpeditionById(@PathVariable Long id){
+        Optional<Expedition> expeditionOptional = expeditionService.getExpeditionById(id);
+        Expedition expedition = expeditionOptional.get();
+        expedition.setEndDay(LocalDate.parse("2005-02-08"));
+        ExpeditionSummary expeditionSummary = expeditionSummaryService.getSummaryOfExpedition(expedition);
+        System.out.println(expeditionSummary);
+
+        //TODO Stworzyć nowy widok dla podsumowania, może też wyświetlanie dodatkowego obiektu.
+        //Dodać podczas zamykania możliwość wyboru daty zakończenia
+        //I swoiste zakończenie spedycji
+        
+        return "redirect:/spedytorHome";
+    }
+
+
 //
 //    @GetMapping("/download")
 //    public ResponseEntity<byte[]> downloadErrorData(@PathVariable Long idExpedition) throws Exception {
